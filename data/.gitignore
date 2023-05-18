@@ -1,0 +1,4 @@
+*
+!.gitignore
+!rich_pmt_positions.dat
+!*.md
