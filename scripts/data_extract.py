@@ -238,7 +238,7 @@ if __name__ == "__main__":
             events_df, OUTPUT_FULL_EVENT_PARQUET, name="Event")
 
         # Work on hits
-        cprint("Working on hits", "purple")
+        cprint("Working on hits", "magenta")
 
         # First, retrieve an event-to-hit mapping
         event_hit_mapping = event_hitmapping_to_lazyframe(f)
