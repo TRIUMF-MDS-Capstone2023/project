@@ -145,18 +145,18 @@ def hits_to_lazyframe(f, position_map):
         .with_columns([
             pl.col("x").alias("x_raw"),
             pl.col("y").alias("y_raw"),
-            # Algorithm modified from `realign_hits`
+            # Algorithm modified from `adjust_hits`
             (
                 pl.when(pl.col("disk_id") == 0)
                 .then(pl.col("x") - 146.8)
                 .otherwise(pl.col("x") - 196.7)
-                .alias("x_realigned")
+                .alias("x_adjusted")
             ),
             (
                 pl.when(pl.col("disk_id") == 0)
                 .then(pl.col("y") - 19.8)
                 .otherwise(pl.col("y") - 9.5)
-                .alias("y_realigned")
+                .alias("y_adjusted")
             )
         ])
     )
@@ -177,7 +177,7 @@ if __name__ == "__main__":
     )
 
     # Read H5 dataset
-    print(f"Reading {DATASET_PATH}", "green")
+    cprint(f"Reading {DATASET_PATH}", "green")
 
     with h5py.File(DATASET_PATH, 'r') as f:
         # Work on events

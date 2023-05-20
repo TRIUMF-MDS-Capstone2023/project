@@ -82,9 +82,9 @@ def get_theoretical_mass_value(label):
     return [105.66, 139.57, 0.511, 493.677, None][label]
 
 
-def realign_hits(x, y, disk_id):
+def adjust_hits(x, y, disk_id):
     """
-    Realigns hit coordinates based on the disk ID.
+    Adjusts hit coordinates based on the disk ID.
 
     Args:
         x (float): X-coordinate of the hit.
@@ -92,7 +92,7 @@ def realign_hits(x, y, disk_id):
         disk_id (int): Disk ID.
 
     Returns:
-        tuple: A tuple containing the realigned X and Y coordinates.
+        tuple: A tuple containing the adjusted X and Y coordinates.
     """
     # disk_id == 0 : Jura
     # disk_id == 1 : Salève
