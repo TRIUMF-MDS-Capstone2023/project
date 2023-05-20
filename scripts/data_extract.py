@@ -283,10 +283,11 @@ if __name__ == "__main__":
             # And see if it is in time
             .with_columns([
                 (
-                    (pl.col("chod_delta").abs() <= 0.5)
+                    (pl.col("chod_delta").abs() <= i / 10.)
                     .cast(pl.Boolean)
-                    .alias("in_time")
+                    .alias(f"in_time_point_{i}")
                 )
+                for i in range(1, 5 + 1)
             ])
         )
 
