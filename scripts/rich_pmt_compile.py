@@ -12,10 +12,15 @@ PAIR_RE = re.compile(r'\s+')
 
 
 def load_config(fname):
-    """Load and parse the NA62 configuration file.
+    """
+    Load and parse the NA62 configuration file.
 
-       Returns a 1952 x 3 array, rows correspond to the PMT seq. ID,
-       columns are (X pos. [mm], Y pos. [mm], jura = 0/saleve = 1)
+    Args:
+        fname: File name to read from
+
+    Returns:
+        list: A 1952 x 3 array, rows correspond to the PMT seq. ID, columns are X position [mm],
+              Y position [mm], disk_id (jura = 0, saleve = 1)
     """
     # We have 1952 PMTs
     pm_position_map = np.empty((1952, 3), dtype=np.float32)
@@ -41,19 +46,22 @@ def load_config(fname):
 
 
 def print_usage():
+    """Print script usage"""
     print(
         f'usage: python {sys.argv[0]} <rich_pmt_positions.dat> <rich_pmt_positions.npy>')
 
 
-def main():
+def main(pm_pos_map_dat_path, output_pm_pos_map_npy_path):
     """Parse the NA62 RICH config file and returns a precomputed lookup table."""
-    if len(sys.argv) != 3:
-        print_usage()
-        return -1
-    pm_pos_map = load_config(sys.argv[1])
-    np.save(sys.argv[2], pm_pos_map)
+    pm_pos_map = load_config(pm_pos_map_dat_path)
+    np.save(output_pm_pos_map_npy_path, pm_pos_map)
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    if len(sys.argv) != 3:
+        print_usage()
+        sys.exit(1)
+
+    sys.exit(main(pm_pos_map_dat_path=sys.argv[1],
+                  output_pm_pos_map_npy_path=sys.argv[2]))

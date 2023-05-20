@@ -1,4 +1,5 @@
 # pylint: disable-msg=C0103
+"""Utility functions"""
 
 import polars as pl
 import numpy as np
@@ -12,28 +13,29 @@ POSITRON_ID = 2
 KAON_ID = 3
 BACKGROUND_ID = 4
 
-# run_id: assumes to be max at 65536, i.e., 2 ^ 16
-# burst_id: [1, 1468], 11-bit
-# event_id, assumes to be max at 16777216, i.e. 2 ^ 24
-# track_id: [1, 10], 4-bit
-# Notice that the bit-packing sequence is different from the argument order
+
 def compute_composite_event_id(run_id, burst_id, event_id, track_id):
     """
     Computes a composite event ID based on individual components.
 
     Args:
-        run_id (int): Run ID.
-        burst_id (int): Burst ID.
-        event_id (int): Event ID.
-        track_id (int): Track ID.
+        run_id: Run ID.
+        burst_id: Burst ID.
+        event_id: Event ID.
+        track_id: Track ID.
 
     Returns:
         int: Composite event ID.
     """
+    # N.B.: bit-packing sequence is different from the argument order
     return (
+        # event_id, assumes to be max at 16777216, i.e. 2 ^ 24
         (event_id & 0xffffff) |
+        # run_id: assumes to be max at 65536, i.e., 2 ^ 16
         ((run_id & 0xffff) << 24) |
+        # burst_id: [1, 1468], 11-bit
         ((burst_id & 0x7ff) << (24 + 16)) |
+        # track_id: [1, 10], 4-bit
         ((track_id & 0xf) << (24 + 16 + 11))
     )
 
@@ -43,12 +45,13 @@ def decompose_composite_event_id(composite_event_id):
     Decomposes a composite event ID into individual components.
 
     Args:
-        composite_event_id (int): Composite event ID.
+        composite_event_id: Composite event ID.
 
     Returns:
         tuple: A tuple containing the decomposed components in the following order:
-               run_id (int), burst_id (int), event_id (int), track_id (int).
+               `run_id`, `burst_id`, `event_id`, `track_id`.
     """
+    # N.B.: bit-packing sequence is different from the argument order
     event_id = composite_event_id & 0xffffff
     run_id = (composite_event_id >> 24) & 0xffff
     burst_id = (composite_event_id >> (24 + 16)) & 0x7ff
@@ -61,7 +64,7 @@ def get_string_label(label):
     Retrieves the string label based on the given label index.
 
     Args:
-        label (int): Label index.
+        label: Label index.
 
     Returns:
         str: String label corresponding to the given index.
@@ -74,7 +77,7 @@ def get_theoretical_mass_value(label):
     Retrieves the theoretical mass value based on the given label index.
 
     Args:
-        label (int): Label index.
+        label: Label index.
 
     Returns:
         float or None: Theoretical mass value corresponding to the given index.
@@ -87,9 +90,9 @@ def adjust_hits(x, y, disk_id):
     Adjusts hit coordinates based on the disk ID.
 
     Args:
-        x (float): X-coordinate of the hit.
-        y (float): Y-coordinate of the hit.
-        disk_id (int): Disk ID.
+        x: X-coordinate of the hit.
+        y: Y-coordinate of the hit.
+        disk_id: Disk ID.
 
     Returns:
         tuple: A tuple containing the adjusted X and Y coordinates.
@@ -107,11 +110,11 @@ def compute_pmt_seq_id(disk_id, updowndisk_id, supercell_id, or_id, pmt_id):
     Computes the RICH PMT sequence ID.
 
     Args:
-        disk_id (int): Disk ID.
-        updowndisk_id (int): Up-down disk ID.
-        supercell_id (int): Supercell ID.
-        or_id (int): OR ID.
-        pmt_id (int): PMT ID.
+        disk_id: Disk ID.
+        updowndisk_id: Up-down disk ID.
+        supercell_id: Supercell ID.
+        or_id: OR ID.
+        pmt_id: PMT ID.
 
     Returns:
         int: RICH PMT sequence ID.
@@ -127,8 +130,8 @@ def calc_ring_radius(m, p):
     Returns the expected ring radius [m] based on the given particle mass and track momentum.
 
     Args:
-        m (float): Mass of the particle in MeV/c^2.
-        p (float): Track momentum in MeV/c.
+        m: Mass of the particle in MeV/c^2.
+        p: Track momentum in MeV/c.
 
     Returns:
         float: Expected ring radius in meters.
@@ -143,12 +146,12 @@ def calc_ring_radius(m, p):
 
 def save_as_parquet(df, output_path, name):
     """
-    Saves a DataFrame as a Parquet file and provides additional information about the DataFrame.
+    Saves a LazyFrame as a Parquet file and provides additional information about the LazyFrame.
 
     Args:
-        df (DataFrame): The DataFrame to be saved.
-        output_path (str): The path where the Parquet file will be saved.
-        name (str): The name of the DataFrame for display purposes.
+        df: The DataFrame to be saved.
+        output_path: The path where the Parquet file will be saved.
+        name: The name of the LazyFrame for display purposes.
     """
     cprint(f"{name} dataframe schema:", "blue")
     cprint(df.schema, "magenta")

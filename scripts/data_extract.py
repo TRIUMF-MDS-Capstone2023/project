@@ -52,7 +52,7 @@ def events_to_lazyframe(f):
             "ring_likelihood_kaon": events["ring_likelihood"][:, 3],
             "ring_likelihood_background": events["ring_likelihood"][:, 4],
             "label": labels,
-            "first_hit": hit_mapping[:-1], # hit n
+            "first_hit": hit_mapping[:-1],  # hit n
             "last_hit": hit_mapping[1:]    # hit n+1
         })
         .lazy()
