@@ -7,7 +7,7 @@ import polars as pl
 import numpy as np
 
 from scipy.spatial.distance import pdist, squareform
-from scipy.spatial import ConvexHull
+from scipy.spatial import ConvexHull, QhullError
 
 from termcolor import cprint
 
@@ -23,27 +23,33 @@ def hull_params(coordinates):
 
     Returns:
         tuple: A tuple of hull width, hull diameter, absolute difference between width and
-               diameter, and area.
+               diameter, and area. In case the hull does not fit, return `None`s.
     """
-    hull = ConvexHull(coordinates)
-    hull_points = hull.points[hull.vertices]
+    try:
+        hull = ConvexHull(coordinates)
+        hull_points = hull.points[hull.vertices]
 
-    # Width
-    widths = []
-    for i, p1 in enumerate(hull_points):
-        p2 = hull_points[(i+1) % len(hull_points)]
-        direction = p2 - p1
-        direction /= np.linalg.norm(direction)
-        projections = np.dot(hull_points, direction)
-        width = projections.max() - projections.min()
-        widths.append(width)
-    width = np.min(widths)
+        # Area
+        area = hull.area
 
-    # Diameter
-    pairwise_dists = squareform(pdist(hull_points))
-    diameter = pairwise_dists.max()
+        # Width
+        widths = []
+        for i, p1 in enumerate(hull_points):
+            p2 = hull_points[(i+1) % len(hull_points)]
+            direction = p2 - p1
+            direction /= np.linalg.norm(direction)
+            projections = np.dot(hull_points, direction)
+            width = projections.max() - projections.min()
+            widths.append(width)
+        width = np.min(widths)
 
-    return width, diameter, abs(width - diameter), hull.area
+        # Diameter
+        pairwise_dists = squareform(pdist(hull_points))
+        diameter = pairwise_dists.max()
+
+        return width, diameter, abs(width - diameter), area
+    except QhullError:
+        return None, None, None, None
 
 
 def hit_features(hits_df, events_df):
@@ -148,11 +154,11 @@ def main(event_parquet_path, hit_parquet_path,
 
     # Read events
     cprint(f"Reading {event_parquet_path}", "green")
-    events_df = pl.read_parquet(event_parquet_path).lazy()
+    events_df = pl.scan_parquet(event_parquet_path)
 
     # Read hits
     cprint(f"Reading {hit_parquet_path}", "green")
-    hits_df = pl.read_parquet(hit_parquet_path).lazy()
+    hits_df = pl.scan_parquet(hit_parquet_path)
 
     # Limit the hits to in time hits
     hits_df = (

@@ -1,6 +1,8 @@
 # pylint: disable-msg=C0103
 """Extract the events and corresponding hits and save as Parquet files"""
 
+import sys
+
 import h5py
 import polars as pl
 import numpy as np
@@ -9,16 +11,17 @@ from termcolor import cprint
 
 import utils
 
-# TODO: Make these as CLI arguments
-
-DATASET_PATH = './data/CaloRICH_Run11100_CTRL_v1.h5'
-POSITION_MAP_PATH = './data/rich_pmt_positions.npy'
-
-OUTPUT_FULL_EVENT_PARQUET = './data/full_events.parquet'
-OUTPUT_FULL_HIT_PARQUET = './data/full_hits.parquet'
-
 
 def events_to_lazyframe(f):
+    """
+    Extract all events from the H5 source file and put it in `pl.LazyFrame`.
+
+    Args:
+        f: An h5py.File
+
+    Returns:
+        pl.LazyFrame: Extracted events from the source file
+    """
     events = f["Events"]
     hit_mapping = np.array(f["HitMapping"])
 
@@ -34,7 +37,7 @@ def events_to_lazyframe(f):
     labels[pos_off:] = 2
 
     return (
-        pl.DataFrame({
+        pl.LazyFrame({
             "run_id": events["run_id"],
             "burst_id": events["burst_id"],
             "event_id": events["event_id"],
@@ -55,7 +58,6 @@ def events_to_lazyframe(f):
             "first_hit": hit_mapping[:-1],  # hit n
             "last_hit": hit_mapping[1:]    # hit n+1
         })
-        .lazy()
         .with_columns([
             (
                 (pl.col("last_hit") - pl.col("first_hit"))
@@ -66,12 +68,21 @@ def events_to_lazyframe(f):
 
 
 def event_hitmapping_to_lazyframe(f):
+    """
+    Extract all event mappings from the H5 source file and put it in `pl.LazyFrame`.
+
+    Args:
+        f: An h5py.File
+
+    Returns:
+        pl.LazyFrame: Extracted event mappings from the source file
+    """
     events = f["Events"]
 
     # First, create an event dataframe, and calculate the composite event ID
     # used for mapping
     composite_event_ids = (
-        pl.DataFrame({
+        pl.LazyFrame({
             "run_id": events["run_id"],
             "burst_id": events["burst_id"],
             "event_id": events["event_id"],
@@ -89,17 +100,18 @@ def event_hitmapping_to_lazyframe(f):
             )
         ])
         .select("composite_event_id")
+        .collect()
         .to_series(0)
     )
 
     # Make a linear mapping, so that it is faster, though a bit more memory-
     # intensive, to be used in a join
     return (
-        pl.DataFrame({
+        pl.LazyFrame({
             "hit_id": range(f['Hits'].size)
         })
         .join(
-            pl.DataFrame({
+            pl.LazyFrame({
                 "hit_id": np.array(f['HitMapping'])[:-1],
                 "composite_event_id": composite_event_ids
             }),
@@ -112,10 +124,20 @@ def event_hitmapping_to_lazyframe(f):
 
 
 def hits_to_lazyframe(f, position_map):
+    """
+    Extract all hits from the H5 source file and put it in `pl.LazyFrame`.
+
+    Args:
+        f: An h5py.File
+        position_map: A `pl.LazyFrame` of position map
+
+    Returns:
+        pl.LazyFrame: Extracted hits from the source file
+    """
     hits = f["Hits"]
 
     return (
-        pl.DataFrame({
+        pl.LazyFrame({
             "hit_id": range(hits.shape[0]),
             "assigned_flag": hits["assigned_flag"],
             "disk_id": hits["disk_id"],
@@ -124,7 +146,6 @@ def hits_to_lazyframe(f, position_map):
             "updowndisk_id": hits["updowndisk_id"],
             "hit_time": hits["hit_time"]
         })
-        .lazy()
         .with_columns([
             (
                 # Algorithm modified from `compute_pmt_seq_id`
@@ -139,7 +160,7 @@ def hits_to_lazyframe(f, position_map):
             )
         ])
         .join(
-            position_map.lazy(),
+            position_map,
             on="pmt_idx"
         )
         .with_columns([
@@ -162,11 +183,18 @@ def hits_to_lazyframe(f, position_map):
     )
 
 
-if __name__ == "__main__":
-    # Read position map
-    cprint(f"Reading {POSITION_MAP_PATH}", "green")
+def position_map_to_lazyframe(position_map_path):
+    """
+    Extract all event mappings from a Numpy file and put it in `pl.LazyFrame`.
+
+    Args:
+        position_map_path: A path to the position map
+
+    Returns:
+        pl.LazyFrame: Extracted event mappings from the source file
+    """
     position_map = pl.from_numpy(
-        np.load(POSITION_MAP_PATH), schema=["x", "y", "disk_id"])
+        np.load(position_map_path), schema=["x", "y", "disk_id"])
     position_map = position_map.insert_at_idx(
         0,
         pl.Series(
@@ -175,17 +203,33 @@ if __name__ == "__main__":
             dtype=pl.Int32
         )
     )
+    return position_map.lazy()
+
+
+def print_usage():
+    """Print script usage"""
+    print(
+        f'usage: python {sys.argv[0]} <dataset_path> <position_map_path> ' +
+        '<events.parquet> <hits.parquet>')
+
+
+def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
+    """Extract the events and corresponding hits and save as Parquet files"""
+
+    # Read position map
+    cprint(f"Reading {position_map_path}", "green")
+    position_map = position_map_to_lazyframe(position_map_path)
 
     # Read H5 dataset
-    cprint(f"Reading {DATASET_PATH}", "green")
+    cprint(f"Reading {dataset_path}", "green")
 
-    with h5py.File(DATASET_PATH, 'r') as f:
+    with h5py.File(dataset_path, 'r') as raw_file:
         # Work on events
         cprint("Working on events", "magenta")
         events_df = (
-            events_to_lazyframe(f)
+            events_to_lazyframe(raw_file)
 
-            # Ignore positron entries
+            # Ignore positron, kaon, and background entries
             .filter(
                 pl.col("label").is_in([utils.MUON_ID, utils.PION_ID])
             )
@@ -237,17 +281,17 @@ if __name__ == "__main__":
 
         # Export events
         utils.save_as_parquet(
-            events_df, OUTPUT_FULL_EVENT_PARQUET, name="Event")
+            events_df, event_parquet_path, name="Event")
 
         # Work on hits
         cprint("Working on hits", "magenta")
 
         # First, retrieve an event-to-hit mapping
-        event_hit_mapping = event_hitmapping_to_lazyframe(f)
+        event_hit_mapping = event_hitmapping_to_lazyframe(raw_file)
 
         # Then, retrieve the hits, and
         hits_df = (
-            hits_to_lazyframe(f, position_map)
+            hits_to_lazyframe(raw_file, position_map)
 
             # Use the event_id from the mapping
             .join(
@@ -280,7 +324,7 @@ if __name__ == "__main__":
                 )
             ])
 
-            # And see if it is in time
+            # And see if it is in time (we use [0.1, 0.5] as the hit time)
             .with_columns([
                 (
                     (pl.col("chod_delta").abs() <= i / 10.)
@@ -292,4 +336,17 @@ if __name__ == "__main__":
         )
 
         # Export hits
-        utils.save_as_parquet(hits_df, OUTPUT_FULL_HIT_PARQUET, name="Hit")
+        utils.save_as_parquet(hits_df, hit_parquet_path, name="Hit")
+
+    return 0
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 5:
+        print_usage()
+        sys.exit(1)
+
+    sys.exit(main(dataset_path=sys.argv[1],
+                  position_map_path=sys.argv[2],
+                  event_parquet_path=sys.argv[3],
+                  hit_parquet_path=sys.argv[4]))
