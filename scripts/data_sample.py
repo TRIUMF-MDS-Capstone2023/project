@@ -47,8 +47,7 @@ def uniform_sampling_momentum(df, min_momentum, max_momentum, seed=None):
         .collect()
         [0, 0]
     )
-    print(
-        f"Smallest bin size found: {min_bin_count}")
+    print(f"Smallest bin size found: {min_bin_count}")
 
     return (
         df

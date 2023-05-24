@@ -32,9 +32,9 @@ def events_to_lazyframe(f):
     entries = f.attrs["entries"]
 
     labels = np.zeros(entries, dtype=np.int32)
-    labels[mu_off:pi_off] = 0
-    labels[pi_off:pos_off] = 1
-    labels[pos_off:] = 2
+    labels[mu_off:pi_off] = utils.MUON_ID
+    labels[pi_off:pos_off] = utils.PION_ID
+    labels[pos_off:] = utils.POSITRON_ID
 
     return (
         pl.LazyFrame({
@@ -295,10 +295,7 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
 
             # Use the event_id from the mapping
             .join(
-                (
-                    event_hit_mapping
-                    .lazy()
-                ),
+                event_hit_mapping,
                 how='inner',
                 on='hit_id'
             )

@@ -134,7 +134,7 @@ def hit_features(hits_df, events_df):
         )
 
         # There is a bug from Polars: if we do `unnest` without `collect`,
-        # it would not work :(
+        # it would not work, with a `PanicException` :(
         .collect()
         .unnest("hull")
         .lazy()

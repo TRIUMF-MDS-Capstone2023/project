@@ -82,7 +82,7 @@ def get_theoretical_mass_value(label):
     Returns:
         float or None: Theoretical mass value corresponding to the given index.
     """
-    return [105.66, 139.57, 0.511, 493.677, None][label]
+    return [105.66, 139.57, 0.51, 493.68, None][label]
 
 
 def adjust_hits(x, y, disk_id):
