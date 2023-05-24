@@ -320,16 +320,6 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
                     .alias("chod_delta")
                 )
             ])
-
-            # And see if it is in time (we use [0.1, 0.5] as the hit time)
-            .with_columns([
-                (
-                    (pl.col("chod_delta").abs() <= i / 10.)
-                    .cast(pl.Boolean)
-                    .alias(f"in_time_point_{i}")
-                )
-                for i in range(1, 5 + 1)
-            ])
         )
 
         # Export hits

@@ -145,11 +145,11 @@ def print_usage():
     """Print script usage"""
     print(
         f'usage: python {sys.argv[0]} <events.parquet> <hits.parquet> ' +
-        '<events_with_hit_features.parquet> <in_time_point_5>')
+        '<events_with_hit_features.parquet> <cut_off_time>')
 
 
 def main(event_parquet_path, hit_parquet_path,
-         output_event_with_hit_features_parquet_path, in_time_column_name):
+         output_event_with_hit_features_parquet_path, cut_off_time):
     """Derive corresponding hits as event features and save as Parquet file"""
 
     # Read events
@@ -163,7 +163,7 @@ def main(event_parquet_path, hit_parquet_path,
     # Limit the hits to in time hits
     hits_df = (
         hits_df
-        .filter(pl.col(in_time_column_name))
+        .filter(pl.col("chod_delta") < cut_off_time)
     )
 
     # Engineer features and merge with the events dataframe
@@ -191,4 +191,4 @@ if __name__ == "__main__":
     sys.exit(main(event_parquet_path=sys.argv[1],
                   hit_parquet_path=sys.argv[2],
                   output_event_with_hit_features_parquet_path=sys.argv[3],
-                  in_time_column_name=sys.argv[4]))
+                  cut_off_time=float(sys.argv[4])))

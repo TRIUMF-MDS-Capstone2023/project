@@ -21,13 +21,23 @@ EVENT_WITH_HIT_FEATURES_FILE_0_2 = data/events_with_hit_features_[cut_off_time=0
 EVENT_WITH_HIT_FEATURES_FILE_0_3 = data/events_with_hit_features_[cut_off_time=0.3].parquet
 EVENT_WITH_HIT_FEATURES_FILE_0_4 = data/events_with_hit_features_[cut_off_time=0.4].parquet
 EVENT_WITH_HIT_FEATURES_FILE_0_5 = data/events_with_hit_features_[cut_off_time=0.5].parquet
+EVENT_WITH_HIT_FEATURES_FILE_1 = data/events_with_hit_features_[cut_off_time=1.0].parquet
+EVENT_WITH_HIT_FEATURES_FILE_3 = data/events_with_hit_features_[cut_off_time=3.0].parquet
+EVENT_WITH_HIT_FEATURES_FILE_5 = data/events_with_hit_features_[cut_off_time=5.0].parquet
+EVENT_WITH_HIT_FEATURES_FILE_8 = data/events_with_hit_features_[cut_off_time=8.0].parquet
+EVENT_WITH_HIT_FEATURES_FILE_10 = data/events_with_hit_features_[cut_off_time=10.0].parquet
 
 EVENT_WITH_HIT_FEATURES_FILES = \
 	$(EVENT_WITH_HIT_FEATURES_FILE_0_1) \
 	$(EVENT_WITH_HIT_FEATURES_FILE_0_2) \
 	$(EVENT_WITH_HIT_FEATURES_FILE_0_3) \
 	$(EVENT_WITH_HIT_FEATURES_FILE_0_4) \
-	$(EVENT_WITH_HIT_FEATURES_FILE_0_5)
+	$(EVENT_WITH_HIT_FEATURES_FILE_0_5) \
+	$(EVENT_WITH_HIT_FEATURES_FILE_1) \
+	$(EVENT_WITH_HIT_FEATURES_FILE_3) \
+	$(EVENT_WITH_HIT_FEATURES_FILE_5) \
+	$(EVENT_WITH_HIT_FEATURES_FILE_8) \
+	$(EVENT_WITH_HIT_FEATURES_FILE_10)
 
 SAMPLE_EVENT_ID_FILE_5_45 = \
 	data/sampled_event_ids_[muon,min_momentum=5,max_momentum=45].parquet
@@ -74,19 +84,34 @@ $(FULL_FILES): $(H5_FILE) $(RICH_PMT_POSITIONS_NPY)
 # == Event with hit features ==
 
 $(EVENT_WITH_HIT_FEATURES_FILE_0_1): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
-	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_1) in_time_point_1
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_1) 0.1
 
 $(EVENT_WITH_HIT_FEATURES_FILE_0_2): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
-	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_2) in_time_point_2
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_2) 0.2
 
 $(EVENT_WITH_HIT_FEATURES_FILE_0_3): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
-	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_3) in_time_point_3
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_3) 0.3
 
 $(EVENT_WITH_HIT_FEATURES_FILE_0_4): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
-	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_4) in_time_point_4
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_4) 0.4
 
 $(EVENT_WITH_HIT_FEATURES_FILE_0_5): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
-	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_5) in_time_point_5
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_0_5) 0.5
+
+$(EVENT_WITH_HIT_FEATURES_FILE_1): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_1)   1.0
+
+$(EVENT_WITH_HIT_FEATURES_FILE_3): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_3)   3.0
+
+$(EVENT_WITH_HIT_FEATURES_FILE_5): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_5)   5.0
+
+$(EVENT_WITH_HIT_FEATURES_FILE_8): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_8)   8.0
+
+$(EVENT_WITH_HIT_FEATURES_FILE_10): $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
+	$(PYTHON) scripts/data_features.py $(FULL_EVENT_FILE) $(FULL_HIT_FILE) $(EVENT_WITH_HIT_FEATURES_FILE_10) 10.0
 
 # == Sample event IDs ==
 
