@@ -67,33 +67,12 @@ def hit_features(hits_df, events_df):
     return (
         hits_df
 
-        # Get the `track_pos_x` and `track_pos_y`
+        # Filter by `composite_event_id`
         .join(
-            events_df.select("composite_event_id",
-                             "track_pos_x", "track_pos_y"),
+            events_df.select("composite_event_id"),
             on='composite_event_id',
             how='inner'
         )
-
-        # With that, we "align" the hit positions, centering to the track position
-        .with_columns([
-            (
-                (pl.col("x_adjusted") - pl.col("track_pos_x"))
-                .alias("x_aligned")
-            ),
-            (
-                (pl.col("y_adjusted") - pl.col("track_pos_y"))
-                .alias("y_aligned")
-            )
-        ])
-
-        # After that, we calculate the hit distances from the track position
-        .with_columns([
-            (
-                (((pl.col("x_aligned") ** 2) + (pl.col("y_aligned") ** 2)) ** 0.5)
-                .alias("hit_distance")
-            )
-        ])
 
         # Then we aggregate the following features, according to the event
         .groupby("composite_event_id")

@@ -124,7 +124,7 @@ $(RICH_PMT_POSITIONS_NPY): $(RICH_PMT_POSITIONS_DAT)
 
 # == Full events and hits ==
 
-$(FULL_PARQUET_FILES): $(H5_FILE) $(RICH_PMT_POSITIONS_NPY)
+$(FULL_EVENT_FILE) $(FULL_HIT_FILE) : $(H5_FILE) $(RICH_PMT_POSITIONS_NPY)
 	$(PYTHON) scripts/data_extract.py $(H5_FILE) $(RICH_PMT_POSITIONS_NPY) $(FULL_EVENT_FILE) $(FULL_HIT_FILE)
 
 # == Event with hit features ==

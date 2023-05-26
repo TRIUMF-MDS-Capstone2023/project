@@ -180,6 +180,10 @@ def hits_to_lazyframe(f, position_map):
                 .alias("y_adjusted")
             )
         ])
+        # Drop to minimize confusion
+        # {x,y}_raw: The raw number at sensor
+        # {x,y}_adjusted: The adjusted number, by `disk_id`
+        .drop(["x", "y"])
     )
 
 
@@ -203,6 +207,7 @@ def position_map_to_lazyframe(position_map_path):
             dtype=pl.Int32
         )
     )
+    position_map = position_map.drop("disk_id")
     return position_map.lazy()
 
 
@@ -306,6 +311,7 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
                     events_df
                     .select(["composite_event_id",
                              "run_id", "burst_id", "event_id", "track_id",
+                             "track_pos_x", "track_pos_y",
                              "chod_time", "class", "track_momentum"])
                 ),
                 how='inner',
@@ -318,6 +324,28 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
                     (pl.col("hit_time") - pl.col("chod_time"))
                     .cast(pl.Float32)
                     .alias("chod_delta")
+                )
+            ])
+
+            # With that, we also "align" the hit positions, centering to the track position
+            .with_columns([
+                (
+                    (pl.col("x_adjusted") - pl.col("track_pos_x"))
+                    .alias("x_aligned")
+                ),
+                (
+                    (pl.col("y_adjusted") - pl.col("track_pos_y"))
+                    .alias("y_aligned")
+                )
+            ])
+
+            # Since we are there, why not we calculate the hit distances from the track position
+            # as well. (Technically it is more like a feature engineering step, but doing it a
+            # step earlier will be faster for latter processing.)
+            .with_columns([
+                (
+                    (((pl.col("x_aligned") ** 2) + (pl.col("y_aligned") ** 2)) ** 0.5)
+                    .alias("hit_distance")
                 )
             ])
         )
