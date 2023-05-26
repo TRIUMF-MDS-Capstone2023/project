@@ -61,5 +61,5 @@ class CalorichEventDataset(Dataset):
                 [n for n in self.event_with_hit_features.row(idx)[1:]])
         )) | {
             # Hits is now a n*3 tensor array
-            "hits": torch.tensor([n for n in hits.rows()])
+            "hits": torch.tensor(hits.rows())
         }
