@@ -171,12 +171,14 @@ def hits_to_lazyframe(f, position_map):
                 pl.when(pl.col("disk_id") == 0)
                 .then(pl.col("x") - 146.8)
                 .otherwise(pl.col("x") - 196.7)
+                .cast(pl.Float32)
                 .alias("x_adjusted")
             ),
             (
                 pl.when(pl.col("disk_id") == 0)
                 .then(pl.col("y") - 19.8)
                 .otherwise(pl.col("y") - 9.5)
+                .cast(pl.Float32)
                 .alias("y_adjusted")
             )
         ])
@@ -211,14 +213,7 @@ def position_map_to_lazyframe(position_map_path):
     return position_map.lazy()
 
 
-def print_usage():
-    """Print script usage"""
-    print(
-        f'usage: python {sys.argv[0]} <dataset_path> <position_map_path> ' +
-        '<events.parquet> <hits.parquet>')
-
-
-def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
+def extract(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
     """Extract the events and corresponding hits and save as Parquet files"""
 
     # Read position map
@@ -285,8 +280,7 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
         )
 
         # Export events
-        utils.save_as_parquet(
-            events_df, event_parquet_path, name="Event")
+        utils.save_as_parquet(events_df, event_parquet_path, name="Event")
 
         # Work on hits
         cprint("Working on hits", "magenta")
@@ -331,10 +325,12 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
             .with_columns([
                 (
                     (pl.col("x_adjusted") - pl.col("track_pos_x"))
+                    .cast(pl.Float32)
                     .alias("x_aligned")
                 ),
                 (
                     (pl.col("y_adjusted") - pl.col("track_pos_y"))
+                    .cast(pl.Float32)
                     .alias("y_aligned")
                 )
             ])
@@ -345,6 +341,7 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
             .with_columns([
                 (
                     (((pl.col("x_aligned") ** 2) + (pl.col("y_aligned") ** 2)) ** 0.5)
+                    .cast(pl.Float32)
                     .alias("hit_distance")
                 )
             ])
@@ -356,12 +353,19 @@ def main(dataset_path, position_map_path, event_parquet_path, hit_parquet_path):
     return 0
 
 
+def print_usage():
+    """Print script usage"""
+    print(
+        f'usage: python {sys.argv[0]} <dataset_path> <position_map_path> ' +
+        '<events.parquet> <hits.parquet>')
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 5:
         print_usage()
         sys.exit(1)
 
-    sys.exit(main(dataset_path=sys.argv[1],
-                  position_map_path=sys.argv[2],
-                  event_parquet_path=sys.argv[3],
-                  hit_parquet_path=sys.argv[4]))
+    sys.exit(extract(dataset_path=sys.argv[1],
+                     position_map_path=sys.argv[2],
+                     event_parquet_path=sys.argv[3],
+                     hit_parquet_path=sys.argv[4]))

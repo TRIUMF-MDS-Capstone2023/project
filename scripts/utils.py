@@ -27,16 +27,15 @@ def compute_composite_event_id(run_id, burst_id, event_id, track_id):
     Returns:
         int: Composite event ID.
     """
-    # N.B.: bit-packing sequence is different from the argument order
     return (
-        # event_id, assumes to be max at 16777216, i.e. 2 ^ 24
-        (event_id & 0xffffff) |
-        # run_id: assumes to be max at 65536, i.e., 2 ^ 16
-        ((run_id & 0xffff) << 24) |
+        # run_id: assumes to be max at 16777216, i.e., 2 ^ 24
+        ((run_id & 0xffffff) << (4 + 24 + 11)) |
         # burst_id: [1, 1468], 11-bit
-        ((burst_id & 0x7ff) << (24 + 16)) |
+        ((burst_id & 0x7ff) << (4 + 24)) |
+        # event_id, assumes to be max at 16777216, i.e. 2 ^ 24
+        ((event_id & 0xffffff) << 4) |
         # track_id: [1, 10], 4-bit
-        ((track_id & 0xf) << (24 + 16 + 11))
+        ((track_id & 0xf))
     )
 
 
@@ -51,11 +50,10 @@ def decompose_composite_event_id(composite_event_id):
         tuple: A tuple containing the decomposed components in the following order:
                `run_id`, `burst_id`, `event_id`, `track_id`.
     """
-    # N.B.: bit-packing sequence is different from the argument order
-    event_id = composite_event_id & 0xffffff
-    run_id = (composite_event_id >> 24) & 0xffff
-    burst_id = (composite_event_id >> (24 + 16)) & 0x7ff
-    track_id = (composite_event_id >> (24 + 16 + 11)) & 0xf
+    run_id = (composite_event_id >> (4 + 24 + 11)) & 0xffffff
+    burst_id = (composite_event_id >> (4 + 24)) & 0x7ff
+    event_id = (composite_event_id >> 4) & 0xffffff
+    track_id = (composite_event_id) & 0xf
     return run_id, burst_id, event_id, track_id
 
 
@@ -144,7 +142,7 @@ def calc_ring_radius(m, p):
     return r
 
 
-def save_as_parquet(df, output_path, name):
+def save_as_parquet(df, output_path, name, display_head=False):
     """
     Saves a LazyFrame as a Parquet file and provides additional information about the LazyFrame.
 
@@ -152,20 +150,24 @@ def save_as_parquet(df, output_path, name):
         df: The DataFrame to be saved.
         output_path: The path where the Parquet file will be saved.
         name: The name of the LazyFrame for display purposes.
+        display_head: True if the first few rows are to be collected and shown.
     """
     cprint(f"{name} dataframe schema:", "blue")
     cprint(df.schema, "magenta")
     print()
 
-    cprint(f"{name} dataframe samples (head):", "blue")
-    cprint(df.head().collect(), "magenta")
-    print()
+    if display_head:
+        cprint(f"{name} dataframe samples (head):", "blue")
+        cprint(df.head().collect(), "magenta")
+        print()
 
     try:
+        cprint("Trying to write out the file using `sink_parquet`", "blue")
         df.sink_parquet(output_path)
     except pl.exceptions.PolarsPanicError:
         # Not all queries support 'streaming' via `sink_parquet`.
         # Fallback if the query does not support streaming
+        cprint("`sink_parquet` failed, using `write_parquet` instead", "blue")
         df.collect().write_parquet(output_path)
     cprint(f"Saved {name} dataframe as {output_path}", "green")
     print()

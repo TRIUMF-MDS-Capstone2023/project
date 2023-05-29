@@ -52,14 +52,13 @@ def hull_params(coordinates):
         return None, None, None, None
 
 
-def hit_features(hits_df, events_df):
+def hit_features(hits_df):
     """
     Create a copy of LazyFrame that contains the hit features, together with all features from
     the events.
 
     Args:
         hits_df: A LazyFrame of the hits data.
-        events_df: A LazyFrame of the events data.
 
     Returns:
         polars.LazyFrame: A LazyFrame of hit features
@@ -67,39 +66,40 @@ def hit_features(hits_df, events_df):
     return (
         hits_df
 
-        # Filter by `composite_event_id`
-        .join(
-            events_df.select("composite_event_id"),
-            on='composite_event_id',
-            how='inner'
-        )
-
-        # Then we aggregate the following features, according to the event
+        # Aggregate the following features, according to the event
         .groupby("composite_event_id")
         .agg(
             # total in time hits
             total_in_time_hits=pl.count(),
 
             # min/max position realigned by subtracting track position
-            x_aligned_min=pl.col("x_aligned").min(),
-            x_aligned_max=pl.col("x_aligned").max(),
+            x_aligned_min=pl.col("x_aligned").min().cast(pl.Float32),
+            x_aligned_max=pl.col("x_aligned").max().cast(pl.Float32),
             x_aligned_width=(
                 pl.col("x_aligned").max() - pl.col("x_aligned").min()
-            ),
-            y_aligned_min=pl.col("y_aligned").min(),
-            y_aligned_max=pl.col("y_aligned").max(),
+            ).cast(pl.Float32),
+            y_aligned_min=pl.col("y_aligned").min().cast(pl.Float32),
+            y_aligned_max=pl.col("y_aligned").max().cast(pl.Float32),
             y_aligned_width=(
                 pl.col("y_aligned").max() - pl.col("y_aligned").min()
-            ),
+            ).cast(pl.Float32),
 
             # hit_distance
-            hit_distance_min=pl.col("hit_distance").min(),
-            hit_distance_max=pl.col("hit_distance").max(),
-            hit_distance_mean=pl.col("hit_distance").mean(),
-            hit_distance_median=pl.col("hit_distance").median(),
-            hit_distance_q25=pl.col("hit_distance").quantile(0.25),
-            hit_distance_q75=pl.col("hit_distance").quantile(0.75),
-            hit_distance_rms=(((pl.col("hit_distance") ** 2).mean()) ** 0.5),
+            hit_distance_min=pl.col("hit_distance").min().cast(pl.Float32),
+            hit_distance_max=pl.col("hit_distance").max().cast(pl.Float32),
+            hit_distance_mean=pl.col("hit_distance").mean().cast(pl.Float32),
+            hit_distance_median=(
+                pl.col("hit_distance").median().cast(pl.Float32)
+            ),
+            hit_distance_q25=(
+                pl.col("hit_distance").quantile(0.25).cast(pl.Float32)
+            ),
+            hit_distance_q75=(
+                pl.col("hit_distance").quantile(0.75).cast(pl.Float32)
+            ),
+            hit_distance_rms=(
+                (((pl.col("hit_distance") ** 2).mean()) ** 0.5).cast(pl.Float32)
+            ),
 
             # hull-related things
             hull=(
@@ -117,18 +117,17 @@ def hit_features(hits_df, events_df):
         .collect()
         .unnest("hull")
         .lazy()
+        .with_columns([
+            pl.col("hull_width").cast(pl.Float32),
+            pl.col("hull_diameter").cast(pl.Float32),
+            pl.col("hull_diff_width_diameter").cast(pl.Float32),
+            pl.col("hull_area").cast(pl.Float32)
+        ])
     )
 
 
-def print_usage():
-    """Print script usage"""
-    print(
-        f'usage: python {sys.argv[0]} <events.parquet> <hits.parquet> ' +
-        '<events_with_hit_features.parquet> <cut_off_time>')
-
-
-def main(event_parquet_path, hit_parquet_path,
-         output_event_with_hit_features_parquet_path, cut_off_time):
+def features(event_parquet_path, hit_parquet_path,
+             output_event_with_hit_features_parquet_path, cut_off_time):
     """Derive corresponding hits as event features and save as Parquet file"""
 
     # Read events
@@ -146,8 +145,11 @@ def main(event_parquet_path, hit_parquet_path,
     )
 
     # Engineer features and merge with the events dataframe
+    cprint(
+        f"Working on engineering features with cut off time of {cut_off_time}", "magenta")
+
     events_with_hit_features = (
-        hit_features(hits_df, events_df)
+        hit_features(hits_df)
         .join(
             events_df,
             on='composite_event_id',
@@ -157,9 +159,16 @@ def main(event_parquet_path, hit_parquet_path,
 
     # And finally, save as parquet
     utils.save_as_parquet(events_with_hit_features,
-                          output_event_with_hit_features_parquet_path, "Events")
+                          output_event_with_hit_features_parquet_path, name="Events")
 
     return 0
+
+
+def print_usage():
+    """Print script usage"""
+    print(
+        f'usage: python {sys.argv[0]} <events.parquet> <hits.parquet> ' +
+        '<events_with_hit_features.parquet> <cut_off_time>')
 
 
 if __name__ == "__main__":
@@ -167,7 +176,7 @@ if __name__ == "__main__":
         print_usage()
         sys.exit(1)
 
-    sys.exit(main(event_parquet_path=sys.argv[1],
-                  hit_parquet_path=sys.argv[2],
-                  output_event_with_hit_features_parquet_path=sys.argv[3],
-                  cut_off_time=float(sys.argv[4])))
+    sys.exit(features(event_parquet_path=sys.argv[1],
+                      hit_parquet_path=sys.argv[2],
+                      output_event_with_hit_features_parquet_path=sys.argv[3],
+                      cut_off_time=float(sys.argv[4])))

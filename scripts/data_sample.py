@@ -10,7 +10,7 @@ from termcolor import cprint
 import utils
 
 
-def uniform_sampling_momentum(df, min_momentum, max_momentum, seed=None):
+def uniform_sampling_muon_in_momentum(df, min_momentum, max_momentum, seed=None):
     """
     Randomly samples the same number of examples in each bin of track_momentum (bin size = 1 Gev),
     the number of examples is equal to the minimum number of examples in all the bins
@@ -63,14 +63,7 @@ def uniform_sampling_momentum(df, min_momentum, max_momentum, seed=None):
     )
 
 
-def print_usage():
-    """Print script usage"""
-    print(
-        f'usage: python {sys.argv[0]} <events.parquet> <min_momentum> ' +
-        '<max_momentum> <events_sampled_id.parquet>')
-
-
-def main(event_parquet_path, min_momentum, max_momentum, event_id_parquet_path):
+def sample(event_parquet_path, min_momentum, max_momentum, event_id_parquet_path):
     """Do a uniform sampling for muon data, in the specified GeV range."""
 
     # Read events
@@ -78,15 +71,21 @@ def main(event_parquet_path, min_momentum, max_momentum, event_id_parquet_path):
     events_df = pl.scan_parquet(event_parquet_path)
 
     # Sample it based on an uniform distribution
-    sampled_composite_event_ids = uniform_sampling_momentum(
-        events_df, min_momentum, max_momentum, seed=42
-    ).collect().to_series(0)
+    cprint(
+        f"Working on uniform sampling of muons, [{min_momentum}, {max_momentum}]", "magenta")
+    sampled_composite_event_ids = (
+        uniform_sampling_muon_in_momentum(
+            events_df, min_momentum, max_momentum, seed=42)
+        .collect()
+        .to_series(0)
+    )
 
-    # And get the event IDs
+    # And filter by the event IDs
     sampled_events_df = (
         events_df
         .filter(
-            pl.col("composite_event_id").is_in(sampled_composite_event_ids)
+            pl.col("composite_event_id")
+            .is_in(sampled_composite_event_ids)
         )
     )
 
@@ -100,12 +99,19 @@ def main(event_parquet_path, min_momentum, max_momentum, event_id_parquet_path):
     return 0
 
 
+def print_usage():
+    """Print script usage"""
+    print(
+        f'usage: python {sys.argv[0]} <events.parquet> <min_momentum> ' +
+        '<max_momentum> <events_sampled_id.parquet>')
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 5:
         print_usage()
         sys.exit(1)
 
-    sys.exit(main(event_parquet_path=sys.argv[1],
-                  min_momentum=int(sys.argv[2]),
-                  max_momentum=int(sys.argv[3]),
-                  event_id_parquet_path=sys.argv[4]))
+    sys.exit(sample(event_parquet_path=sys.argv[1],
+                    min_momentum=int(sys.argv[2]),
+                    max_momentum=int(sys.argv[3]),
+                    event_id_parquet_path=sys.argv[4]))
