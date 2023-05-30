@@ -60,7 +60,36 @@ def events_to_lazyframe(f):
         })
         .with_columns([
             (
+                pl.col("run_id")
+                .cast(pl.UInt32)
+            ),
+            (
+                pl.col("burst_id")
+                .cast(pl.UInt16)
+            ),
+            (
+                pl.col("event_id")
+                .cast(pl.UInt64)
+            ),
+            (
+                pl.col("track_id")
+                .cast(pl.UInt8)
+            ),
+            (
+                pl.col("label")
+                .cast(pl.UInt8)
+            ),
+            (
+                pl.col("first_hit")
+                .cast(pl.UInt64)
+            ),
+            (
+                pl.col("last_hit")
+                .cast(pl.UInt64)
+            ),
+            (
                 (pl.col("last_hit") - pl.col("first_hit"))
+                .cast(pl.UInt16)
                 .alias("total_hits")
             )
         ])
@@ -90,12 +119,29 @@ def event_hitmapping_to_lazyframe(f):
         })
         .with_columns([
             (
+                pl.col("run_id")
+                .cast(pl.UInt32)
+            ),
+            (
+                pl.col("burst_id")
+                .cast(pl.UInt16)
+            ),
+            (
+                pl.col("event_id")
+                .cast(pl.UInt64)
+            ),
+            (
+                pl.col("track_id")
+                .cast(pl.UInt8)
+            ),
+            (
                 pl.struct(["run_id", "burst_id", "event_id", "track_id"])
                 .apply(lambda x: (
                     utils.compute_composite_event_id(
                         x["run_id"], x["burst_id"], x["event_id"], x["track_id"]
                     )
                 ))
+                .cast(pl.UInt64)
                 .alias("composite_event_id")
             )
         ])
@@ -148,6 +194,26 @@ def hits_to_lazyframe(f, position_map):
         })
         .with_columns([
             (
+                pl.col("assigned_flag")
+                .cast(pl.Int32)
+            ),
+            (
+                pl.col("disk_id")
+                .cast(pl.UInt8)
+            ),
+            (
+                pl.col("pmt_id")
+                .cast(pl.UInt8)
+            ),
+            (
+                pl.col("supercell_id")
+                .cast(pl.UInt8)
+            ),
+            (
+                pl.col("updowndisk_id")
+                .cast(pl.UInt8)
+            ),
+            (
                 # Algorithm modified from `compute_pmt_seq_id`
                 # In this slice, `or_id` is always 0
                 (
@@ -156,6 +222,7 @@ def hits_to_lazyframe(f, position_map):
                     pl.col("updowndisk_id") * 61 * 8 +
                     pl.col("disk_id") * 61 * 8 * 2
                 )
+                .cast(pl.UInt32)
                 .alias("pmt_idx")
             )
         ])
@@ -206,7 +273,7 @@ def position_map_to_lazyframe(position_map_path):
         pl.Series(
             "pmt_idx",
             range(position_map.shape[0]),
-            dtype=pl.Int32
+            dtype=pl.UInt32
         )
     )
     position_map = position_map.drop("disk_id")
@@ -260,7 +327,7 @@ def extract(dataset_path, position_map_path, event_parquet_path, hit_parquet_pat
                             x["run_id"], x["burst_id"], x["event_id"], x["track_id"]
                         )
                     ))
-                    .cast(pl.Int64)
+                    .cast(pl.UInt64)
                     .alias("composite_event_id")
                 )
             ])

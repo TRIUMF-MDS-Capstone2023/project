@@ -70,59 +70,122 @@ def hit_features(hits_df):
         .groupby("composite_event_id")
         .agg(
             # total in time hits
-            total_in_time_hits=pl.count(),
+            total_in_time_hits=(
+                pl.count()
+                .cast(pl.UInt16)
+            ),
 
             # min/max position realigned by subtracting track position
-            x_aligned_min=pl.col("x_aligned").min().cast(pl.Float32),
-            x_aligned_max=pl.col("x_aligned").max().cast(pl.Float32),
+            x_aligned_min=(
+                pl.col("x_aligned")
+                .min()
+                .cast(pl.Float32)
+            ),
+            x_aligned_max=(
+                pl.col("x_aligned")
+                .max()
+                .cast(pl.Float32)
+            ),
             x_aligned_width=(
-                pl.col("x_aligned").max() - pl.col("x_aligned").min()
-            ).cast(pl.Float32),
-            y_aligned_min=pl.col("y_aligned").min().cast(pl.Float32),
-            y_aligned_max=pl.col("y_aligned").max().cast(pl.Float32),
+                (pl.col("x_aligned").max() - pl.col("x_aligned").min())
+                .cast(pl.Float32)
+            ),
+            y_aligned_min=(
+                pl.col("y_aligned")
+                .min()
+                .cast(pl.Float32)
+            ),
+            y_aligned_max=(
+                pl.col("y_aligned")
+                .max()
+                .cast(pl.Float32)
+            ),
             y_aligned_width=(
-                pl.col("y_aligned").max() - pl.col("y_aligned").min()
-            ).cast(pl.Float32),
+                (pl.col("y_aligned").max() - pl.col("y_aligned").min())
+                .cast(pl.Float32)
+            ),
 
             # hit_distance
-            hit_distance_min=pl.col("hit_distance").min().cast(pl.Float32),
-            hit_distance_max=pl.col("hit_distance").max().cast(pl.Float32),
-            hit_distance_mean=pl.col("hit_distance").mean().cast(pl.Float32),
+            hit_distance_min=(
+                pl.col("hit_distance")
+                .min()
+                .cast(pl.Float32)
+            ),
+            hit_distance_max=(
+                pl.col("hit_distance")
+                .max()
+                .cast(pl.Float32)
+            ),
+            hit_distance_mean=(
+                pl.col("hit_distance")
+                .mean()
+                .cast(pl.Float32)
+            ),
             hit_distance_median=(
-                pl.col("hit_distance").median().cast(pl.Float32)
+                pl.col("hit_distance")
+                .median()
+                .cast(pl.Float32)
+            ),
+            hit_distance_q5=(
+                pl.col("hit_distance")
+                .quantile(0.05)
+                .cast(pl.Float32)
+            ),
+            hit_distance_q10=(
+                pl.col("hit_distance")
+                .quantile(0.10)
+                .cast(pl.Float32)
             ),
             hit_distance_q25=(
-                pl.col("hit_distance").quantile(0.25).cast(pl.Float32)
+                pl.col("hit_distance")
+                .quantile(0.25)
+                .cast(pl.Float32)
             ),
             hit_distance_q75=(
-                pl.col("hit_distance").quantile(0.75).cast(pl.Float32)
+                pl.col("hit_distance")
+                .quantile(0.75)
+                .cast(pl.Float32)
+            ),
+            hit_distance_q90=(
+                pl.col("hit_distance")
+                .quantile(0.90)
+                .cast(pl.Float32)
+            ),
+            hit_distance_q95=(
+                pl.col("hit_distance")
+                .quantile(0.95)
+                .cast(pl.Float32)
             ),
             hit_distance_rms=(
-                (((pl.col("hit_distance") ** 2).mean()) ** 0.5).cast(pl.Float32)
+                (((pl.col("hit_distance") ** 2).mean()) ** 0.5)
+                .cast(pl.Float32)
             ),
 
             # hull-related things
             hull=(
                 pl.struct("x_aligned", "y_aligned")
                 .apply(lambda x: dict(zip(
-                    ("hull_width", "hull_diameter",
-                     "hull_diff_width_diameter", "hull_area"),
+                    (
+                        "hull_width",
+                        "hull_diameter",
+                        "hull_diff_width_diameter",
+                        "hull_area"
+                    ),
                     hull_params([list(i.values()) for i in x])
                 )))
+                .cast(
+                    pl.Struct({
+                        "hull_width": pl.Float32,
+                        "hull_diameter": pl.Float32,
+                        "hull_diff_width_diameter": pl.Float32,
+                        "hull_area": pl.Float32
+                    })
+                )
             )
         )
 
-        # There is a bug from Polars: if we do `unnest` without `collect`,
-        # it would not work, with a `PanicException` :(
-        .collect()
+        # Break hull into separate variables
         .unnest("hull")
-        .lazy()
-        .with_columns([
-            pl.col("hull_width").cast(pl.Float32),
-            pl.col("hull_diameter").cast(pl.Float32),
-            pl.col("hull_diff_width_diameter").cast(pl.Float32),
-            pl.col("hull_area").cast(pl.Float32)
-        ])
     )
 
 
