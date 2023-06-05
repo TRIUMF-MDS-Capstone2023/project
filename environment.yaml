@@ -1,0 +1,38 @@
+# This is a Conda environment file.
+#
+# To create an environment, run:
+#   conda env create -f environment.yaml
+#
+# Or, alternatively, for mamba, run:
+#   mamba env create -f environment.yaml
+#
+# To update the environment, change `create` to `update`.
+name: calorich
+channels:
+  - conda-forge
+  - pytorch
+  - anaconda
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.11
+  - altair
+  - catboost
+  - h5py
+  - ipykernel
+  - lightgbm
+  - matplotlib
+  - numpy
+  - pandas
+  - polars
+  - pytorch
+  - pytorch::torchvision
+  - pytorch::torchaudio
+  - scikit-learn
+  - scipy
+  - seaborn
+  - termcolor
+  - xgboost
+  - pip
+  - pip:
+    - autopep8
