@@ -79,6 +79,9 @@ PNN_H5_FILE_2021A_AA = data/CaloRICH_93d0k1cx_CTRL_v1.h5
 PNN_H5_FILE_2021A_AB = data/CaloRICH_YZbjqz_CTRL_v1.h5
 PNN_H5_FILE_2021A_AC = data/CaloRICH_yxwNNN_CTRL_v1.h5
 
+PNN_EVENT_FILE = data/pnn_2021a/events.parquet
+PNN_HIT_FILE = data/pnn_2021a/hits.parquet
+
 PNN_EVENT_FILE_2021A_AA = data/pnn_2021a/events_aa.parquet
 PNN_EVENT_FILE_2021A_AB = data/pnn_2021a/events_ab.parquet
 PNN_EVENT_FILE_2021A_AC = data/pnn_2021a/events_ac.parquet
@@ -87,39 +90,140 @@ PNN_HIT_FILE_2021A_AA = data/pnn_2021a/hits_aa.parquet
 PNN_HIT_FILE_2021A_AB = data/pnn_2021a/hits_ab.parquet
 PNN_HIT_FILE_2021A_AC = data/pnn_2021a/hits_ac.parquet
 
-PNN_EVENT_FILE = data/pnn_2021a/events.parquet
-PNN_HIT_FILE = data/pnn_2021a/hits.parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_1 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.1].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_2 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.2].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_3 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.3].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_4 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.4].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_5 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.5].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_6 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.6].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_7 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.7].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_8 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.8].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_0_9 = data/pnn_2021a/events_with_hit_features_[cut_off_time=0.9].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_1_0 = data/pnn_2021a/events_with_hit_features_[cut_off_time=1.0].parquet
+
+PNN_EVENT_WITH_HIT_FEATURES_FILES = \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_1) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_2) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_3) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_4) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_5) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_6) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_7) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_8) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_0_9) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_1_0)
+
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_1 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.1].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_2 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.2].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_3 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.3].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_4 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.4].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_5 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.5].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_6 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.6].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_7 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.7].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_8 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.8].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_9 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=0.9].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_1_0 = data/pnn_2021a/events_aa_with_hit_features_[cut_off_time=1.0].parquet
+
+PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AA = \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_1) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_2) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_3) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_4) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_5) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_6) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_7) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_8) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_9) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_1_0)
+
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_1 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.1].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_2 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.2].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_3 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.3].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_4 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.4].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_5 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.5].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_6 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.6].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_7 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.7].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_8 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.8].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_9 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=0.9].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_1_0 = data/pnn_2021a/events_ab_with_hit_features_[cut_off_time=1.0].parquet
+
+PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AB = \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_1) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_2) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_3) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_4) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_5) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_6) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_7) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_8) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_9) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_1_0)
+
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_1 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.1].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_2 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.2].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_3 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.3].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_4 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.4].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_5 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.5].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_6 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.6].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_7 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.7].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_8 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.8].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_9 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=0.9].parquet
+PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_1_0 = data/pnn_2021a/events_ac_with_hit_features_[cut_off_time=1.0].parquet
+
+PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AC = \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_1) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_2) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_3) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_4) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_5) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_6) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_7) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_8) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_9) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_1_0)
 
 # `all` and `clean`
 
 .PHONY : clean
 
-all : \
-	$(RICH_PMT_POSITIONS_NPY) \
+all : run-all
+
+rich_pmt_positions : $(RICH_PMT_POSITIONS_NPY)
+
+run-all : \
 	$(RUN_EVENT_FILE) \
 	$(RUN_HIT_FILE) \
 	$(RUN_EVENT_WITH_HIT_FEATURES_FILES) \
 	$(RUN_SAMPLE_EVENT_ID_FILES)
 
-full: \
-	$(RICH_PMT_POSITIONS_NPY) \
+run-full: \
 	$(RUN_EVENT_FILE) \
 	$(RUN_HIT_FILE) \
 	$(RUN_EVENT_WITH_HIT_FEATURES_FILES) \
 	$(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA) \
 	$(RUN_SAMPLE_EVENT_ID_FILES)
 
-rich_pmt_positions : $(RICH_PMT_POSITIONS_NPY)
+run-events : $(RUN_EVENT_FILE)
 
-events : $(RUN_EVENT_FILE)
+run-hits : $(RUN_HIT_FILE)
 
-hits : $(RUN_HIT_FILE)
-
-event_with_hit_features : \
+run-event_with_hit_features : \
 	$(RUN_EVENT_WITH_HIT_FEATURES_FILES) \
 	$(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA)
 
-sample_event_ids : $(RUN_SAMPLE_EVENT_ID_FILES)
+run-sample_event_ids : $(RUN_SAMPLE_EVENT_ID_FILES)
+
+pnn-all : \
+	$(PNN_EVENT_FILE) \
+	$(PNN_HIT_FILE) \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILES)
+
+pnn-events : $(PNN_EVENT_FILE)
+
+pnn-hits : $(PNN_HIT_FILE)
+
+pnn-event_with_hit_features : \
+	$(PNN_EVENT_WITH_HIT_FEATURES_FILES)
 
 clean :
 	$(RM) \
@@ -128,7 +232,13 @@ clean :
 		$(RUN_HIT_FILE) \
 		$(RUN_EVENT_WITH_HIT_FEATURES_FILES) \
 		$(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA) \
-		$(RUN_SAMPLE_EVENT_ID_FILES)
+		$(RUN_SAMPLE_EVENT_ID_FILES) \
+		$(PNN_EVENT_FILE) \
+		$(PNN_HIT_FILE) \
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILES) \
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AA) \
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AB) \
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AC)
 
 # == Position map ==
 
@@ -139,6 +249,9 @@ $(RICH_PMT_POSITIONS_NPY): $(RICH_PMT_POSITIONS_DAT)
 
 $(RUN_EVENT_FILE) : $(RUN_H5_FILE)
 	$(PYTHON) scripts/data_extract_events.py $(RUN_H5_FILE) $@
+
+$(PNN_EVENT_FILE) : $(PNN_H5_FILE_2021A_AA) $(PNN_H5_FILE_2021A_AB) $(PNN_H5_FILE_2021A_AC)
+	$(PYTHON) scripts/data_merge.py $(PNN_H5_FILE_2021A_AA) $(PNN_H5_FILE_2021A_AB) $(PNN_H5_FILE_2021A_AC) $@
 
 $(PNN_EVENT_FILE_2021A_AA) : $(PNN_H5_FILE_2021A_AA)
 	$(PYTHON) scripts/data_extract_events.py $(PNN_H5_FILE_2021A_AA) $@
@@ -169,6 +282,34 @@ $(RUN_EVENT_WITH_HIT_FEATURES_FILES) $(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA) 
 	$(PYTHON) scripts/data_features.py \
 		$(RUN_EVENT_FILE) \
 		$(RUN_HIT_FILE) \
+		$@ \
+		$(word 1,$(subst ], ,$(word 2,$(subst =, ,$@))))
+
+$(PNN_EVENT_WITH_HIT_FEATURES_FILES) : $(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021_AA) $(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021_AB) $(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021_AC)
+	$(PYTHON) scripts/data_merge.py \
+		$(subst events,events_aa,$@) \
+		$(subst events,events_ab,$@) \
+		$(subst events,events_ac,$@) \
+		$@
+
+$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AA) : $(PNN_EVENT_FILE_2021A_AA) $(PNN_HIT_FILE_2021A_AA)
+	$(PYTHON) scripts/data_features.py \
+		$(PNN_EVENT_FILE_2021A_AA) \
+		$(PNN_HIT_FILE_2021A_AA) \
+		$@ \
+		$(word 1,$(subst ], ,$(word 2,$(subst =, ,$@))))
+
+$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AB) : $(PNN_EVENT_FILE_2021A_AB) $(PNN_HIT_FILE_2021A_AB)
+	$(PYTHON) scripts/data_features.py \
+		$(PNN_EVENT_FILE_2021A_AB) \
+		$(PNN_HIT_FILE_2021A_AB) \
+		$@ \
+		$(word 1,$(subst ], ,$(word 2,$(subst =, ,$@))))
+
+$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AC) : $(PNN_EVENT_FILE_2021A_AC) $(PNN_HIT_FILE_2021A_AC)
+	$(PYTHON) scripts/data_features.py \
+		$(PNN_EVENT_FILE_2021A_AC) \
+		$(PNN_HIT_FILE_2021A_AC) \
 		$@ \
 		$(word 1,$(subst ], ,$(word 2,$(subst =, ,$@))))
 
