@@ -73,6 +73,24 @@ RUN_SAMPLE_EVENT_ID_FILES = \
 	$(RUN_SAMPLE_EVENT_ID_FILE_15_45) \
 	$(RUN_SAMPLE_EVENT_ID_FILE_20_45)
 
+RUN_POINTNET_FILE_0_5_10 = \
+	data/point_net_[cut_off_time=0.5,sample_size=10].parquet
+RUN_POINTNET_FILE_0_5_30 = \
+	data/point_net_[cut_off_time=0.5,sample_size=30].parquet
+RUN_POINTNET_FILE_0_5_50 = \
+	data/point_net_[cut_off_time=0.5,sample_size=50].parquet
+RUN_POINTNET_FILE_0_5_80 = \
+	data/point_net_[cut_off_time=0.5,sample_size=80].parquet
+RUN_POINTNET_FILE_0_5_100 = \
+	data/point_net_[cut_off_time=0.5,sample_size=100].parquet
+
+RUN_POINTNET_FILES = \
+	$(RUN_POINTNET_FILE_0_5_10) \
+	$(RUN_POINTNET_FILE_0_5_30) \
+	$(RUN_POINTNET_FILE_0_5_50) \
+	$(RUN_POINTNET_FILE_0_5_80) \
+	$(RUN_POINTNET_FILE_0_5_100)
+
 # - PNN filtered dataset
 
 PNN_H5_FILE_2021A_AA = data/CaloRICH_93d0k1cx_CTRL_v1.h5
@@ -182,6 +200,78 @@ PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AC = \
 	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_0_9) \
 	$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AC_1_0)
 
+PNN_POINTNET_FILE_2021A_AA_0_5_10 = \
+	data/pnn_2021a/point_net_aa_[cut_off_time=0.5,sample_size=10].parquet
+PNN_POINTNET_FILE_2021A_AA_0_5_30 = \
+	data/pnn_2021a/point_net_aa_[cut_off_time=0.5,sample_size=30].parquet
+PNN_POINTNET_FILE_2021A_AA_0_5_50 = \
+	data/pnn_2021a/point_net_aa_[cut_off_time=0.5,sample_size=50].parquet
+PNN_POINTNET_FILE_2021A_AA_0_5_80 = \
+	data/pnn_2021a/point_net_aa_[cut_off_time=0.5,sample_size=80].parquet
+PNN_POINTNET_FILE_2021A_AA_0_5_100 = \
+	data/pnn_2021a/point_net_aa_[cut_off_time=0.5,sample_size=100].parquet
+
+PNN_POINTNET_FILES_2021A_AA = \
+	$(PNN_POINTNET_FILE_2021A_AA_0_5_10) \
+	$(PNN_POINTNET_FILE_2021A_AA_0_5_30) \
+	$(PNN_POINTNET_FILE_2021A_AA_0_5_50) \
+	$(PNN_POINTNET_FILE_2021A_AA_0_5_80) \
+	$(PNN_POINTNET_FILE_2021A_AA_0_5_100)
+
+PNN_POINTNET_FILE_2021A_AB_0_5_10 = \
+	data/pnn_2021a/point_net_ab_[cut_off_time=0.5,sample_size=10].parquet
+PNN_POINTNET_FILE_2021A_AB_0_5_30 = \
+	data/pnn_2021a/point_net_ab_[cut_off_time=0.5,sample_size=30].parquet
+PNN_POINTNET_FILE_2021A_AB_0_5_50 = \
+	data/pnn_2021a/point_net_ab_[cut_off_time=0.5,sample_size=50].parquet
+PNN_POINTNET_FILE_2021A_AB_0_5_80 = \
+	data/pnn_2021a/point_net_ab_[cut_off_time=0.5,sample_size=80].parquet
+PNN_POINTNET_FILE_2021A_AB_0_5_100 = \
+	data/pnn_2021a/point_net_ab_[cut_off_time=0.5,sample_size=100].parquet
+
+PNN_POINTNET_FILES_2021A_AB = \
+	$(PNN_POINTNET_FILE_2021A_AB_0_5_10) \
+	$(PNN_POINTNET_FILE_2021A_AB_0_5_30) \
+	$(PNN_POINTNET_FILE_2021A_AB_0_5_50) \
+	$(PNN_POINTNET_FILE_2021A_AB_0_5_80) \
+	$(PNN_POINTNET_FILE_2021A_AB_0_5_100)
+
+PNN_POINTNET_FILE_2021A_AC_0_5_10 = \
+	data/pnn_2021a/point_net_ac_[cut_off_time=0.5,sample_size=10].parquet
+PNN_POINTNET_FILE_2021A_AC_0_5_30 = \
+	data/pnn_2021a/point_net_ac_[cut_off_time=0.5,sample_size=30].parquet
+PNN_POINTNET_FILE_2021A_AC_0_5_50 = \
+	data/pnn_2021a/point_net_ac_[cut_off_time=0.5,sample_size=50].parquet
+PNN_POINTNET_FILE_2021A_AC_0_5_80 = \
+	data/pnn_2021a/point_net_ac_[cut_off_time=0.5,sample_size=80].parquet
+PNN_POINTNET_FILE_2021A_AC_0_5_100 = \
+	data/pnn_2021a/point_net_ac_[cut_off_time=0.5,sample_size=100].parquet
+
+PNN_POINTNET_FILES_2021A_AC = \
+	$(PNN_POINTNET_FILE_2021A_AC_0_5_10) \
+	$(PNN_POINTNET_FILE_2021A_AC_0_5_30) \
+	$(PNN_POINTNET_FILE_2021A_AC_0_5_50) \
+	$(PNN_POINTNET_FILE_2021A_AC_0_5_80) \
+	$(PNN_POINTNET_FILE_2021A_AC_0_5_100)
+
+PNN_POINTNET_FILE_0_5_10 = \
+	data/pnn_2021a/point_net_[cut_off_time=0.5,sample_size=10].parquet
+PNN_POINTNET_FILE_0_5_30 = \
+	data/pnn_2021a/point_net_[cut_off_time=0.5,sample_size=30].parquet
+PNN_POINTNET_FILE_0_5_50 = \
+	data/pnn_2021a/point_net_[cut_off_time=0.5,sample_size=50].parquet
+PNN_POINTNET_FILE_0_5_80 = \
+	data/pnn_2021a/point_net_[cut_off_time=0.5,sample_size=80].parquet
+PNN_POINTNET_FILE_0_5_100 = \
+	data/pnn_2021a/point_net_[cut_off_time=0.5,sample_size=100].parquet
+
+PNN_POINTNET_FILES = \
+	$(PNN_POINTNET_FILE_0_5_10) \
+	$(PNN_POINTNET_FILE_0_5_30) \
+	$(PNN_POINTNET_FILE_0_5_50) \
+	$(PNN_POINTNET_FILE_0_5_80) \
+	$(PNN_POINTNET_FILE_0_5_100)
+
 # `all` and `clean`
 
 .PHONY : clean
@@ -191,17 +281,15 @@ all : run-all
 rich_pmt_positions : $(RICH_PMT_POSITIONS_NPY)
 
 run-all : \
-	$(RUN_EVENT_FILE) \
-	$(RUN_HIT_FILE) \
-	$(RUN_EVENT_WITH_HIT_FEATURES_FILES) \
-	$(RUN_SAMPLE_EVENT_ID_FILES)
+	run-events \
+	run-hits \
+	run-sample_event_ids \
+	run-pointnet \
+	$(RUN_EVENT_WITH_HIT_FEATURES_FILES)
 
 run-full: \
-	$(RUN_EVENT_FILE) \
-	$(RUN_HIT_FILE) \
-	$(RUN_EVENT_WITH_HIT_FEATURES_FILES) \
-	$(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA) \
-	$(RUN_SAMPLE_EVENT_ID_FILES)
+	run-all \
+	$(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA)
 
 run-events : $(RUN_EVENT_FILE)
 
@@ -213,10 +301,12 @@ run-event_with_hit_features : \
 
 run-sample_event_ids : $(RUN_SAMPLE_EVENT_ID_FILES)
 
+run-pointnet : $(RUN_POINTNET_FILES)
+
 pnn-all : \
-	$(PNN_EVENT_FILE) \
-	$(PNN_HIT_FILE) \
-	$(PNN_EVENT_WITH_HIT_FEATURES_FILES)
+	pnn-events \
+	pnn-hits \
+	pnn-event_with_hit_features
 
 pnn-events : $(PNN_EVENT_FILE)
 
@@ -224,6 +314,8 @@ pnn-hits : $(PNN_HIT_FILE)
 
 pnn-event_with_hit_features : \
 	$(PNN_EVENT_WITH_HIT_FEATURES_FILES)
+
+pnn-pointnet : $(PNN_POINTNET_FILES)
 
 clean :
 	$(RM) \
@@ -233,12 +325,14 @@ clean :
 		$(RUN_EVENT_WITH_HIT_FEATURES_FILES) \
 		$(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA) \
 		$(RUN_SAMPLE_EVENT_ID_FILES) \
+		$(RUN_POINTNET_FILES) \
 		$(PNN_EVENT_FILE) \
 		$(PNN_HIT_FILE) \
 		$(PNN_EVENT_WITH_HIT_FEATURES_FILES) \
 		$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AA) \
 		$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AB) \
-		$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AC)
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILES_2021A_AC) \
+		$(PNN_POINTNET_FILES)
 
 # == Position map ==
 
@@ -319,5 +413,42 @@ $(RUN_SAMPLE_EVENT_ID_FILES) : $(RUN_EVENT_FILE)
 	$(PYTHON) scripts/data_sample.py \
 		$(RUN_EVENT_FILE) \
 		$(word 2,$(subst =, ,$(word 2,$(subst $(,), ,$@)))) \
+		$(word 1,$(subst ], ,$(word 3,$(subst =, ,$@)))) \
+		$@
+
+# == PointNet ==
+
+$(RUN_POINTNET_FILES) : $(RUN_EVENT_WITH_HIT_FEATURES_FILE_0_5) $(RUN_HIT_FILE)
+	$(PYTHON) scripts/wrangle_point_net.py \
+		$(RUN_EVENT_WITH_HIT_FEATURES_FILE_0_5) \
+		$(RUN_HIT_FILE) \
+		$(word 1,$(subst ], ,$(word 3,$(subst =, ,$@)))) \
+		$@
+
+$(PNN_POINTNET_FILES) : $(PNN_POINTNET_FILES_2021A_AA) $(PNN_POINTNET_FILES_2021A_AB) $(PNN_POINTNET_FILES_2021A_AC)
+	$(PYTHON) scripts/data_merge.py \
+		$(subst point_net,point_net_aa,$@) \
+		$(subst point_net,point_net_ab,$@) \
+		$(subst point_net,point_net_ac,$@) \
+		$@
+
+$(PNN_POINTNET_FILES_2021A_AA) : $(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_5) $(PNN_HIT_FILE_2021A_AA)
+	$(PYTHON) scripts/wrangle_point_net.py \
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_5) \
+		$(PNN_HIT_FILE_2021A_AA) \
+		$(word 1,$(subst ], ,$(word 3,$(subst =, ,$@)))) \
+		$@
+
+$(PNN_POINTNET_FILES_2021A_AB) : $(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_5) $(PNN_HIT_FILE_2021A_AB)
+	$(PYTHON) scripts/wrangle_point_net.py \
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AB_0_5) \
+		$(PNN_HIT_FILE_2021A_AB) \
+		$(word 1,$(subst ], ,$(word 3,$(subst =, ,$@)))) \
+		$@
+
+$(PNN_POINTNET_FILES_2021A_AC) : $(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_5) $(PNN_HIT_FILE_2021A_AC)
+	$(PYTHON) scripts/wrangle_point_net.py \
+		$(PNN_EVENT_WITH_HIT_FEATURES_FILE_2021A_AA_0_5) \
+		$(PNN_HIT_FILE_2021A_AC) \
 		$(word 1,$(subst ], ,$(word 3,$(subst =, ,$@)))) \
 		$@

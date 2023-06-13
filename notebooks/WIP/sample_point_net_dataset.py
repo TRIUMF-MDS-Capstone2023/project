@@ -8,6 +8,7 @@ class CalorichPointNetDataset(Dataset):
         """Constructor"""
         self.point_net_dataset = (
             pl.read_parquet(point_net_dataset_path)
+            .select(["ring_radius_cal", "hits_xy_adjusted"])
         )
 
     def __len__(self):
