@@ -75,3 +75,13 @@ make clean
 ```
 
 Rest assured that it would _not_ remove the raw H5 files.
+
+## Copyright and Licensing
+
+Unless otherwise specified, the code in this repository is covered under this copyright statement:
+
+Copyright (c) 2023 Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang
+
+The software and associated documentation files are licensed under [the MIT License](https://opensource.org/license/mit/). You may find a copy of the license at [`LICENSE.md`](LICENSE.md).
+
+The report texts are licensed under [the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (CC BY-NC-ND 4.0) License](https://creativecommons.org/licenses/by-nc-nd/4.0/). A copy of the license can be found at [`LICENSE-CC-BYNCND.md`](LICENSE-CC-BYNCND.md).
