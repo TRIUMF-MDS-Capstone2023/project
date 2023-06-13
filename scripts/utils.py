@@ -179,5 +179,5 @@ def save_as_parquet(df, output_path, name, display_head=False):
     cprint(f"Saved {name} dataframe as {output_path} at {time_end}", "green")
 
     time_elapsed = time_end - time_start
-    cprint(f"Time elapsed: {time_elapsed:.2f}", "green")
+    cprint(f"Time elapsed: {time_elapsed}", "green")
     print()
