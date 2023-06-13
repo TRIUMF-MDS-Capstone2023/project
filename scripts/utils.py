@@ -1,7 +1,7 @@
 # pylint: disable-msg=C0103
 """Utility functions"""
 
-import time
+import datetime
 
 import polars as pl
 import numpy as np
@@ -163,8 +163,9 @@ def save_as_parquet(df, output_path, name, display_head=False):
         cprint(df.head().collect(), "magenta")
         print()
 
-    cprint("Starting to persist", "blue")
-    time_start = time.time()
+    time_start = datetime.datetime.now()
+    cprint(f"Starting to persist at {time_start}", "blue")
+
     try:
         cprint("Trying `sink_parquet`", "blue")
         df.sink_parquet(output_path)
@@ -173,7 +174,10 @@ def save_as_parquet(df, output_path, name, display_head=False):
         # Fallback if the query does not support streaming
         cprint("`sink_parquet` failed, fallback to `write_parquet` instead", "blue")
         df.collect().write_parquet(output_path)
-    cprint(f"Saved {name} dataframe as {output_path}", "green")
-    time_elapsed = time.time() - time_start
-    cprint(f"Time elapsed: {time_elapsed:.2f} seconds", "green")
+
+    time_end = datetime.datetime.now()
+    cprint(f"Saved {name} dataframe as {output_path} at {time_end}", "green")
+
+    time_elapsed = time_end - time_start
+    cprint(f"Time elapsed: {time_elapsed:.2f}", "green")
     print()
