@@ -7,7 +7,8 @@ import polars as pl
 import utils
 
 
-def point_net_dataset_in_lazyframe(event_with_hit_features_path, hits_path, sample_size=50):
+def point_net_dataset_in_lazyframe(event_with_hit_features_path, hits_path,
+                                   sample_size=50, seed=None):
     """
     Make a PointNet dataset in LazyFrame.
 
@@ -40,7 +41,7 @@ def point_net_dataset_in_lazyframe(event_with_hit_features_path, hits_path, samp
         .agg([
             pl.first("ring_radius_cal"),
             pl.struct(["x_adjusted", "y_adjusted"])
-            .sample(sample_size, with_replacement=True, seed=42)
+            .sample(sample_size, with_replacement=True, seed=seed)
             .apply(lambda n: [[i["x_adjusted"], i["y_adjusted"]] for i in n])
             .alias("hits_xy_adjusted")
         ])
@@ -53,7 +54,8 @@ def wrangle_point_net(event_with_hit_features_path, hits_path, sample_size,
     point_net_dataset = point_net_dataset_in_lazyframe(
         event_with_hit_features_path,
         hits_path,
-        sample_size
+        sample_size,
+        seed=42
     )
 
     utils.save_as_parquet(point_net_dataset,
