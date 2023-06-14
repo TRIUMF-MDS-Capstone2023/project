@@ -3,6 +3,7 @@
 
 import sys
 
+import circle_fit
 import polars as pl
 import numpy as np
 
@@ -50,6 +51,69 @@ def hull_params(coordinates):
         return width, diameter, abs(width - diameter), area
     except QhullError:
         return None, None, None, None
+
+
+def circle_fit_radii(coordinates):
+    """
+    Compute our own circle fit from the coordinates.
+
+    Args:
+        coordinates: Coordinates to calculate circle radius with.
+
+    Returns:
+        tuple: A tuple of fit radii. In case the coordinates do not fit, return `None`.
+    """
+    try:
+        _x, _y, radius_fit_lsq, radius_fit_lsq_err = \
+            circle_fit.standardLSQ(coordinates)
+    except:
+        radius_fit_lsq, radius_fit_lsq_err = None, None
+
+    try:
+        _x, _y, radius_fit_lsq_hyper, radius_fit_lsq_hyper_err = \
+            circle_fit.hyperLSQ(coordinates)
+    except:
+        radius_fit_lsq_hyper, radius_fit_lsq_hyper_err = None, None
+
+    try:
+        _x, _y, radius_fit_riemann_swfla, radius_fit_riemann_swfla_err = \
+            circle_fit.riemannSWFLa(coordinates)
+    except:
+        radius_fit_riemann_swfla, radius_fit_riemann_swfla_err = None, None
+
+    try:
+        _x, _y, radius_fit_svd_pratt, radius_fit_svd_pratt_err = \
+            circle_fit.prattSVD(coordinates)
+    except:
+        radius_fit_svd_pratt, radius_fit_svd_pratt_err = None, None
+
+    try:
+        _x, _y, radius_fit_svd_taubin, radius_fit_svd_taubin_err = \
+            circle_fit.taubinSVD(coordinates)
+    except:
+        radius_fit_svd_taubin, radius_fit_svd_taubin_err = None, None
+
+    try:
+        _x, _y, radius_fit_svd_hyper, radius_fit_svd_hyper_err = \
+            circle_fit.hyperSVD(coordinates)
+    except:
+        radius_fit_svd_hyper, radius_fit_svd_hyper_err = None, None
+
+    try:
+        _x, _y, radius_fit_kmh, radius_fit_kmh_err = \
+            circle_fit.kmh(coordinates)
+    except:
+        radius_fit_kmh, radius_fit_kmh_err = None, None
+
+    return (
+        radius_fit_lsq, radius_fit_lsq_err,
+        radius_fit_lsq_hyper, radius_fit_lsq_hyper_err,
+        radius_fit_riemann_swfla, radius_fit_riemann_swfla_err,
+        radius_fit_svd_pratt, radius_fit_svd_pratt_err,
+        radius_fit_svd_taubin, radius_fit_svd_taubin_err,
+        radius_fit_svd_hyper, radius_fit_svd_hyper_err,
+        radius_fit_kmh, radius_fit_kmh_err
+    )
 
 
 def hit_features(hits_df):
@@ -181,11 +245,46 @@ def hit_features(hits_df):
                         "hull_area": pl.Float32
                     })
                 )
+            ),
+
+            # fit-circle things
+            circle_fit_radii=(
+                pl.struct("x_aligned", "y_aligned")
+                .apply(lambda x: dict(zip(
+                    (
+                        "radius_fit_lsq", "radius_fit_lsq_err",
+                        "radius_fit_lsq_hyper", "radius_fit_lsq_hyper_err",
+                        "radius_fit_riemann_swfla", "radius_fit_riemann_swfla_err",
+                        "radius_fit_svd_pratt", "radius_fit_svd_pratt_err",
+                        "radius_fit_svd_taubin", "radius_fit_svd_taubin_err",
+                        "radius_fit_svd_hyper", "radius_fit_svd_hyper_err",
+                        "radius_fit_kmh", "radius_fit_kmh_err"
+                    ),
+                    circle_fit_radii([list(i.values()) for i in x])
+                )))
+                .cast(
+                    pl.Struct({
+                        "radius_fit_lsq": pl.Float32,
+                        "radius_fit_lsq_err": pl.Float32,
+                        "radius_fit_lsq_hyper": pl.Float32,
+                        "radius_fit_lsq_hyper_err": pl.Float32,
+                        "radius_fit_riemann_swfla": pl.Float32,
+                        "radius_fit_riemann_swfla_err": pl.Float32,
+                        "radius_fit_svd_pratt": pl.Float32,
+                        "radius_fit_svd_pratt_err": pl.Float32,
+                        "radius_fit_svd_taubin": pl.Float32,
+                        "radius_fit_svd_taubin_err": pl.Float32,
+                        "radius_fit_svd_hyper": pl.Float32,
+                        "radius_fit_svd_hyper_err": pl.Float32,
+                        "radius_fit_kmh": pl.Float32,
+                        "radius_fit_kmh_err": pl.Float32
+                    })
+                )
             )
         )
 
         # Break hull into separate variables
-        .unnest("hull")
+        .unnest("hull", "circle_fit_radii")
     )
 
 

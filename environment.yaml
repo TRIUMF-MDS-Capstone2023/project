@@ -36,3 +36,5 @@ dependencies:
   - pip
   - pip:
     - autopep8
+    - cachetools
+    - circle-fit
