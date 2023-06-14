@@ -23,7 +23,7 @@ def point_net_dataset_in_lazyframe(event_with_hit_features_path, hits_path,
     return (
         pl
         .scan_parquet(event_with_hit_features_path)
-        .select(["composite_event_id", "ring_radius_cal"])
+        .select(["composite_event_id", "ring_radius_cal", "class", "label", "track_momentum"])
         .filter(pl.col("ring_radius_cal").is_finite())  # filter NaNs and Nones
         .join(
             (
@@ -40,6 +40,9 @@ def point_net_dataset_in_lazyframe(event_with_hit_features_path, hits_path,
         .groupby("composite_event_id")
         .agg([
             pl.first("ring_radius_cal"),
+            pl.first("label"),
+            pl.first("class"),
+            pl.first("track_momentum"),
             pl.struct(["x_adjusted", "y_adjusted"])
             .sample(sample_size, with_replacement=True, seed=seed)
             .apply(lambda n: [[i["x_adjusted"], i["y_adjusted"]] for i in n])
