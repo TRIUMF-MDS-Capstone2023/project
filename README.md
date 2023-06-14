@@ -54,6 +54,8 @@ It would create all the necessary Parquet files for the analyses involving the `
 
 The main dataset (after cleaning) contains 2,376,174 events and 99,397,075 hits.
 
+(Note that there is also `make run-full`, which also includes some of the obsolete data files derived from the main dataset.)
+
 ### Supplementary Dataset
 
 The supplementary dataset (or the `pnn` dataset) is much larger, spanning several runs. However, since the events have been filtered, the label distribution is very different.
@@ -65,6 +67,8 @@ make pnn-all
 ```
 
 The supplementary dataset (after cleaning) contains 42,897,096 events and 1,635,601,517 hits.
+
+(Note that, similar to the main dataset, there is also `make pnn-full`, which also includes some of the obsolete data files associated with the supplementary dataset.)
 
 ### Clean-up
 

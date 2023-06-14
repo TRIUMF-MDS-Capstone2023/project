@@ -87,7 +87,9 @@ RUN_POINTNET_FILE_0_5_100 = \
 RUN_POINTNET_FILES = \
 	$(RUN_POINTNET_FILE_0_5_10) \
 	$(RUN_POINTNET_FILE_0_5_30) \
-	$(RUN_POINTNET_FILE_0_5_50) \
+	$(RUN_POINTNET_FILE_0_5_50)
+
+RUN_POINTNET_FILES_EXTRA = \
 	$(RUN_POINTNET_FILE_0_5_80) \
 	$(RUN_POINTNET_FILE_0_5_100)
 
@@ -214,7 +216,9 @@ PNN_POINTNET_FILE_2021A_AA_0_5_100 = \
 PNN_POINTNET_FILES_2021A_AA = \
 	$(PNN_POINTNET_FILE_2021A_AA_0_5_10) \
 	$(PNN_POINTNET_FILE_2021A_AA_0_5_30) \
-	$(PNN_POINTNET_FILE_2021A_AA_0_5_50) \
+	$(PNN_POINTNET_FILE_2021A_AA_0_5_50)
+
+PNN_POINTNET_FILES_EXTRA_2021A_AA = \
 	$(PNN_POINTNET_FILE_2021A_AA_0_5_80) \
 	$(PNN_POINTNET_FILE_2021A_AA_0_5_100)
 
@@ -232,7 +236,9 @@ PNN_POINTNET_FILE_2021A_AB_0_5_100 = \
 PNN_POINTNET_FILES_2021A_AB = \
 	$(PNN_POINTNET_FILE_2021A_AB_0_5_10) \
 	$(PNN_POINTNET_FILE_2021A_AB_0_5_30) \
-	$(PNN_POINTNET_FILE_2021A_AB_0_5_50) \
+	$(PNN_POINTNET_FILE_2021A_AB_0_5_50)
+
+PNN_POINTNET_FILES_EXTRA_2021A_AB = \
 	$(PNN_POINTNET_FILE_2021A_AB_0_5_80) \
 	$(PNN_POINTNET_FILE_2021A_AB_0_5_100)
 
@@ -250,7 +256,9 @@ PNN_POINTNET_FILE_2021A_AC_0_5_100 = \
 PNN_POINTNET_FILES_2021A_AC = \
 	$(PNN_POINTNET_FILE_2021A_AC_0_5_10) \
 	$(PNN_POINTNET_FILE_2021A_AC_0_5_30) \
-	$(PNN_POINTNET_FILE_2021A_AC_0_5_50) \
+	$(PNN_POINTNET_FILE_2021A_AC_0_5_50)
+
+PNN_POINTNET_FILES_EXTRA_2021A_AC = \
 	$(PNN_POINTNET_FILE_2021A_AC_0_5_80) \
 	$(PNN_POINTNET_FILE_2021A_AC_0_5_100)
 
@@ -268,7 +276,9 @@ PNN_POINTNET_FILE_0_5_100 = \
 PNN_POINTNET_FILES = \
 	$(PNN_POINTNET_FILE_0_5_10) \
 	$(PNN_POINTNET_FILE_0_5_30) \
-	$(PNN_POINTNET_FILE_0_5_50) \
+	$(PNN_POINTNET_FILE_0_5_50)
+
+PNN_POINTNET_FILES_EXTRA = \
 	$(PNN_POINTNET_FILE_0_5_80) \
 	$(PNN_POINTNET_FILE_0_5_100)
 
@@ -280,17 +290,22 @@ all : \
 	run-all \
 	pnn-all
 
+full : \
+	run-full \
+	pnn-full
+
 rich_pmt_positions : $(RICH_PMT_POSITIONS_NPY)
 
 run-all : \
 	run-events \
 	run-hits \
 	run-sample_event_ids \
-	run-pointnet \
+	$(RUN_POINTNET_FILES) \
 	$(RUN_EVENT_WITH_HIT_FEATURES_FILES)
 
 run-full: \
 	run-all \
+	$(RUN_POINTNET_FILES_EXTRA)
 	$(RUN_EVENT_WITH_HIT_FEATURES_FILES_EXTRA)
 
 run-events : $(RUN_EVENT_FILE)
@@ -303,13 +318,19 @@ run-event_with_hit_features : \
 
 run-sample_event_ids : $(RUN_SAMPLE_EVENT_ID_FILES)
 
-run-pointnet : $(RUN_POINTNET_FILES)
+run-pointnet : \
+	$(RUN_POINTNET_FILES)
+	$(RUN_POINTNET_FILES_EXTRA)
 
 pnn-all : \
 	pnn-events \
 	pnn-hits \
 	pnn-event_with_hit_features \
-	pnn-pointnet
+	$(PNN_POINTNET_FILES)
+
+pnn-full: \
+	pnn-all \
+	$(PNN_POINTNET_FILES_EXTRA)
 
 pnn-events : $(PNN_EVENT_FILE)
 
@@ -318,7 +339,9 @@ pnn-hits : $(PNN_HIT_FILE)
 pnn-event_with_hit_features : \
 	$(PNN_EVENT_WITH_HIT_FEATURES_FILES)
 
-pnn-pointnet : $(PNN_POINTNET_FILES)
+pnn-pointnet : \
+	$(PNN_POINTNET_FILES) \
+	$(PNN_POINTNET_FILES_EXTRA)
 
 clean :
 	$(RM) \
@@ -432,6 +455,13 @@ $(RUN_POINTNET_FILES) : $(RUN_EVENT_WITH_HIT_FEATURES_FILE_0_5) $(RUN_HIT_FILE)
 		$@
 
 $(PNN_POINTNET_FILES) : $(PNN_POINTNET_FILES_2021A_AA) $(PNN_POINTNET_FILES_2021A_AB) $(PNN_POINTNET_FILES_2021A_AC)
+	$(PYTHON) scripts/data_merge.py \
+		$(subst point_net,point_net_aa,$@) \
+		$(subst point_net,point_net_ab,$@) \
+		$(subst point_net,point_net_ac,$@) \
+		$@
+
+$(PNN_POINTNET_FILES_EXTRA) : $(PNN_POINTNET_FILES_EXTRA_2021A_AA) $(PNN_POINTNET_FILES_EXTRA_2021A_AB) $(PNN_POINTNET_FILES_EXTRA_2021A_AC)
 	$(PYTHON) scripts/data_merge.py \
 		$(subst point_net,point_net_aa,$@) \
 		$(subst point_net,point_net_ab,$@) \
