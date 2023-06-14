@@ -308,7 +308,8 @@ run-pointnet : $(RUN_POINTNET_FILES)
 pnn-all : \
 	pnn-events \
 	pnn-hits \
-	pnn-event_with_hit_features
+	pnn-event_with_hit_features \
+	pnn-pointnet
 
 pnn-events : $(PNN_EVENT_FILE)
 
