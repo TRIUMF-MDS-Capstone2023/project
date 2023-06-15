@@ -8,7 +8,16 @@ The proposal presentation and report can be found in [the `docs/proposal` folder
 
 ## Installation
 
-The project runs on Python 3.9+, and a Conda environment file can be found at [`environment.yaml`](environment.yaml). After installing [Conda](https://github.com/conda/conda), create a Conda environment by:
+The project runs on Python 3.9+, and a Conda environment file can be found at [`environment.yaml`](environment.yaml).
+
+To run the code, first clone the repository with [Git](https://git-scm.org/):
+
+```bash
+git clone git@github.com:TRIUMF-MDS-Capstone2023/project.git calorich
+cd calorich
+```
+
+After installing [Conda](https://github.com/conda/conda), create a Conda environment by:
 
 ```
 conda env create -f environment.yaml
@@ -79,6 +88,10 @@ make clean
 ```
 
 Rest assured that it would _not_ remove the raw H5 files.
+
+## Run the Model
+
+(WIP)
 
 ## Copyright and Licensing
 
