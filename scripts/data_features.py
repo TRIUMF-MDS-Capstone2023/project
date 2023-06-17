@@ -303,7 +303,7 @@ def features(event_parquet_path, hit_parquet_path,
     # Limit the hits to in time hits
     hits_df = (
         hits_df
-        .filter(pl.col("chod_delta") < cut_off_time)
+        .filter(pl.col("chod_delta").abs() < cut_off_time)
     )
 
     # Engineer features and merge with the events dataframe

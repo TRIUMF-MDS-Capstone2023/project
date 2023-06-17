@@ -319,7 +319,7 @@ run-event_with_hit_features : \
 run-sample_event_ids : $(RUN_SAMPLE_EVENT_ID_FILES)
 
 run-pointnet : \
-	$(RUN_POINTNET_FILES)
+	$(RUN_POINTNET_FILES) \
 	$(RUN_POINTNET_FILES_EXTRA)
 
 pnn-all : \
@@ -447,7 +447,7 @@ $(RUN_SAMPLE_EVENT_ID_FILES) : $(RUN_EVENT_FILE)
 
 # == PointNet ==
 
-$(RUN_POINTNET_FILES) : $(RUN_EVENT_WITH_HIT_FEATURES_FILE_0_5) $(RUN_HIT_FILE)
+$(RUN_POINTNET_FILES) $(RUN_POINTNET_FILES_EXTRA) : $(RUN_EVENT_WITH_HIT_FEATURES_FILE_0_5) $(RUN_HIT_FILE)
 	$(PYTHON) scripts/wrangle_point_net.py \
 		$(RUN_EVENT_WITH_HIT_FEATURES_FILE_0_5) \
 		$(RUN_HIT_FILE) \
