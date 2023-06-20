@@ -25,6 +25,7 @@ dependencies:
   - numpy
   - pandas
   - polars
+  - pyarrow
   - pytorch
   - pytorch::torchvision
   - pytorch::torchaudio
