@@ -22,7 +22,7 @@ dependencies:
   - ipykernel
   - lightgbm
   - matplotlib
-  - numpy
+  - numpy<1.24.0
   - pandas
   - polars
   - pyarrow
