@@ -20,6 +20,7 @@ dependencies:
   - catboost
   - h5py
   - ipykernel
+  - jupyter-book
   - lightgbm
   - matplotlib
   - numpy<1.24.0
@@ -40,3 +41,4 @@ dependencies:
     - autopep8
     - cachetools
     - circle-fit
+    - git+https://github.com/TRIUMF-MDS-Capstone2023/custom-quantecon-book-theme.git@v0.5.1-custom

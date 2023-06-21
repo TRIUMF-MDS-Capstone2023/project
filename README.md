@@ -2,7 +2,7 @@
 
 ## Introduction
 
-(WIP)
+The final report of this project is published at [the respective GitHub page](https://triumf-mds-capstone2023.github.io/project).
 
 The proposal presentation and report can be found in [the `docs/proposal` folder](docs/proposal).
 

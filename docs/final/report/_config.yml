@@ -1,0 +1,41 @@
+# Configuration
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Calorich AI
+author: Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang
+copyright: '2023'
+
+execute:
+  execute_notebooks: 'cache'
+
+latex:
+  latex_documents:
+    targetname: book.tex
+
+bibtex_bibfiles:
+  - references.bib
+
+repository:
+  url: https://github.com/TRIUMF-MDS-Capstone2023/project
+  path_to_book: docs/final/report
+  branch: main
+
+html:
+  use_repository_button: true
+
+sphinx:
+  config:
+    html_theme: quantecon_book_theme
+    html_title: "Calorich AI"
+    html_theme_options:
+      keywords: calorich, triumf, na62
+      header_organisation: Calorich AI
+      header_organisation_url: https://triumf-mds-capstone2023.github.io/project
+      persistent_sidebar: true
+      repository_url: https://github.com/TRIUMF-MDS-Capstone2023/project
+    bibtex_reference_style: author_year
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+parse:
+  myst_enable_extensions:
+    - amsmath

@@ -1,0 +1,37 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts:
+
+- caption: Preface
+  chapters:
+  - file: preface/executive_summary
+  - file: preface/introduction
+
+- caption: Data
+  chapters:
+  - file: data/raw-data
+  - file: data/preprocessing
+  - file: data/engineered-features
+
+- caption: Data Science Methods
+  chapters:
+  - file: data-science-methods/regressor/index
+    sections:
+    - file: data-science-methods/regressor/xgbregressor
+  - file: data-science-methods/neural-networks/index
+    sections:
+    - file: data-science-methods/neural-networks/mlp
+    - file: data-science-methods/neural-networks/mlp-quantile
+    - file: data-science-methods/neural-networks/pointnet
+  - file: data-science-methods/best-performing-model/index
+
+- caption: Conclusion
+  chapters:
+  - file: conclusion
+
+- caption: References
+  chapters:
+  - file: references
