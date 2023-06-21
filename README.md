@@ -1,6 +1,6 @@
-# CALORICH AI {#sec-calorich-ai}
+# CALORICH AI 
 
-## Introduction {#introduction}
+## Introduction 
 
 This GitHub repository includes the work associated with the 2023 CALORICH AI Capstone Project, which was undertaken by Crystal Geng, Daniel Merigo, Kelvin Wong, and Peng Zhang as part of the Master of Data Science program at the University of British Columbia. The project was conducted in collaboration with scientists from [TRIUMF](https://www.triumf.ca/), Canada's leading particle accelerator center and a leading research facility in subatomic physics.
 
@@ -21,7 +21,7 @@ The final report of this project is published at [the respective GitHub page](ht
 
 The proposal presentation and report can be found in [the `docs/proposal` folder](docs/proposal).
 
-## Executive Summary {#executive-summary}
+## Executive Summary 
 
 The *Calorich AI* project is proposed by TRIUMF, Canada's national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the *RICH AI* project [[den Hooff N *et al.*, 2022](https://triumf-mds-capstone2023.github.io/project/references.html#id11 "Van den Hooff N, Pandey R, Iyer M, and Jena S. Rich ai final report. 2022. Accessed: 2023-05-12. URL: https://triumf-capstone2022.github.io/richai/welcome.html.")], attempted by an MDS capstone team of similar goals last year.
 
@@ -33,7 +33,7 @@ Based on the research and advice by the partner, we chose XGBoost as the baselin
 
 From our results, the XGBoost seemed to be the best model to perform this ring-fitting. The results, unfortunately, did not yield a better performance than the current State of the Art algorithm employed by the NA62 team, which uses a maximum likelihood estimation (MLE) model.
 
-## Installation {#installation}
+## Installation 
 
 The project runs on Python 3.9+, and a Conda environment file can be found at [`environment.yaml`](environment.yaml).
 
@@ -68,7 +68,7 @@ or:
 mamba env update -f environment.yaml
 ```
 
-## Dataset {#dataset}
+## Dataset 
 
 All the data files used are prepared and provided by the NA62 team from [TRIUMF](https://triumf.ca/). All of the data is from the 2021a experiments.
 
@@ -76,7 +76,7 @@ We are using a series of processed files, in [Parquet](https://parquet.apache.or
 
 > Note: For access to the dataset, please reach out to TRIUMF.
 
-### Main Dataset {#main-dataset}
+### Main Dataset
 
 The main dataset (or the `run` dataset) we are using is in [HDF5](https://www.loc.gov/preservation/digital/formats/fdd/fdd000229.shtml) format. The file was extracted from a full `RECO` stream.
 
@@ -92,7 +92,7 @@ The main dataset (after cleaning) contains 2,376,174 events and 99,397,075 hits.
 
 (Note that there is also `make run-full`, which also includes some of the obsolete data files derived from the main dataset.)
 
-### Supplementary Dataset {#supplementary-dataset}
+### Supplementary Dataset
 
 The supplementary dataset (or the `pnn` dataset) is much larger, spanning several runs. However, since the events have been filtered, the label distribution is very different.
 
@@ -106,7 +106,7 @@ The supplementary dataset (after cleaning) contains 42,897,096 events and 1,635,
 
 (Note that, similar to the main dataset, there is also `make pnn-full`, which also includes some of the obsolete data files associated with the supplementary dataset.)
 
-### Clean-up {#clean-up}
+### Clean-up 
 
 To clean up the generated Parquet files, run:
 
@@ -116,11 +116,11 @@ make clean
 
 Rest assured that it would *not* remove the raw H5 files.
 
-## Run the Model {#run-the-model}
+## Run the Model 
 
 (WIP)
 
-## Copyright and Licensing {#copyright-and-licensing}
+## Copyright and Licensing 
 
 Unless otherwise specified, the code in this repository is covered under this copyright statement:
 
