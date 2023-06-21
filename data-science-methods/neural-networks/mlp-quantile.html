@@ -112,13 +112,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="MLP Quantile Regression  Why did we choose this model?  A regular machine learning approach for regression problems only provides a numerical prediction for eac" />
+<meta name="description" content="MLP Quantile Regression  Why did we choose this model  A regular machine learning approach for regression problems only provides a numerical prediction for each" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:title" content="MLP Quantile Regression"/>
-<meta name="twitter:description" content="MLP Quantile Regression  Why did we choose this model?  A regular machine learning approach for regression problems only provides a numerical prediction for eac">
+<meta name="twitter:description" content="MLP Quantile Regression  Why did we choose this model  A regular machine learning approach for regression problems only provides a numerical prediction for each">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:image" content="">
 
@@ -127,7 +127,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="MLP Quantile Regression  Why did we choose this model?  A regular machine learning approach for regression problems only provides a numerical prediction for eac" />
+<meta property="og:description" content="MLP Quantile Regression  Why did we choose this model  A regular machine learning approach for regression problems only provides a numerical prediction for each" />
 <meta property="og:site_name" content="Calorich AI" />
 <meta name="theme-color" content="#ffffff" />
 
@@ -155,8 +155,9 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-we-choose-this-model">Why did we choose this model?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-we-choose-this-model">Why did we choose this model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-model-structure">Features and model structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-analysis">Further analysis</a></li>
 </ul>
                             <p class="logo">
@@ -198,19 +199,26 @@ const thebe_selector_output = ".output, .cell_output"
   <section id="mlp-quantile-regression">
 <h1>MLP Quantile Regression<a class="headerlink" href="#mlp-quantile-regression" title="Permalink to this headline">#</a></h1>
 <section id="why-did-we-choose-this-model">
-<h2>Why did we choose this model?<a class="headerlink" href="#why-did-we-choose-this-model" title="Permalink to this headline">#</a></h2>
-<p>A regular machine learning approach for regression problems only provides a numerical prediction for each observation. In order to evaluate how confident the prediction is, we need to know the quantiles of the predicted value. In addition, for this particular project as part of the NA62 experiment, the ultimate goal is to distinguish pions and muons. It would be useful if we have more tools available to examine the uncertainty of the predicted ring radius so further research may be conducted to identify the two particles based on the difference of their fitted rings at a certain level of track momentum.</p>
+<h2>Why did we choose this model<a class="headerlink" href="#why-did-we-choose-this-model" title="Permalink to this headline">#</a></h2>
+<p>A regular machine learning approach for regression problems only provides a numerical prediction for each observation. In order to evaluate how confident the prediction is, we need to know the quantiles of the predicted value. Moreover, for our particular project as part of the NA62 experiment, the ultimate goal is to distinguish pions and muons. It would be useful if we have more tools available to examine the uncertainty of the predicted ring radius so further researches may be continued to identify the two particles based on the difference of their fitted ring radius at a certain level of track momentum.</p>
 </section>
 <section id="features-and-model-structure">
 <h2>Features and model structure<a class="headerlink" href="#features-and-model-structure" title="Permalink to this headline">#</a></h2>
-<p>Based on the above noted MLP architecture, we have custom defined a suitable quantile loss function and modified the trainer function to implement the quantile regression approach. The rest of the model structure, input features, target and the training process are the same as the MLP. We can specify the desired quantile as one of the parameters in the trainer function to predict the corresponding quantile of ring radius.
-Results</p>
-<p>Since it is a preliminary research in this project, so far we have only experimented with three quantiles (q = 0.05, 0.5, and 0.95) of predicted ring radius. The predicted values are indicated in Figure 4.2. The red line on the most right side of the plot is the theoretical ring radius values (the target of the regression model). And the predicted ring radius for three quantiles are the scatter points with different colours. From Figure 4.2, the predictions with three quantiles show the same pattern of distributions, and we did not see a significant variation between three quantiles.</p>
-<p>Figure 4.2 Predicted ring radius per quantile 0.05, 0.5, and 0.95</p>
+<p>Based on the MLP architecture in the previous section, we have defined a quantile loss function and modified the trainer function to implement the quantile regression approach. The rest of the model structure, input features, target and the training process are the same as the MLP. We can specify the desired quantile as one of the parameters in the trainer function to predict the corresponding quantile of ring radius.</p>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<p>Since it is a preliminary research as part of our project, so far we have only experimented with three quantiles (q = 0.05, 0.5, 0.95) of predicted ring radius as shown in <a class="reference internal" href="#qmlp-pred-plot"><span class="std std-ref">Fig. 6</span></a>. To demonstrate the trend, all values are sorted and the x-axis only indicates the index of the observations. The red line on the most right side of the plot is the theoretical ring radius (the target of the regression model). And the predicted ring radius for three quantiles are the scatter points in different colours on the left side. From the plot, the predictions with three quantiles show the same pattern of distributions, and we did not see a significant variation between three quantiles.</p>
+<figure class="align-default" id="qmlp-pred-plot">
+<img alt="../../_images/qmlp_pred_plot.png" src="../../_images/qmlp_pred_plot.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Predicted ring radius per quantile 0.05, 0.5, and 0.95</span><a class="headerlink" href="#qmlp-pred-plot" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="further-analysis">
 <h2>Further analysis<a class="headerlink" href="#further-analysis" title="Permalink to this headline">#</a></h2>
-<p>Due to time constraints of the capstone project, we have not conducted a full study and analysis on the MLP Quantile Regression approach. We suggest more work to be performed in the future, such as predicting more quantiles, exploring predictions of pions and muons in different momentum ranges.</p>
+<p>Due to time constraints of the capstone project, we have not conducted a full study and analysis on the MLP Quantile Regression approach. We suggest further works to be performed in the future, such as predicting more quantiles, exploring predictions of pions and muons in different momentum ranges.</p>
 </section>
 </section>
 

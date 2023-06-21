@@ -112,13 +112,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="MLP (Multilayer Perceptron)  Why did we choose this model?  A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our projec" />
+<meta name="description" content="MLP (Multilayer Perceptron)  Why did we choose this model  A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our project" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:title" content="MLP (Multilayer Perceptron)"/>
-<meta name="twitter:description" content="MLP (Multilayer Perceptron)  Why did we choose this model?  A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our projec">
+<meta name="twitter:description" content="MLP (Multilayer Perceptron)  Why did we choose this model  A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our project">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:image" content="">
 
@@ -127,7 +127,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="MLP (Multilayer Perceptron)  Why did we choose this model?  A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our projec" />
+<meta property="og:description" content="MLP (Multilayer Perceptron)  Why did we choose this model  A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our project" />
 <meta property="og:site_name" content="Calorich AI" />
 <meta name="theme-color" content="#ffffff" />
 
@@ -155,7 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-we-choose-this-model">Why did we choose this model?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-we-choose-this-model">Why did we choose this model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-model-structure">Features and model structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-and-results">Training process and results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
@@ -199,8 +199,8 @@ const thebe_selector_output = ".output, .cell_output"
   <section id="mlp-multilayer-perceptron">
 <h1>MLP (Multilayer Perceptron)<a class="headerlink" href="#mlp-multilayer-perceptron" title="Permalink to this headline">#</a></h1>
 <section id="why-did-we-choose-this-model">
-<h2>Why did we choose this model?<a class="headerlink" href="#why-did-we-choose-this-model" title="Permalink to this headline">#</a></h2>
-<p>A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our project for the regression problem, by designing appropriate number of hidden layers and introducing a non-linear activation function, the model is expected to capture more complex linear and non-linear relationships between input features (regressors) and the target (theoretical ring radius for each event) in the training dataset, and output predictions of ring radius for the unseen testing dataset. MLP is easy to implement in the PyTorch framework. It provides us with the extensive flexibility to custom design deep learning structures, define particular loss functions, or add more functionalities to our modelling. For example, we have also implemented a quantile regression based on the MLP architecture.</p>
+<h2>Why did we choose this model<a class="headerlink" href="#why-did-we-choose-this-model" title="Permalink to this headline">#</a></h2>
+<p>A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our project for the regression problem, by designing appropriate number of hidden layers and incorporating a non-linear activation function, the model is expected to capture more complex linear and non-linear relationships between input features (regressors) and the target in the training dataset, and output predictions for the unseen testing dataset. MLP is easy to implement in the PyTorch framework. It provides us with the extensive flexibility to custom design deep learning structures, define particular loss functions, or add more functionalities to our modeling. For example, we have also implemented a quantile regression based on the MLP architecture.</p>
 </section>
 <section id="features-and-model-structure">
 <h2>Features and model structure<a class="headerlink" href="#features-and-model-structure" title="Permalink to this headline">#</a></h2>
@@ -210,15 +210,20 @@ const thebe_selector_output = ".output, .cell_output"
 <section id="training-process-and-results">
 <h2>Training process and results<a class="headerlink" href="#training-process-and-results" title="Permalink to this headline">#</a></h2>
 <p>To avoid possible bias from two particles, the model has been trained on randomly split 75% of muon events, then tested on the rest of muon events and all pion events. Based on the PyTorch framework, we have developed the training and validation data loaders, the custom defined trainer, used standard <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html">MSELoss function</a> and <a class="reference external" href="https://arxiv.org/abs/1412.6980">Adam optimizer</a> to train the MLP model.</p>
-<p>In addition, before feeding the features into the model, the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a> has been applied to rescale the inputs considering unscaled inputs could result in exploring gradients during the learning process.</p>
-<p>After the training completed, we tested the regression performance on the test data. Between the predicted ring radius and the theoretical values, the R2 score was 0.934 and the MAE (Mean Absolute Error) was 1.92. Compared to the result of the XGBRegressor approach (R2 was 0.94), the accuracy of MLP predictions was slightly lower.</p>
-<p>We have also performed residual analysis for the MLP model. As shown in Figure 4.1, the similar patterns were observed compared to the residual plot from the XGBRegressor. The result confirms the bias analysis in the above XGBoost Regressor section.</p>
-<p>Figure 4.1 Residual plot residuals vs. calculated ring radius for MLP model</p>
+<p>In addition, before feeding features into the model, the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a> has been applied to rescale the inputs considering unscaled inputs could result in exploding gradients during the learning process.</p>
+<p>After the training completed, we tested the regression performance on the test data. Between the predicted ring radius and the theoretical values, the R2 score was 0.934 and the MAE (Mean Absolute Error) was 1.92. Compared to the result of the XGBRegressor approach (R2 was 0.94), the accuracy of the MLP model was slightly lower.</p>
+<p>We have also performed residual analysis for the MLP model. As shown in <a class="reference internal" href="#mlp-residual-plot"><span class="std std-ref">Fig. 5</span></a>, the similar patterns were observed compared to the residual plot from the XGBRegressor. The result confirms the bias analysis in the previous section.</p>
+<figure class="align-default" id="mlp-residual-plot">
+<img alt="../../_images/mlp_residual_plot.png" src="../../_images/mlp_residual_plot.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Residual plot residuals vs. calculated ring radius for MLP model</span><a class="headerlink" href="#mlp-residual-plot" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
-<p>From the result comparison between XGBRegressor and the MLP model, we can see the deep learning architecture (MLP) did not improve the regression performance. Considering the longer training time, and the extra pre-processing steps including normalisation and tensor conversion required for the MLP model, we think the XGBRegressor is the better approach for the regression purposes.</p>
-<p>One of the advantages of deep learning methods is to rely on the complex networks to perform feature engineering and feature extraction. In our case, we feed the MLP model with our explicitly engineered features rather than the raw data (coordinates of hits for each event). It is possible that the method we have used in this section did not reach the full potential of the deep learning approach. Therefore, we are exploring other neural network architectures that can be directly trained with the raw hit position data.</p>
+<p>From the result comparison between XGBRegressor and the MLP model, we can see the deep learning architecture (MLP) did not improve the regression performance. Considering the longer training time, and the extra pre-processing steps including normalisation and tensor conversion required for the MLP modeling, we think the XGBRegressor is the better approach for the regression purpose.</p>
+<p>One of the advantages of deep learning methods is to rely on the complex networks to perform feature engineering and feature extraction. In our case, we feed the MLP model with explicitly engineered features rather than the raw data (coordinates of hits for each event). It is possible that the method we have used in this section did not reach the full potential of the deep learning. Therefore, we are exploring other neural network architectures that can be directly trained with the raw hit coordinates.</p>
 </section>
 </section>
 
