@@ -112,13 +112,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="Conclusion  Results  Future WorkResultsFuture Work" />
+<meta name="description" content="Conclusion  In this capstone project we have applied machine learning regression methods to predict the ring radius from variable number of “hits” (excited phot" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:title" content="Conclusion"/>
-<meta name="twitter:description" content="Conclusion  Results  Future WorkResultsFuture Work">
+<meta name="twitter:description" content="Conclusion  In this capstone project we have applied machine learning regression methods to predict the ring radius from variable number of “hits” (excited phot">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:image" content="">
 
@@ -127,7 +127,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="Conclusion  Results  Future WorkResultsFuture Work" />
+<meta property="og:description" content="Conclusion  In this capstone project we have applied machine learning regression methods to predict the ring radius from variable number of “hits” (excited phot" />
 <meta property="og:site_name" content="Calorich AI" />
 <meta name="theme-color" content="#ffffff" />
 
@@ -148,16 +148,10 @@ const thebe_selector_output = ".output, .cell_output"
                     <div class="inner">
 
                         
-                        <div class="qe-page__toc-header">
-                            On this page
-                        </div>
 
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
-                            <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-work">Future Work</a></li>
-</ul>
+                            
                             <p class="logo">
                                 
                             </p>
@@ -196,12 +190,14 @@ const thebe_selector_output = ".output, .cell_output"
                         
   <section id="conclusion">
 <h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h1>
-<section id="results">
-<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="future-work">
-<h2>Future Work<a class="headerlink" href="#future-work" title="Permalink to this headline">#</a></h2>
-</section>
+<p>In this capstone project we have applied machine learning regression methods to predict the ring radius from variable number of “hits” (excited photodetectors in the RICH detector) for each event of decay. Three models, XGBRegressor, MLP, and PointNet, have been adopted to perform the ring fitting. Both XGBRegressor and MLP were using engineered features generated from hit positions as inputs, while PointNet was directly trained on the raw data of hit coordinates. The result of regression evaluation metrics shown XGBRegressor had the best performance compared to the other two deep learning approaches. Considering the simplicity of model structure and implementation, timing, and future maintenance, we recommend XGBRegressor as the best option to perform the regression task.</p>
+<p>Although the result of PointNet did not yield an expected performance, we have identified the probable reason, a vanishing gradient, a thus have devised solutions to this problem. Due to the time consuming process of training a new model with the necessary modifications we are keeping these conclusions for the moment and will update if a solution is found and has proven to yield better results than XGBoost.</p>
+<p>For the future works, we would suggest the following areas:</p>
+<ol class="arabic simple">
+<li><p>In addition to the three regular regression models, we have also started a quantile regression based on the MLP architecture. Due to time constraints, more research and analysis could be continued to explore the possibility of quantile regression to facilitate the differentiation of pions and muons in different track momentum ranges.</p></li>
+<li><p>Since the ultimate goal of the NA62 project is to distinguish pions and muons<span id="id1">[<a class="reference internal" href="references.html#id5" title="E. Cortina Gil, E. Martin Albarran, E. Minucci, G. Nüssle, S. Padolski, P. Petrov, N. Szilasi, B. Velghe, G. Georgiev, V. Kozhuharov, L. Litov, T. Husek, K. Kampf, M. Zamkovsky, R. Aliberti, K. H. Geib, G. Khoriauli, K. Kleinknecht, J. Kunze, D. Lomidze, R. Marchevski, L. Peruzzo, M. Vormstein, R. Wanke, A. Winhart, M. Bolognesi, V. Carassiti, S. Chiozzi, A. Cotta Ramusino, A. Gianoli, R. Malaguti, P. Dalpiaz, M. Fiorini, E. Gamberini, I. Neri, A. Norton, F. Petrucci, M. Statera, H. Wahl, F. Bucci, R. Ciaranfi, M. Lenti, F. Maletta, R. Volpe, A. Bizzeti, A. Cassese, E. Iacopini, A. Antonelli, E. Capitolo, C. Capoccia, A. Cecchetti, G. Corradi, V. Fascianelli, F. Gonnella, G. Lamanna, R. Lenci, G. Mannocchi, S. Martellotti, M. Moulson, C. Paglia, M. Raggi, V. Russo, M. Santoni, T. Spadaro, D. Tagnani, S. Valeri, T. Vassilieva, F. Cassese, L. Roscilli, F. Ambrosino, T. Capussela, D. Di Filippo, P. Massarotti, M. Mirra, M. Napolitano, G. Saracino, M. Barbanera, P. Cenci, B. Checcucci, V. Duk, L. Farnesini, E. Gersabeck, M. Lupi, A. Papi, M. Pepe, M. Piccini, G. Scolieri, D. Aisa, G. Anzivino, M. Bizzarri, C. Campeggi, E. Imbergamo, A. Piluso, C. Santoni, L. Berretta, S. Bianucci, A. Burato, C. Cerri, R. Fantechi, S. Galeotti, G. Magazzu\textquotesingle , M. Minuti, A. Orsini, G. Petragnani, L. Pontisso, F. Raffaelli, F. Spinella, G. Collazuol, I. Mannelli, C. Avanzini, F. Costantini, L. Di Lella, N. Doble, M. Giorgi, S. Giudici, E. Pedreschi, R. Piandani, G. Pierazzini, J. Pinzino, M. Sozzi, L. Zaccarelli, A. Biagioni, E. Leonardi, A. Lonardo, P. Valente, P. Vicini, G. D\textquotesingle Agostini, R. Ammendola, V. Bonaiuto, N. De Simone, L. Federici, A. Fucci, G. Paoluzzi, A. Salamon, G. Salina, F. Sargeni, C. Biino, G. Dellacasa, S. Garbolino, F. Marchetto, S. Martoiu, G. Mazza, A. Rivetti, R. Arcidiacono, B. Bloch-Devaux, M. Boretto, L. Iacobuzio, E. Menichetti, D. Soldi, J. Engelfried, N. Estrada-Tristan, A. M. Bragadireanu, O. E. Hutanu, N. Azorskiy, V. Elsha, T. Enik, V. Falaleev, L. Glonti, Y. Gusakov, S. Kakurin, V. Kekelidze, S. Kilchakovskaya, E. Kislov, A. Kolesnikov, D. Madigozhin, M. Misheva, S. Movchan, I. Polenkevich, Y. Potrebenikov, V. Samsonov, S. Shkarovskiy, S. Sotnikov, L. Tarasova, M. Zaytseva, A. Zinchenko, V. Bolotov, S. Fedotov, E. Gushin, A. Khotjantsev, A. Khudyakov, A. Kleimenova, Yu. Kudenko, A. Shaikhiev, A. Gorin, S. Kholodenko, V. Kurshetsov, V. Obraztsov, A. Ostankov, V. Rykalin, V. Semenov, V. Sugonyaev, O. Yushchenko, L. Bician, T. Blazek, V. Cerny, M. Koval, R. Lietava, G. Aglieri Rinella, J. Arroyo Garcia, S. Balev, M. Battistin, J. Bendotti, F. Bergsma, S. Bonacini, F. Butin, A. Ceccucci, P. Chiggiato, H. Danielsson, J. Degrange, N. Dixon, B. Döbrich, P. Farthouat, L. Gatignon, P. Golonka, S. Girod, A. Goncalves Martins De Oliveira, R. Guida, F. Hahn, E. Harrouch, M. Hatch, P. Jarron, O. Jamet, B. Jenninger, J. Kaplon, A. Kluge, G. Lehmann-Miotto, P. Lichard, G. Maire, A. Mapelli, J. Morant, M. Morel, J. Noël, M. Noy, V. Palladino, A. Pardons, F. Perez-Gomez, L. Perktold, M. Perrin-Terrin, P. Petagna, K. Poltorak, P. Riedler, G. Romagnoli, G. Ruggiero, T. Rutter, J. Rouet, V. Ryjov, A. Saputi, T. Schneider, G. Stefanini, C. Theis, S. Tiuraniemi, F. Vareia Rodriguez, S. Venditti, M. Vergain, H. Vincke, P. Wertelaers, M. B. Brunetti, S. Edwards, E. Goudzovski, B. Hallgren, M. Krivda, C. Lazzeroni, N. Lurkin, D. Munday, F. Newson, C. Parkinson, S. Pyatt, A. Romano, X. Serghi, A. Sergi, R. Staley, A. Sturgess, H. Heath, R. Page, B. Angelucci, D. Britton, D. Protopopescu, I. Skillicorn, P. Cooke, J. B. Dainton, J. R. Fry, L. Fulton, D. Hutchcroft, E. Jones, T. Jones, K. Massri, E. Maurice, K. McCormick, P. Sutcliffe, B. Wrona, A. Conovaloff, P. Cooper, D. Coward, P. Rubin, and R. Winston. The beam and detector of the NA62 experiment at CERN. Journal of Instrumentation, 12(05):P05025–P05025, May 2017. URL: https://doi.org/10.1088%2F1748-0221%2F12%2F05%2Fp05025, doi:10.1088/1748-0221/12/05/p05025.">Gil <em>et al.</em>, 2017</a>]</span>, the resolution of fitted ring radius for the two particles in each track momentum range would be important. We need to consider both accuracy and precision of the predictions in order to separate two particles effectively in the future studies.</p></li>
+<li><p>We also suggest exploring the use of a <a class="reference external" href="https://www.ibm.com/topics/convolutional-neural-networks">Convolutional Neural Network (CNN)</a> in future experiments as they have proven reliability in image pattern recognition. If the RICH photodetector is treated as a pixel array there could be the opportunity to obtain a promising result.</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">

@@ -1,3 +1,3 @@
 # Neural Networks
 
-We have tried both multilayer perceptron (MLP) and PointNet models.
+We have decided on 2 methods: multilayer perceptron (MLP) and PointNet models.
