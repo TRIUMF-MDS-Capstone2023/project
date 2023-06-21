@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Deploy final report](https://github.com/TRIUMF-MDS-Capstone2023/project/actions/workflows/deploy-final-report.yml/badge.svg)](https://github.com/TRIUMF-MDS-Capstone2023/project/actions/workflows/deploy-final-report.yml)
+
 # CALORICH AI 
 
 ## Introduction 
