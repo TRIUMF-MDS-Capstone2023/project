@@ -1,13 +1,13 @@
 # CALORICH AI
 
-## Introduction
+## Introduction {#introduction}
 
 This GitHub repository includes the work associated with the 2023 CALORICH AI Capstone Project, which was undertaken by Crystal Geng, Daniel Merigo, Kelvin Wong, and Peng Zhang as part of the Master of Data Science program at the University of British Columbia. The project was conducted in collaboration with scientists from [TRIUMF](https://www.triumf.ca/), Canada's leading particle accelerator center and a leading research facility in subatomic physics.
 
 The purpose of this repository is to serve as a central hub for accessing general information about the project. You have the option to navigate directly to specific sections using the links provided below, or you can simply scroll down for more details.
 
 -   [CALORICH AI](#CALORICH%20AI)
-    -   [Introduction](#installation)
+    -   [Introduction](#introduction)
     -   [Executive summary](#executive-summary){data-heading="Executive Summary"}
     -   [Installation](#installation){data-heading="Installation"}
     -   [Dataset](#dataset){data-heading="Dataset"}
