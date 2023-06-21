@@ -6,16 +6,16 @@ This GitHub repository includes the work associated with the 2023 CALORICH AI Ca
 
 The purpose of this repository is to serve as a central hub for accessing general information about the project. You have the option to navigate directly to specific sections using the links provided below, or you can simply scroll down for more details.
 
--   [CALORICH AI](#CALORICH%20AI)
-    -   [Introduction](#introduction)
-    -   [Executive summary](#executive-summary){data-heading="Executive Summary"}
-    -   [Installation](#installation){data-heading="Installation"}
-    -   [Dataset](#dataset){data-heading="Dataset"}
-        -   [Main Dataset](#main-dataset){data-heading="Main Dataset"}
-        -   [Supplementary Dataset](#supplementary-dataset){data-heading="Supplementary Dataset"}
-        -   [Clean-up](#clean-up){data-heading="Clean-up"}
-    -   [Run the Model](#run-the-model){data-heading="Run the Model"}
-    -   [Copyright and Licensing](#copyright-and-licensing){data-heading="Copyright and Licensing"}
+-   CALORICH AI
+    -   [introduction](#introduction)
+    -   [Executive Summary](#executive-summary)
+    -   [Installation](#installation)
+    -   [Dataset](#dataset)
+        -   [Main Dataset](#main-dataset)
+        -   [Supplementary Dataset](#supplementary-dataset)
+        -   [Clean Up](#clean-up)
+    -   [Run the Model](#run-the-model)
+    -   [Copyright and Licensing](#copyright-and-licensing)
 
 The final report of this project is published at [the respective GitHub page](https://triumf-mds-capstone2023.github.io/project).
 
