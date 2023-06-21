@@ -1,0 +1,40 @@
+name: Deploy final report
+
+on:
+  push:
+    branches:
+    - master
+    - main
+
+jobs:
+  deploy-final-report:
+    name: Deploy final report
+
+    runs-on: ubuntu-latest
+
+    permissions: write-all
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set-up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Setup Micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment.yaml
+          cache-environment: true
+
+      - name: Build the book
+        run: jupyter-book build ./docs/final/report
+        shell: micromamba-shell {0}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/final/report/_build/html
