@@ -112,13 +112,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="Best Performing Model  Justification  WIPJustification  WIP" />
+<meta name="description" content="Best Performing Model  Justification  After evaluating the performance of three models: XGBRegressor, MLP, and PointNet, it appears that XGBRegressor currently " />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@" />
 <meta name="twitter:title" content="Best Performing Model"/>
-<meta name="twitter:description" content="Best Performing Model  Justification  WIPJustification  WIP">
+<meta name="twitter:description" content="Best Performing Model  Justification  After evaluating the performance of three models: XGBRegressor, MLP, and PointNet, it appears that XGBRegressor currently ">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:image" content="">
 
@@ -127,7 +127,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="Best Performing Model  Justification  WIPJustification  WIP" />
+<meta property="og:description" content="Best Performing Model  Justification  After evaluating the performance of three models: XGBRegressor, MLP, and PointNet, it appears that XGBRegressor currently " />
 <meta property="og:site_name" content="Calorich AI" />
 <meta name="theme-color" content="#ffffff" />
 
@@ -197,7 +197,31 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Best Performing Model<a class="headerlink" href="#best-performing-model" title="Permalink to this headline">#</a></h1>
 <section id="justification">
 <h2>Justification<a class="headerlink" href="#justification" title="Permalink to this headline">#</a></h2>
-<p>WIP</p>
+<p>After evaluating the performance of three models: XGBRegressor, MLP, and PointNet, it appears that XGBRegressor currently outperforms the others. According to Table 1, both XGBRegressor and MLP demonstrate similar best R2 scores. However, the performance of the PointNet architecture has not been satisfactory thus far, and it also requires an exceptionally long training time.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Training Time</p></th>
+<th class="head"><p>Best Test R2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>XGBRegressor</p></td>
+<td><p>~ 3 minutes</p></td>
+<td><p>0.94</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLP</p></td>
+<td><p>~ 8 minutes</p></td>
+<td><p>0.94</p></td>
+</tr>
+<tr class="row-even"><td><p>PointNet</p></td>
+<td><p>~ 23.5 hours</p></td>
+<td><p>0.20</p></td>
+</tr>
+</tbody>
+</table>
+<p>: Table 1. Model performance comparison</p>
+<p>When comparing the performance of XGBRegressor and MLP, it is difficult to determine the better performing model solely based on their performance scores. However, taking into account the difference in training time, with XGBRegressor being more than 2 times faster, and considering the additional complexity associated with MLP modeling, it is reasonable to conclude that XGBRegressor is a more efficient and simpler choice in terms of both time consumption and computational power. Overall, we determine XGBRegressor to be the best performing model with our training data.</p>
 </section>
 </section>
 
