@@ -8,6 +8,6 @@ For the future works, we would suggest the following areas:
 
 1.  In addition to the three regular regression models, we have also started a quantile regression based on the MLP architecture. Due to time constraints, more research and analysis could be continued to explore the possibility of quantile regression to facilitate the differentiation of pions and muons in different track momentum ranges.
 
-2.  Since the ultimate goal of the NA62 project is to distinguish pions and muons, the resolution of fitted ring radius for the two particles in each track momentum range would be important. We need to consider both accuracy and precision of the predictions in order to separate two particles effectively in the future studies.
+2.  Since the ultimate goal of the NA62 project is to distinguish pions and muons{cite}`Gil_2017`, the resolution of fitted ring radius for the two particles in each track momentum range would be important. We need to consider both accuracy and precision of the predictions in order to separate two particles effectively in the future studies.
 
 3.  We also suggest exploring the use of a [Convolutional Neural Network (CNN)](https://www.ibm.com/topics/convolutional-neural-networks) in future experiments as they have proven reliability in image pattern recognition. If the RICH photodetector is treated as a pixel array there could be the opportunity to obtain a promising result.

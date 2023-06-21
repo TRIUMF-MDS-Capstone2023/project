@@ -2,7 +2,10 @@
 
 ## Architecture
 
-Developed in Stanford, [PointNet](https://arxiv.org/abs/1612.00593) is a simple yet effective architecture that directly consumes 3-dimensional point clouds and can perform diverse operations such as classification, part segmentation and even semantic parsing. In order to apply this architecture to the regression problem we had to do some modifications (refer to appendix for further explanation and architecture).
+Developed in Stanford, [PointNet](https://arxiv.org/abs/1612.00593) is a simple yet effective architecture that directly consumes 3-dimensional point clouds and can perform diverse operations such as classification, part segmentation and even semantic parsing {cite}`qi2017pointnet`. In order to apply this architecture to the regression problem we had to do some modifications, including:
+- Adding a third dimension to the hit locations using Gaussian noise in the range (0, 0.5)
+- Substituting the output layer with a linear fully connected layer
+- Changing the output size to 1
 
 We developed 2 distinct architectures, based on the base PointNet architecture, in PyTorch to compare and test simultaneously. We used the MSELoss Loss function and Adam Optimizer. Each architecture also utilized ReLU as the activation function
 
@@ -19,3 +22,5 @@ Training time was also a limitation as, even with pre-transformed parquet files,
 Residual plot predicted vs. calculated ring radius for PointNet \`\`\`
 
 As shown in [Fig 7](pnt_predicted_vs_theoretical) the performance of PointNet is deficient, not being able to capture the trends in the model. The predicted results have a different behaviour than the ground truth, shown here as a black line. These results, combined with the long training time, motivated us to decide on XGBoost as the best modelling technique for this regression problem.
+
+
