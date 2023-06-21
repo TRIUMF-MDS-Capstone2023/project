@@ -16,7 +16,8 @@ Training time was also a limitation as, even with pre-transformed parquet files,
 
 ```{figure} ../../../../../figures/pnt_pred_theo.png :name: pnt_predicted_vs_theoretical
 
-Residual plot predicted vs. calculated ring radius for PointNet```
+Residual plot predicted vs. calculated ring radius for PointNet
+```
 
 Figure 7.1 Predicted Vs Theoretical PointNet
 
