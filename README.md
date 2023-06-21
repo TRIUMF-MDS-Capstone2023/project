@@ -17,7 +17,6 @@ The purpose of this repository is to serve as a central hub for accessing genera
         -   [Main Dataset](#main-dataset)
         -   [Supplementary Dataset](#supplementary-dataset)
         -   [Clean Up](#clean-up)
-    -   [Run the Model](#run-the-model)
     -   [Copyright and Licensing](#copyright-and-licensing)
 
 The final report of this project is published at [the respective GitHub page](https://triumf-mds-capstone2023.github.io/project).
@@ -119,9 +118,6 @@ make clean
 
 Rest assured that it would *not* remove the raw H5 files.
 
-## Run the Model 
-
-(WIP)
 
 ## Copyright and Licensing 
 
