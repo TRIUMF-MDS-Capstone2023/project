@@ -10,10 +10,14 @@ We developed 2 distinct architectures based on the base PointNet architecture to
 
 PointNet is an architecture developed to perform classifications, translating the architecture to a regression problem meant discarding the semantic segmentation portion and adding a 3rd dimension at first. This added complexity to the data preparation and in the end could not capture local information or immediately determine the particle for a given event.
 
-Training time was also a limitation as, even with pre-transformed parquet files, the training time averaged 15 minutes per epoch on a high end GPU.
+Training time was also a limitation as, even with pre-transformed parquet files, the training time averaged 15 minutes per epoch on a high end GPU (RTX 3080).
 
 ## Results
 
-Figure 5.1 Predicted Vs Theoretical PointNet
+```{figure} ../../../../../figures/pnt_pred_theo.png :name: pnt_predicted_vs_theoretical
+
+Residual plot predicted vs. calculated ring radius for PointNet```
+
+Figure 7.1 Predicted Vs Theoretical PointNet
 
 As shown in Figure 5.1 the performance of PointNet is deficient, not being able to capture the ground truth, shown as a black line. These results motivated us to decide on XGBoost as the best modelling technique for this regression problem.
