@@ -1,4 +1,4 @@
-# CALORICH AI
+# CALORICH AI {#sec-calorich-ai}
 
 ## Introduction {#introduction}
 
@@ -6,8 +6,8 @@ This GitHub repository includes the work associated with the 2023 CALORICH AI Ca
 
 The purpose of this repository is to serve as a central hub for accessing general information about the project. You have the option to navigate directly to specific sections using the links provided below, or you can simply scroll down for more details.
 
--   CALORICH AI
-    -   [introduction](#introduction)
+-   [CALORICH AI](#sec-calorich-ai)
+    -   [Introduction](#introduction)
     -   [Executive Summary](#executive-summary)
     -   [Installation](#installation)
     -   [Dataset](#dataset)
