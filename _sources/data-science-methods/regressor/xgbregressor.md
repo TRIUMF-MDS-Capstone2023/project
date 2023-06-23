@@ -28,11 +28,11 @@ Overlaid residual plot showing the difference between the theoretical ring radiu
 
 The underestimation can be further demonstrated by [Fig. 3](xgb_radius_vs_momentum), which illustrates the relationship between the ring radius and track momentum. As previously mentioned, the theoretical ring radius is determined based on the track momentum and mass of the particles, and it is depicted as the green curves in the plot. The predicted radii are represented by the blue and orange scatter points on the plot. By examining the magnified view of the predicted radius specifically for muons in the right plot, it becomes apparent that the model begins to underestimate the radius predictions when the track momentum reaches approximately 57 GeV/c. At this point, the predicted values start to plateau, whereas the theoretical values continue to gradually increase.
 
-```{figure} ../../../../../figures/xgb_radius_vs_momentum.png :name: xgb_radius_vs_momentum
+```{figure} ../../../../../figures/xgb_radius_vs_momentum.png 
+:name: xgb_radius_vs_momentum
 
 Overlaid plot showing predicted ring radius and theoretical ring radius vs. track momentum for XGBRegressor
-
-```         
+```       
 
 ## SHAP Analysis
 
