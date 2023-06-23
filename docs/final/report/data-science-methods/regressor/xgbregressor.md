@@ -12,11 +12,11 @@ Using the default hyperparameters of `n_estimators = 100` and `max_depth = 6`, t
 
 Although the XGBRegressor showed excellent performance, we noticed a bias near the higher end of the radius spectrum. The scatter plot of residuals shown in [Fig. 1](xgb_residual_plot), which represents the difference between the calculated ring radius and the predicted ring radius, reveals a slight bias towards the higher end of the calculated ring radius. More data points are concentrated above the 0 line, indicating that the model tends to underestimate the radius for higher values. In light of this residuals pattern, further in-depth analyses were conducted to investigate the underlying cause of this phenomenon.
 
-```{figure} ../../../../../figures/xgb_residual_plot.png :name: xgb_residual_plot
+```{figure} ../../../../../figures/xgb_residual_plot.png 
+:name: xgb_residual_plot
 
 Residual plot residuals vs. calculated ring radius for XGBRegressor
-
-```         
+```       
 
 To examine the correlation between the predicted ring radius and the theoretical ring radius, we computed the difference between the theoretical ring radius and its overall maximum for each data point. This is illustrated by the red line in [Fig. 2](xgb_max_calc_diff). If a data point lies above the red line, it suggests that the predicted ring radius is smaller than the theoretical ring radius. Conversely, if a data point lies below the red line, it indicates that the predicted ring radius is larger than the theoretical ring radius. Upon examining the more detailed plot on the right side of [Fig. 2](xgb_max_calc_diff), it becomes apparent that the data points below the red line are considerably scarce. Additionally, the data points appear to be "pushed" upwards by the presence of the red line. This observation suggests that the predictions are constrained by the upper limit of the theoretical ring radius. As a result, the predictions are unable to exceed the maximum value of the theoretical ring radius.
 
