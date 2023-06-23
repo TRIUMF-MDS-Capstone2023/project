@@ -2,7 +2,7 @@
 
 ## Why did we choose this model?
 
-For our baseline model, we selected XGBoost {cite}`Chen_2016` because of its impressive performance and fast execution compared to other baseline models we experimented with. We employed XGBRegressor to train our data set, which exclusively consisted of muons. In addition to the previously mentioned engineered features, we included `total_in_time_hits` as one of the features in our model. The target variable `y_train` used for training the model corresponds to the calculated ring radius (`ring_radius_calc`), which is the theoretical ring radius determined based on the track momentum and mass of the particles.
+For our baseline model, we have attempted training XGBRegressor, RandomForestRegressor, LigtGBM and CatBoostRegressor. Out of all the models we have trained, we selected XGBRegressor {cite}`Chen_2016` as our baseline model because of its impressive performance and fast execution compared to other baseline models we experimented with. We employed XGBRegressor to train our data set, which exclusively consisted of muons. In addition to the previously mentioned engineered features, we included `total_in_time_hits` as one of the features in our model. The target variable `y_train` used for training the model corresponds to the calculated ring radius (`ring_radius_calc`), which is the theoretical ring radius determined based on the track momentum and mass of the particles.
 
 ## Performance
 
@@ -12,11 +12,11 @@ Using the default hyperparameters of `n_estimators = 100` and `max_depth = 6`, t
 
 Although the XGBRegressor showed excellent performance, we noticed a bias near the higher end of the radius spectrum. The scatter plot of residuals shown in [Fig. 1](xgb_residual_plot), which represents the difference between the calculated ring radius and the predicted ring radius, reveals a slight bias towards the higher end of the calculated ring radius. More data points are concentrated above the 0 line, indicating that the model tends to underestimate the radius for higher values. In light of this residuals pattern, further in-depth analyses were conducted to investigate the underlying cause of this phenomenon.
 
-```{figure} ../../../../../figures/xgb_residual_plot.png
-:name: xgb_residual_plot
+```{figure} ../../../../../figures/xgb_residual_plot.png :name: xgb_residual_plot
 
 Residual plot residuals vs. calculated ring radius for XGBRegressor
-```
+
+```         
 
 To examine the correlation between the predicted ring radius and the theoretical ring radius, we computed the difference between the theoretical ring radius and its overall maximum for each data point. This is illustrated by the red line in [Fig. 2](xgb_max_calc_diff). If a data point lies above the red line, it suggests that the predicted ring radius is smaller than the theoretical ring radius. Conversely, if a data point lies below the red line, it indicates that the predicted ring radius is larger than the theoretical ring radius. Upon examining the more detailed plot on the right side of [Fig. 2](xgb_max_calc_diff), it becomes apparent that the data points below the red line are considerably scarce. Additionally, the data points appear to be "pushed" upwards by the presence of the red line. This observation suggests that the predictions are constrained by the upper limit of the theoretical ring radius. As a result, the predictions are unable to exceed the maximum value of the theoretical ring radius.
 
@@ -28,11 +28,11 @@ Overlaid residual plot showing the difference between the theoretical ring radiu
 
 The underestimation can be further demonstrated by [Fig. 3](xgb_radius_vs_momentum), which illustrates the relationship between the ring radius and track momentum. As previously mentioned, the theoretical ring radius is determined based on the track momentum and mass of the particles, and it is depicted as the green curves in the plot. The predicted radii are represented by the blue and orange scatter points on the plot. By examining the magnified view of the predicted radius specifically for muons in the right plot, it becomes apparent that the model begins to underestimate the radius predictions when the track momentum reaches approximately 57 GeV/c. At this point, the predicted values start to plateau, whereas the theoretical values continue to gradually increase.
 
-```{figure} ../../../../../figures/xgb_radius_vs_momentum.png
-:name: xgb_radius_vs_momentum
+```{figure} ../../../../../figures/xgb_radius_vs_momentum.png :name: xgb_radius_vs_momentum
 
 Overlaid plot showing predicted ring radius and theoretical ring radius vs. track momentum for XGBRegressor
-```
+
+```         
 
 ## SHAP Analysis
 
