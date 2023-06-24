@@ -6,7 +6,7 @@ A multilayer perceptron (MLP) is a classic fully connected feedforward neural ne
 
 ## Features and model structure
 
-The MLP model has taken 18 engineered features as the inputs, the theoretical ring radius as the target, to predict the ring radius for each event.
+The MLP model has taken all [18 engineered features](https://triumf-mds-capstone2023.github.io/project/data/engineered-features.html) as the inputs, the theoretical ring radius as the target, to predict the ring radius for each event.
 
 After a number of experiments, we have selected a MLP model with 4 hidden layers. The hidden size is gradually decreased from 1024 to 12, and the [ReLU activation function](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) has been used in each hidden layer.
 
