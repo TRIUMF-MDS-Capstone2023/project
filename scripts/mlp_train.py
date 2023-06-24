@@ -68,12 +68,14 @@ validloader = DataLoader(val_set, batch_size=BATCH_SIZE, shuffle=True)
 
 # define mlp model
 def linear_block(input_size, output_size):
+    """Linear module with ReLU activation function."""
     return nn.Sequential(
         nn.Linear(input_size, output_size),
         nn.ReLU()
     )
 
 class MLPregression(nn.Module):
+    """MLP regression implementation in PyTorch."""
     def __init__(self, input_size):
         super().__init__()
         self.main = nn.Sequential(
