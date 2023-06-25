@@ -2,7 +2,7 @@
 
 ## Why did we choose this model
 
-A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our project for the regression problem, by designing appropriate number of hidden layers and incorporating a non-linear activation function, the model is expected to capture more complex linear and non-linear relationships between input features (regressors) and the target in the training dataset, and output predictions for the unseen testing dataset. MLP is easy to implement in the PyTorch framework. It provides us with the extensive flexibility to custom design deep learning structures, define particular loss functions, or add more functionalities to our modeling. For example, we have also implemented a quantile regression based on the MLP architecture.
+A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. In our project for the regression problem, by designing appropriate number of hidden layers and incorporating a non-linear activation function, the model is expected to capture more complex linear and non-linear relationships between input features (regressors) and the target in the training dataset, and output predictions for the unseen testing dataset. MLP is easy to implement in the PyTorch {cite}`pytorch` framework. It provides us with the extensive flexibility to custom design deep learning structures, define particular loss functions, or add more functionalities to our modeling. For example, we have also implemented a quantile regression based on the MLP architecture.
 
 ## Features and model structure
 
@@ -12,7 +12,7 @@ After a number of experiments, we have selected a MLP model with 4 hidden layers
 
 ## Training process and results
 
-To avoid possible bias from two particles, the model has been trained on randomly split 75% of muon events, then tested on the rest of muon events and all pion events. Based on the PyTorch framework, we have developed the training and validation data loaders, the custom defined trainer, used standard [MSELoss function](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html) and [Adam optimizer](https://arxiv.org/abs/1412.6980) to train the MLP model.
+To avoid possible bias from two particles, the model has been trained on randomly split 75% of muon events, then tested on the rest of muon events and all pion events. Based on the PyTorch framework, we have developed the training and validation data loaders, the custom defined trainer, used standard [MSELoss function](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html) and Adam optimizer {cite}`kingma2017adam` to train the MLP model.
 
 In addition, before feeding features into the model, the [StandardScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) has been applied to rescale the inputs considering unscaled inputs could result in exploding gradients during the learning process.
 
