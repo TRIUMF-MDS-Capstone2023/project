@@ -30,11 +30,11 @@ jobs:
           cache-environment: true
 
       - name: Build the book
-        run: jupyter-book build ./docs/final/report
+        run: jupyter-book build ./docs/final/website
         shell: micromamba-shell {0}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/final/report/_build/html
+          publish_dir: ./docs/final/website/_build/html
