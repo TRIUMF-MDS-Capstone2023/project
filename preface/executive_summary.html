@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Executive Summary &#8212; Calorich AI</title>
+    <title>Executive Summary &#8212; CaloRICH AI</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -71,7 +71,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/quantecon-book-theme.33ce6e3bc444546fc6d037ac6621ba14.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/quantecon-book-theme.634417d147056104826f3ea244dbc30e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -107,19 +107,17 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction" href="introduction.html" />
-    <link rel="prev" title="Calorich Final Report" href="../index.html" />
+    <link rel="prev" title="Final Report" href="../index.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="Executive Summary  The Calorich AI project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector " />
+<meta name="description" content="Executive Summary  The CaloRICH AI project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector " />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@" />
 <meta name="twitter:title" content="Executive Summary"/>
-<meta name="twitter:description" content="Executive Summary  The Calorich AI project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector ">
-<meta name="twitter:creator" content="@">
+<meta name="twitter:description" content="Executive Summary  The CaloRICH AI project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector ">
 <meta name="twitter:image" content="">
 
 <!-- Opengraph tags -->
@@ -127,8 +125,12 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="Executive Summary  The Calorich AI project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector " />
-<meta property="og:site_name" content="Calorich AI" />
+<meta property="og:description" content="Executive Summary  The CaloRICH AI project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector " />
+<meta property="og:site_name" content="CaloRICH AI" />
+
+<link rel="icon" href="../_static/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="../_static/apple-touch-icon.png" />
+
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -171,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="../index.html">Calorich AI</a></p>
+                        <p class="qe-page__header-heading"><a href="../index.html">CaloRICH AI</a></p>
 
                         <p class="qe-page__header-subheading">Executive Summary</p>
 
@@ -190,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
                         
   <section id="executive-summary">
 <h1>Executive Summary<a class="headerlink" href="#executive-summary" title="Permalink to this headline">#</a></h1>
-<p>The <em>Calorich AI</em> project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the <em>RICH AI</em> project <span id="id1">[<a class="reference internal" href="../references.html#id11" title="Van den Hooff N, Pandey R, Iyer M, and Jena S. Rich ai final report. 2022. Accessed: 2023-05-12. URL: https://triumf-capstone2022.github.io/richai/welcome.html.">den Hooff N <em>et al.</em>, 2022</a>]</span>, attempted by an MDS capstone team of similar goals last year.</p>
+<p>The <em>CaloRICH AI</em> project is proposed by TRIUMF, Canada’s national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the <em>RICH AI</em> project <span id="id1">[<a class="reference internal" href="../references.html#id11" title="Van den Hooff N, Pandey R, Iyer M, and Jena S. Rich ai final report. 2022. Accessed: 2023-05-12. URL: https://triumf-capstone2022.github.io/richai/welcome.html.">den Hooff N <em>et al.</em>, 2022</a>]</span>, attempted by an MDS capstone team of similar goals last year.</p>
 <p>The project dataset comes from the NA62 experiment at CERN, the European Organization for Nuclear Research, which involves a particle physics experiment designed to study rare decays of charged kaons. The capstone project aims to build a model to accurately classify a particle as a pion produced in a decay event. We aim to train models using the data from a subset of the 2021A NA62 experiments, which contains around 2.4 million decay events labeled by calorimeter <span id="id2">[<a class="reference internal" href="../references.html#id5" title="E. Cortina Gil, E. Martin Albarran, E. Minucci, G. Nüssle, S. Padolski, P. Petrov, N. Szilasi, B. Velghe, G. Georgiev, V. Kozhuharov, L. Litov, T. Husek, K. Kampf, M. Zamkovsky, R. Aliberti, K. H. Geib, G. Khoriauli, K. Kleinknecht, J. Kunze, D. Lomidze, R. Marchevski, L. Peruzzo, M. Vormstein, R. Wanke, A. Winhart, M. Bolognesi, V. Carassiti, S. Chiozzi, A. Cotta Ramusino, A. Gianoli, R. Malaguti, P. Dalpiaz, M. Fiorini, E. Gamberini, I. Neri, A. Norton, F. Petrucci, M. Statera, H. Wahl, F. Bucci, R. Ciaranfi, M. Lenti, F. Maletta, R. Volpe, A. Bizzeti, A. Cassese, E. Iacopini, A. Antonelli, E. Capitolo, C. Capoccia, A. Cecchetti, G. Corradi, V. Fascianelli, F. Gonnella, G. Lamanna, R. Lenci, G. Mannocchi, S. Martellotti, M. Moulson, C. Paglia, M. Raggi, V. Russo, M. Santoni, T. Spadaro, D. Tagnani, S. Valeri, T. Vassilieva, F. Cassese, L. Roscilli, F. Ambrosino, T. Capussela, D. Di Filippo, P. Massarotti, M. Mirra, M. Napolitano, G. Saracino, M. Barbanera, P. Cenci, B. Checcucci, V. Duk, L. Farnesini, E. Gersabeck, M. Lupi, A. Papi, M. Pepe, M. Piccini, G. Scolieri, D. Aisa, G. Anzivino, M. Bizzarri, C. Campeggi, E. Imbergamo, A. Piluso, C. Santoni, L. Berretta, S. Bianucci, A. Burato, C. Cerri, R. Fantechi, S. Galeotti, G. Magazzu\textquotesingle , M. Minuti, A. Orsini, G. Petragnani, L. Pontisso, F. Raffaelli, F. Spinella, G. Collazuol, I. Mannelli, C. Avanzini, F. Costantini, L. Di Lella, N. Doble, M. Giorgi, S. Giudici, E. Pedreschi, R. Piandani, G. Pierazzini, J. Pinzino, M. Sozzi, L. Zaccarelli, A. Biagioni, E. Leonardi, A. Lonardo, P. Valente, P. Vicini, G. D\textquotesingle Agostini, R. Ammendola, V. Bonaiuto, N. De Simone, L. Federici, A. Fucci, G. Paoluzzi, A. Salamon, G. Salina, F. Sargeni, C. Biino, G. Dellacasa, S. Garbolino, F. Marchetto, S. Martoiu, G. Mazza, A. Rivetti, R. Arcidiacono, B. Bloch-Devaux, M. Boretto, L. Iacobuzio, E. Menichetti, D. Soldi, J. Engelfried, N. Estrada-Tristan, A. M. Bragadireanu, O. E. Hutanu, N. Azorskiy, V. Elsha, T. Enik, V. Falaleev, L. Glonti, Y. Gusakov, S. Kakurin, V. Kekelidze, S. Kilchakovskaya, E. Kislov, A. Kolesnikov, D. Madigozhin, M. Misheva, S. Movchan, I. Polenkevich, Y. Potrebenikov, V. Samsonov, S. Shkarovskiy, S. Sotnikov, L. Tarasova, M. Zaytseva, A. Zinchenko, V. Bolotov, S. Fedotov, E. Gushin, A. Khotjantsev, A. Khudyakov, A. Kleimenova, Yu. Kudenko, A. Shaikhiev, A. Gorin, S. Kholodenko, V. Kurshetsov, V. Obraztsov, A. Ostankov, V. Rykalin, V. Semenov, V. Sugonyaev, O. Yushchenko, L. Bician, T. Blazek, V. Cerny, M. Koval, R. Lietava, G. Aglieri Rinella, J. Arroyo Garcia, S. Balev, M. Battistin, J. Bendotti, F. Bergsma, S. Bonacini, F. Butin, A. Ceccucci, P. Chiggiato, H. Danielsson, J. Degrange, N. Dixon, B. Döbrich, P. Farthouat, L. Gatignon, P. Golonka, S. Girod, A. Goncalves Martins De Oliveira, R. Guida, F. Hahn, E. Harrouch, M. Hatch, P. Jarron, O. Jamet, B. Jenninger, J. Kaplon, A. Kluge, G. Lehmann-Miotto, P. Lichard, G. Maire, A. Mapelli, J. Morant, M. Morel, J. Noël, M. Noy, V. Palladino, A. Pardons, F. Perez-Gomez, L. Perktold, M. Perrin-Terrin, P. Petagna, K. Poltorak, P. Riedler, G. Romagnoli, G. Ruggiero, T. Rutter, J. Rouet, V. Ryjov, A. Saputi, T. Schneider, G. Stefanini, C. Theis, S. Tiuraniemi, F. Vareia Rodriguez, S. Venditti, M. Vergain, H. Vincke, P. Wertelaers, M. B. Brunetti, S. Edwards, E. Goudzovski, B. Hallgren, M. Krivda, C. Lazzeroni, N. Lurkin, D. Munday, F. Newson, C. Parkinson, S. Pyatt, A. Romano, X. Serghi, A. Sergi, R. Staley, A. Sturgess, H. Heath, R. Page, B. Angelucci, D. Britton, D. Protopopescu, I. Skillicorn, P. Cooke, J. B. Dainton, J. R. Fry, L. Fulton, D. Hutchcroft, E. Jones, T. Jones, K. Massri, E. Maurice, K. McCormick, P. Sutcliffe, B. Wrona, A. Conovaloff, P. Cooper, D. Coward, P. Rubin, and R. Winston. The beam and detector of the NA62 experiment at CERN. Journal of Instrumentation, 12(05):P05025–P05025, May 2017. URL: https://doi.org/10.1088%2F1748-0221%2F12%2F05%2Fp05025, doi:10.1088/1748-0221/12/05/p05025.">Gil <em>et al.</em>, 2017</a>]</span>. The final data product of the project consists of a modularized machine learning pipeline that takes in the raw experiment data in a HDF5 format, pre-processes it, prepares training data, trains a model on the training data, and finally runs the model.</p>
 <p>One of the challenges in the project is, instead of using classification methods to distinguish between a muon or pion decay, we are only using the hit co-ordinates captured by this detector.</p>
 <p>Based on the research and advice by the partner, we chose XGBoost as the baseline Machine Learning model, and applied a modified version of PointNet as well as a simple Multi-Layer Perceptron neural network.</p>
@@ -229,7 +231,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                     <p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png"></a></p>
 
-                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International.</p>
+                    <p>Creative Commons License &ndash; This work is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"></a>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</a>.</p>
 
                     <p>Powered by <a href="https://jupyterbook.org/" target="_blank" rel="noreferer nofollow">Jupyter Book</a>. Theme forked from <a href="https://github.com/QuantEcon/quantecon-book-theme" target="_blank" rel="noreferer nofollow">quantecon-book-theme</a>.</p>
 
@@ -387,7 +389,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="../index.html"><i data-feather="home"></i></a></li>
-                    <li class="btn__qelogo"><a href="https://triumf-mds-capstone2023.github.io/project" title=""><span class="show-for-sr">Calorich AI</span></a></li>
+                    <li class="btn__qelogo"><a href="https://triumf-mds-capstone2023.github.io/project" title=""><span class="show-for-sr">CaloRICH AI</span></a></li>
                 </ul>
 
                 <ul class="qe-toolbar__links">
