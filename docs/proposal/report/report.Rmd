@@ -1,9 +1,9 @@
 ---
-title: "Proposal of CALORICH AI"
+title: "Proposal of CaloRICH AI"
 subtitle: "Discrimination of Muon and Pion Decay in NA62"
 author: "Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang"
 date: "May 13, 2023"
-output: 
+output:
   pdf_document:
     number_sections: true
     toc: true
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Executive summary
 
-The "*CALORICH AI*" project is proposed by TRIUMF, Canada's national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the "*RICH AI*" project [@RICHAI], attempted by an MDS capstone team of similar goals last year.
+The "*CaloRICH AI*" project is proposed by TRIUMF, Canada's national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the "*RICH AI*" project [@RICHAI], attempted by an MDS capstone team of similar goals last year.
 
 The project dataset comes from the NA62 experiment at CERN, the European Organization for Nuclear Research, which involves a particle physics experiment designed to study rare decays of charged kaons. The capstone project aims to build a model to accurately classify a particle as a pion produced in a decay event. The formal deliverable for our project is a trained model that could be used for classification. We aim to train the model using the data from a subset of the 2021A NA62 experiments, which contains around 2.4 million decay events labeled by calorimeter [@Gil_2017].
 

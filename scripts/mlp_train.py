@@ -1,5 +1,5 @@
 """
-Multi-layer Perceptron (MLP) regression implementation for the Calorich AI MDS Capstone project (2023).
+Multi-layer Perceptron (MLP) regression implementation for the CaloRICH AI MDS Capstone project (2023).
 
 """
 
@@ -24,7 +24,7 @@ df = pd.read_parquet(event_with_hit_features_path).dropna()
 df_muons = df.query('label==0')
 
 # split for train and test dataset
-train_df, test_df_muon = train_test_split(df_muons, 
+train_df, test_df_muon = train_test_split(df_muons,
                                           random_state=42)
 
 # add pions data into test dataset
@@ -57,7 +57,7 @@ trainset = TensorDataset(X_train, y_train)
 train_size = int(0.6 * len(trainset)) # 60% of train data
 val_size = len(trainset) - train_size
 generator1 = torch.Generator().manual_seed(42)
-train_set, val_set = random_split(dataset=trainset, 
+train_set, val_set = random_split(dataset=trainset,
                                   lengths=[train_size, val_size],
                                   generator=generator1)
 
@@ -86,7 +86,7 @@ class MLPregression(nn.Module):
             linear_block(64, 12),
             nn.Linear(12, 1)
         )
-        
+
     def forward(self, x):
         out = self.main(x)
         return out
@@ -99,14 +99,14 @@ model.to(device)
 # below code adopted from MDS DSCI 572 Lecture 5 notes
 def trainer(model, criterion, optimizer, trainloader, validloader, epochs=5, patience=5, verbose=True):
     """Training wrapper for PyTorch network."""
-    
+
     train_loss = []
     valid_loss = []
-    
+
     for epoch in range(epochs):
         train_batch_loss = 0
         valid_batch_loss = 0
-        
+
         # Training
         for X, y in trainloader:
             X, y = X.to(device), y.to(device)
@@ -116,9 +116,9 @@ def trainer(model, criterion, optimizer, trainloader, validloader, epochs=5, pat
             loss.backward()             # Getting gradients w.r.t. parameters
             optimizer.step()            # Update parameters
             train_batch_loss += loss.item()       # Add loss for this batch to running total
-            
+
         train_loss.append(train_batch_loss / len(trainloader))
-            
+
         # Validation
         with torch.no_grad():  # this stops pytorch doing computational graph stuff under-the-hood
 
@@ -128,7 +128,7 @@ def trainer(model, criterion, optimizer, trainloader, validloader, epochs=5, pat
                 loss = criterion(y_hat, y_valid)  # Calculate loss based on output
 
                 valid_batch_loss += loss.item()
-            
+
         valid_loss.append(valid_batch_loss / len(validloader))
 
         # Print progress
@@ -136,7 +136,7 @@ def trainer(model, criterion, optimizer, trainloader, validloader, epochs=5, pat
             print(f"Epoch {epoch + 1:3}:",
                   f"Train Loss: {train_loss[-1]:.3f}.",
                   f"Valid Loss: {valid_loss[-1]:.3f}.")
-        
+
         # Early stopping
         if epoch > 0 and valid_loss[-1] > valid_loss[-2]:
             consec_increases += 1
@@ -145,19 +145,19 @@ def trainer(model, criterion, optimizer, trainloader, validloader, epochs=5, pat
         if consec_increases == patience:
             print(f"Stopped early at epoch {epoch + 1} - val loss increased for {consec_increases} consecutive epochs!")
             break
-            
+
     return train_loss, valid_loss
 
 # model training
 LEARNING_RATE = 0.0001
 criterion = nn.MSELoss() # loss function
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
-train_loss, valid_loss = trainer(model, 
-                                 criterion, 
-                                 optimizer, 
+train_loss, valid_loss = trainer(model,
+                                 criterion,
+                                 optimizer,
                                  trainloader,
                                  validloader,
-                                 epochs=30, 
+                                 epochs=30,
                                  patience=5,
                                  verbose=True)
 

@@ -1,8 +1,8 @@
-# Contributing to CALORICH AI project
+# Contributing to CaloRICH AI project
 
 ## About
 
-This document outlines how to propose a change to our CALORICH AI project, and the repo can be found [here](https://github.com/TRIUMF-MDS-Capstone2023/project/tree/main). We look forward to all proposals and contributions to this project. If reporting a bug or requesting features, please open an issue. If you'd like to actively contribute to features and/or bugs, please fork our repo and submit a Pull Request (PR), which will be reviewed as soon as possible. Please note that all contributors must abide by our code of conduct which can be found below.
+This document outlines how to propose a change to our CaloRICH AI project, and the repo can be found [here](https://github.com/TRIUMF-MDS-Capstone2023/project/tree/main). We look forward to all proposals and contributions to this project. If reporting a bug or requesting features, please open an issue. If you'd like to actively contribute to features and/or bugs, please fork our repo and submit a Pull Request (PR), which will be reviewed as soon as possible. Please note that all contributors must abide by our code of conduct which can be found below.
 
 ## Types of Contributions
 

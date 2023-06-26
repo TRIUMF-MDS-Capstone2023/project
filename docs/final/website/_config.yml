@@ -1,7 +1,7 @@
 # Configuration
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Calorich AI
+title: CaloRICH AI
 author: Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang
 copyright: '2023'
 
@@ -26,10 +26,10 @@ html:
 sphinx:
   config:
     html_theme: quantecon_book_theme
-    html_title: "Calorich AI"
+    html_title: "CaloRICH AI"
     html_theme_options:
       keywords: calorich, triumf, na62
-      header_organisation: Calorich AI
+      header_organisation: CaloRICH AI
       header_organisation_url: https://triumf-mds-capstone2023.github.io/project
       persistent_sidebar: true
       repository_url: https://github.com/TRIUMF-MDS-Capstone2023/project
