@@ -13,6 +13,7 @@ parts:
 - caption: Data
   chapters:
   - file: data/raw-data
+  - file: data/eda
   - file: data/preprocessing
   - file: data/engineered-features
 
