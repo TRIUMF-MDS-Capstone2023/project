@@ -1,4 +1,4 @@
-# Supporting project analysis
+# Model training result analyses
 
 This directory contains the following Jupyter Notebooks, which are the analyses we performed with our models during the project:
 
