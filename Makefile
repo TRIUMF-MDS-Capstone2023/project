@@ -372,7 +372,6 @@ mlp :
 pointnet:
 	
 	$(PYTHON) scripts/full_pointnet_1.py
-	$(NBCONVERT) --to notebook --inplace --execute models/PointNet/PointNet_1.ipynb
 
 clean :
 	$(RM) \
