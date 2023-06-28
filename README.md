@@ -17,6 +17,8 @@ The purpose of this repository is to serve as a central hub for accessing genera
     - [Main Dataset](#main-dataset)
     - [Supplementary Dataset](#supplementary-dataset)
     - [Clean-up](#clean-up)
+  - [Running the Models](#running-the-models)
+  - [Additional Notebooks](#additional-notebooks)
   - [Copyright and Licensing](#copyright-and-licensing)
 
 The summary of this project can be accessed via [the respective GitHub page](https://triumf-mds-capstone2023.github.io/project).
@@ -48,25 +50,25 @@ cd calorich
 
 After installing [Conda](https://github.com/conda/conda), create a Conda environment by:
 
-```
+```bash
 conda env create -f environment.yaml
 ```
 
 Alternatively, if you are using [Mamba](https://github.com/mamba-org/mamba), run:
 
-```
+```bash
 mamba env create -f environment.yaml
 ```
 
 To update a created environment to the latest version defined by the `environment.yaml`, run:
 
-```
+```bash
 conda env update -f environment.yaml
 ```
 
 or:
 
-```
+```bash
 mamba env update -f environment.yaml
 ```
 
@@ -84,7 +86,7 @@ The main dataset (or the `run` dataset) we are using is in [HDF5](https://www.lo
 
 To obtain the necessary files, after placing the aforementioned H5 file in [the `data/` folder](data/), run the following command in the Conda environment:
 
-``` bash
+```bash
 make data-run
 ```
 
@@ -100,7 +102,7 @@ The supplementary dataset (or the `pnn` dataset) is much larger, spanning severa
 
 To generate the Parquet files associated with the `pnn` dataset, run the following command in the Conda environment:
 
-``` bash
+```bash
 make data-pnn
 ```
 
@@ -112,12 +114,38 @@ The supplementary dataset (after cleaning) contains 42,897,096 events and 1,635,
 
 To clean up the generated Parquet files, run:
 
-``` bash
+```bash
 make clean
 ```
 
 Rest assured that it would *not* remove the raw H5 files.
 
+## Running the Models
+
+The model scripts are stored in the corresponding sub-folders under [the `models/` folder](models/). They are stored in the form of [Jupyter notebooks](https://jupyter-notebook.readthedocs.io/en/latest/).
+
+We have the following models:
+- XGBoost Regressor ([`models/XGBRegressor`](models/XGBRegressor/))
+- Multilayer Perceptron neural network ([`models/MLP`](models/MLP/))
+- PointNet (['models/PointNet](models/PointNet/))
+
+An alternative to running the notebooks directly is by using the `make` commands.
+
+To run the XGBoost regressor model notebooks, use the following command in the Conda environment:
+
+```bash
+make xgboost
+```
+
+To run the MLP model notebooks:
+
+```bash
+make mlp
+```
+
+## Additional Notebooks
+
+There are a number of supplementary notebooks in the `notebooks` folder, separated into `experiments` and `analyses`. The files are documented by the corresponding `README.md` in each of the subfolders.
 
 ## Copyright and Licensing
 
@@ -125,6 +153,6 @@ Unless otherwise specified, the code in this repository is covered under this co
 
 Copyright (c) 2023 Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang
 
-The software and associated documentation files are licensed under [the MIT License](https://opensource.org/license/mit/). You may find a copy of the license at [`LICENSE.md`](LICENSE.md).
+The software and associated documentation files, with the exception of the materials in the `docs/` folder, are licensed under [the MIT License](https://opensource.org/license/mit/). You may find a copy of the license at [`LICENSE.md`](LICENSE.md).
 
 The materials in the `docs/` folder are licensed under [the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (CC BY-NC-ND 4.0) License](https://creativecommons.org/licenses/by-nc-nd/4.0/). A copy of the license can be found at [`LICENSE-CC-BYNCND.md`](LICENSE-CC-BYNCND.md).
