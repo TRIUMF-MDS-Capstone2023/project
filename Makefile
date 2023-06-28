@@ -369,6 +369,11 @@ mlp :
 	$(NBCONVERT) --to notebook --inplace --execute models/MLP/mlp_regression_analysis.ipynb
 	$(NBCONVERT) --to notebook --inplace --execute models/MLP/mlp_quantile_regression_model.ipynb
 
+pointnet:
+	
+	$(PYTHON) scripts/full_pointnet_1.py
+	$(NBCONVERT) --to notebook --inplace --execute models/PointNet/PointNet_1.ipynb
+
 clean :
 	$(RM) \
 		$(RICH_PMT_POSITIONS_NPY) \
