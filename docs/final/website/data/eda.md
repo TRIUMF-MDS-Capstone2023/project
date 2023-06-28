@@ -21,7 +21,7 @@ Histogram showing distribution of number of hits per event for muons and pions f
 
 To further investigate the behaviour of our data, we have also computed the relationship between the ring radius and the track momentum. Since the theoretical ring radius is calculated from the track momentum and mass of the particle, an ideal relationship between the predicted ring radius and the track momentum should be similar to the plot shown in [Fig. 3](eda_theoretical_radius_vs_momentum). 
 
-```{figure} ../../../../eda_radius_vs_momentum_theoretical.png
+```{figure} ../../../../figures/eda_radius_vs_momentum_theoretical.png
 :name: eda_theoretical_radius_vs_momentum
 
 Theoretical ring radius vs. track momentum from events data
@@ -29,7 +29,7 @@ Theoretical ring radius vs. track momentum from events data
 
 At the stage of performing the EDA, our focus was to examine the behaviour of our data without fitting any models. Since the events data includes the ring radius predicted by the state-of-the-art method (SOTA),we plotted the relationship between the ring radius from SOTA vs. the track momentum in [Fig. 4](eda_theoretical_radius_vs_momentum) for investigation and comparison purpose. The plot reveals that the distribution of the predicted ring radius exhibits a wider spread and contains a number of outliers. Consequently, our objective is to develop models that can accurately predict the ring radius with a narrower distribution, thus achieving improved precision and reducing the occurrence of outliers.
 
-```{figure} ../../../../eda_radius_vs_momentum_sota.png
+```{figure} ../../../../figures/eda_radius_vs_momentum_sota.png
 :name: eda_sota_radius_vs_momentum
 
 SOTA ring radius vs. track momentum from events data
