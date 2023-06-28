@@ -2,7 +2,7 @@
 title: "CaloRICH AI"
 subtitle: "Discrimination of Muon and Pion Decay in NA62"
 author: "Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang"
-date: "May 28, 2023"
+date: "June 28, 2023"
 output:
   pdf_document:
     number_sections: true
@@ -16,219 +16,157 @@ link-citations: yes
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Executive summary
+# Executive Summary
 
-The "*CaloRICH AI*" project is proposed by TRIUMF, Canada's national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the "*RICH AI*" project [@RICHAI], attempted by an MDS capstone team of similar goals last year.
+The project focuses on the NA62 project conducted by [CERN](https://home.cern). The NA62 requires a high level of identification performance to distinguish between muons and pions during a rare meson decay in order to verify the Standard Model of Physics. This identification is performed using the Cherenkov Radiation phenomenon, specifically the photon ring radius constructed from the array of photodetectors in the RICH detector.
 
-The project dataset comes from the NA62 experiment at CERN, the European Organization for Nuclear Research, which involves a particle physics experiment designed to study rare decays of charged kaons. The capstone project aims to build a model to accurately classify a particle as a pion produced in a decay event. The formal deliverable for our project is a trained model that could be used for classification. We aim to train the model using the data from a subset of the 2021A NA62 experiments, which contains around 2.4 million decay events labeled by calorimeter [@Gil_2017].
-
-For more background information, please refer to Appendix A.
+From our results, the XGBoost seemed to be the best model to perform this ring-fitting. The results, unfortunately, did not yield a better performance than the current state-of-the-art algorithm employed by the NA62 team, which uses a maximum likelihood estimation (MLE) model.
 
 # Introduction
 
-## RICH detector
+The CaloRICH AI project is proposed by TRIUMF, Canada's national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the RICH AI project [den Hooff N et al., 2022], attempted by an MDS capstone team of similar goals last year.
 
-```{r rich_detector, fig.align = 'center', out.width = "70%", fig.cap = "RICH detector (Gil et al. 2017)", echo=FALSE}
-knitr::include_graphics(here::here("docs/proposal/report/images", "rich_detector.jpg"))
+The project dataset comes from the NA62 experiment at CERN, the European Organization for Nuclear Research, which involves a particle physics experiment designed to study rare decays of charged kaons. The capstone project aims to build a model to accurately classify a particle as a pion produced in a decay event. We aim to train models using the data from a subset of the 2021A NA62 experiments, which contains around 2.4 million decay events labeled by calorimeter [Gil et al., 2017].
+
+Based on the research and advice by the partner, we chose XGBoost as the baseline Machine Learning model, and applied a modified version of PointNet as well as a simple Multi-Layer Perceptron neural network.
+
+## Scope and Challenges
+
+Our challenge is to improve the capability to determine the specific ring radius of the Cherenkov Radiation cone in the RICH detector, by avoiding the use of the momentum detection and performing a regression analysis instead of a classification based on the "hits" data only.
+
+## Output and Deliverables
+
+The aim of the *CaloRICH AI* project is the creation of a concise, documented and reproducible machine learning pipeline. The pipeline must include the data preprocessing, hyperparameters, models and training procedures required to achieve the results presented on this report in a manner such that the TRIUMF team can verify the findings and potentially incorporate the pipeline into their own ML pipelines.
+
+# Data Science Methods
+
+## Data
+
+The dataset we work with is provided by TRIUMF. The data structure can be read from the [Raw Data section](https://triumf-mds-capstone2023.github.io/project/data/raw-data.html) on the project website.
+
+## Regressor
+
+### XGBoost Regressor
+
+#### Why This Model?
+
+For our baseline model, we have attempted to train XGBRegressor, RandomForestRegressor, LightGBM and CatBoostRegressor. Out of all the models we have trained, we selected XGBRegressor [@Chen_2016] as our baseline model because of its impressive performance and fast execution compared to other baseline models we experimented with. We employed XGBRegressor to train our data set, which exclusively consisted of muons. In addition to the previously mentioned engineered features, we included `total_in_time_hits` as one of the features in our model. The target variable `y_train` used for training the model corresponds to the calculated ring radius (`ring_radius_calc`), which is the theoretical ring radius determined based on the track momentum and mass of the particles.
+
+#### Performance
+
+Using the default hyperparameters of `n_estimators = 100` and `max_depth = 6`, the XGBRegressor achieved an average training $R^2$ score of 0.96 and an average test $R^2$ score of 0.94 during 5-fold cross-validation. We attempted hyperparameter optimization using `RandomizedSearch`, but it did not yield significant improvements in performance. Additionally, the best parameter value found by `RandomizedSearch` was `n_estimators = 500`, which required substantial computational cost. Therefore, we decided to stick with the default hyperparameters.
+
+#### Residual Analysis
+
+Although the XGBRegressor showed excellent performance, we noticed a bias near the higher end of the radius spectrum. The scatter plot of residuals shown in Fig. 1, which represents the difference between the calculated ring radius and the predicted ring radius, reveals a slight bias towards the higher end of the calculated ring radius. More data points are concentrated above the 0 line, indicating that the model tends to underestimate the radius for higher values. In light of this residuals pattern, further in-depth analyses were conducted to investigate the underlying cause of this phenomenon.
+
+```{r xgb_residual_plot, fig.align = 'center', out.width = "70%", fig.cap = "Residual plot residuals vs. calculated ring radius for XGBRegressor", echo=FALSE}
+knitr::include_graphics(here::here("figures", "xgb_residual_plot.png"))
 ```
 
-```{r na62_apparatus.png, fig.align = 'center', out.width = "80%", fig.cap = "NA62 experiment beam and detector set up (Gil et al. 2017)", echo=FALSE}
-knitr::include_graphics(here::here("docs/proposal/report/images", "na62_apparatus.png"))
+To examine the correlation between the predicted ring radius and the theoretical ring radius, we computed the difference between the theoretical ring radius and its overall maximum for each data point. This is illustrated by the red line in Fig. 2. If a data point lies above the red line, it suggests that the predicted ring radius is smaller than the theoretical ring radius. Conversely, if a data point lies below the red line, it indicates that the predicted ring radius is larger than the theoretical ring radius. Upon examining the more detailed plot on the right side of Fig. 2, it becomes apparent that the data points below the red line are considerably scarce. Additionally, the data points appear to be "pushed" upwards by the presence of the red line. This observation suggests that the predictions are constrained by the upper limit of the theoretical ring radius. As a result, the predictions are unable to exceed the maximum value of the theoretical ring radius.
+
+```{r xgb_max_calc_diff, fig.align = 'center', out.width = "70%", fig.cap = "Overlaid residual plot showing the difference between the theoretical ring radius and its overall maximum for each data point (shown as red line)", echo=FALSE}
+knitr::include_graphics(here::here("figures", "xgb_max_calc_diff.png"))
 ```
 
-```{r kaon_ring, fig.align = 'center', out.width = "80%", fig.cap = "Ring data sample, with fitted probabilities (Lazzeroni et al. 2019)", echo=FALSE}
-knitr::include_graphics(here::here("docs/proposal/report/images", "kaon_ring.jpg"))
+#### Conclusion
+
+The XGBRegressor model demonstrates favourable performance, as evidenced by high training and test $R^2$ scores, with the majority of residuals concentrated around 0. However, there exists an underestimation issue specifically associated with higher radius values. This underestimation is believed to be limited by the upper limit of the theoretical ring radius, a hypothesis supported by our residual analysis.
+
+In attempts to address this problem, we explored various techniques such as feature selection, L1 and L2 regularization, and hyperparameter optimization. Unfortunately, these approaches did not effectively mitigate the bias. Notably, we observed the same residual bias when employing other tree-based models such as RandomForestRegressor, LightGBMRegressor, and CatBoostRegressor.
+
+Given the persistent bias, we became intrigued by the possibility of utilizing more sophisticated models like neural networks, hoping they may alleviate the issue.
+
+## Neural Networks
+
+### MLP (Multilayer Perceptron)
+
+#### Why This Model?
+
+A multilayer perceptron (MLP) is a classic fully connected feedforward neural network. The model is expected to capture more complex linear and non-linear relationships between input features (regressors) and the target. MLP is easy to implement in the PyTorch [@pytorch] framework. It provides us with the extensive flexibility to custom design deep learning structures, define particular loss functions, or add more functionalities to our modeling.
+
+#### Features and Model Structure
+
+The MLP model has taken all 18 engineered features as the inputs, the theoretical ring radius as the target, to predict the ring radius for each event.
+
+After a number of experiments, we have selected a MLP model with 4 hidden layers. The hidden size is gradually decreased from 1024 to 12, and the [ReLU activation function](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) has been used in each hidden layer.
+
+#### Training Process and Results
+
+To avoid possible bias from two particles, the model has been trained on randomly split 75% of muon events, then tested on the rest of muon events and all pion events. Based on the PyTorch framework, we have developed the training and validation data loaders, the custom defined trainer, used standard [MSELoss function](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html) and Adam optimizer [@kingma2017adam] to train the MLP model.
+
+After the training completed, we tested the regression performance on the test data. Between the predicted ring radius and the theoretical values, the $R^2$ score was 0.934 and the MAE (Mean Absolute Error) was 1.92. Compared to the result of the XGBRegressor approach ($R^2$ was 0.94), the accuracy of the MLP model was slightly lower.
+
+We have also performed residual analysis for the MLP model. As shown in Fig. 5, the similar patterns were observed compared to the residual plot from the XGBRegressor. The result confirms the bias analysis in the previous section.
+
+```{r mlp_residual_plot, fig.align = 'center', out.width = "70%", fig.cap = "Residual plot residuals vs. calculated ring radius for MLP model", echo=FALSE}
+knitr::include_graphics(here::here("figures", "mlp_residual_plot.png"))
 ```
 
-Our data comes from the RICH detector, shown in Figure 1 [@anzivino2020light]. It collects data on photon signals emitted during each particle decay (an event). Other sensors, shown in Figure 2 [@anzivino2020light], measure supplementary data such as particle momentum, velocity, and time of passage.
+#### Conclusion
 
-The data collected by the RICH detector forms an image of a ring, shown in Figure 3, as the projection of the conical light emitted due to the Cherenkov radiation [@Gil_2017]. Therefore, we can represent the signal as a 2D scatterplot [@Lazzeroni_2019].
+From the result comparison between XGBRegressor and the MLP model, we can see the deep learning architecture (MLP) did not improve the regression performance.
 
-## Project deliverable
+One of the advantages of deep learning methods is to rely on the complex networks to perform feature engineering and feature extraction. In our case, we feed the MLP model with explicitly engineered features rather than the raw data (coordinates of hits for each event). It is possible that the method we have used in this section did not reach the full potential of the deep learning.
 
-The project deliverable is a trained model for the classification of the decay events and the entire code with adequate comments to reproduce the results and, potentially, train on new data. The goal in building the model would be to classify each particle decay, emphasizing pion decay accurately. A knowledge transfer session is also proposed so that it can be further developed by the NA62 project team at TRIUMF if needed.
+Another advantage is that we can do quantile regression in this sort of architecture. The results for that is published in the [report website](https://triumf-mds-capstone2023.github.io/project/data-science-methods/neural-networks/mlp-quantile.html).
 
-# Data science techniques
+### PointNet
 
-## Dataset
+#### Architecture
 
-We are working on a small slice of data collected from the 2021A NA62 experiment. which is around 2.7GiB in HDF5 format. It contains around 2.4 million labeled events. Each event has a variable number of hits. In total, there are around 101 million records of hits across all events.
+Developed in Stanford, [PointNet](https://arxiv.org/abs/1612.00593) is a simple yet effective architecture that directly consumes 3-dimensional point clouds and can perform diverse operations such as classification, part segmentation and even semantic parsing [@qi2017pointnet]. In order to apply this architecture to the regression problem we had to do some modifications, including: - Adding a third dimension to the hit locations using Gaussian noise in the range (0, 0.5) - Substituting the output layer with a linear fully connected layer - Changing the output size to 1
 
-The raw data structure can be found in Appendix B.
+We developed 2 distinct architectures, based on the base PointNet architecture, in PyTorch to compare and test simultaneously. We used the MSELoss Loss function and Adam Optimizer. Each architecture also utilized ReLU as the activation function
 
-## Machine learning
+#### Benefits and Limitations
 
-### Task
+PointNet is an architecture developed to perform classifications, translating the architecture to a regression problem meant discarding the semantic segmentation portion and adding a 3rd dimension at first. This added complexity to the data preparation and in the end could not capture local information or immediately determine the particle for a given event.
 
-Our project's objective is to develop a machine-learning model capable of accurately fitting the radius of the ring, enabling the identification of individual particle decay events as either pions or muons. The experiment primarily concentrates on the rate of rare kaon decay into pions, while muon and positron decays are of lesser interest. The challenge of this task stems from the class imbalance in the data, with pions being considerably rarer compared to muons.
+Training time was also a limitation as, even with pre-transformed parquet files, the training time averaged 15 minutes per epoch on a high-end customer GPU.
 
-### Current approach
+#### Results
 
-The state-of-the-art algorithm currently employed by TRIUMF utilizes an analytical approach without incorporating machine learning for particle classification. Specifically, they implement a statistical algorithm based on the maximum likelihood estimation method to fit a ring to the PMT hit data, using the resulting radius for particle decay classification.
+```{r pnt_pred_theo, fig.align = 'center', out.width = "70%", fig.cap = "Residual plot predicted vs. calculated ring radius for PointNet", echo=FALSE}
+knitr::include_graphics(here::here("figures", "pnt_pred_theo.png"))
+```
 
-With this methodology, TRIUMF achieves the following results:
+As shown in Fig 7, the performance of PointNet is deficient, not being able to capture the trends in the model. The predicted results have a different behaviour than the ground truth, shown here as a black line. These results, combined with the long training time, motivated us to decide on XGBoost as the best modelling technique for this regression problem.
 
-1.  Pion efficiency (or true positive rate for pion classification) of 95%
-2.  Misclassification of a pion as a muon (or false negative) of 1%
+## Best Performing Model
 
-### Goals
+After evaluating the performance of three models: XGBRegressor, MLP, and PointNet, it appears that XGBRegressor currently outperforms the others. According to the results, both XGBRegressor and MLP demonstrate similar best scores. However, the performance of the PointNet architecture has not been satisfactory thus far, and it also requires an exceptionally long training time.
 
-In building our machine learning model, we have the following goals:
+| Model        | Training Time | Best Test $R^2$ |
+|--------------|---------------|-----------------|
+| XGBRegressor | \~ 3 minutes  | 0.94            |
+| MLP          | \~ 8 minutes  | 0.94            |
+| PointNet     | \~ 23.5 hours | 0.20            |
 
-1.  Achieve a pion efficiency of above 95%
-2.  Reduce pion/muon misclassification to 0.01%
+When comparing the performance of XGBRegressor and MLP, it is difficult to determine the better performing model solely based on their performance scores. However, taking into account the difference in training time, with XGBRegressor being more than 2 times faster, and considering the additional complexity associated with MLP modeling, it is reasonable to conclude that XGBRegressor is a more efficient and simpler choice in terms of both time consumption and computational power. Overall, we determine XGBRegressor to be the best performing model with our training data.
 
-### Metrics
+# Data Product and Results
 
-In building our machine learning model, we will attempt to maximize pion efficiency, defined as:
+# Conclusions and Recommendations
 
-$$
-\text{pion efficiency} = \frac{\text{total number of pions detected}}{\text{total number of pions in dataset}}
-$$
+## Conclusions
 
-We propose using the metrics root mean square error (RMSE) and coefficient of determination ($R^2$) to compare different machine learning models.
+In this capstone project we have applied machine learning regression methods to predict the ring radius from variable number of "hits" (excited photodetectors in the RICH detector) for each event of decay. Three models, XGBRegressor, MLP, and PointNet, have been adopted to perform the ring fitting. Both XGBRegressor and MLP were using engineered features generated from hit positions as inputs, while PointNet was directly trained on the raw data of hit coordinates. The result of regression evaluation metrics shown XGBRegressor had the best performance compared to the other two deep learning approaches. Considering the simplicity of model structure and implementation, timing, and future maintenance, we recommend XGBRegressor as the best option to perform the regression task.
 
-### Baseline model
+Although the result of PointNet did not yield an expected performance, we have identified the probable reason, a vanishing gradient, a thus have devised solutions to this problem. Due to the time consuming process of training a new model with the necessary modifications we are keeping these conclusions for the moment and will update if a solution is found and has proven to yield better results than XGBoost.
 
-We will use a gradient-boosted tree regressor as our baseline model. In our preliminary experiment, we will test both XGBoost [@Chen_2016] and LightGBM [@ke2017lightgbm], and training them on our raw dataset. The model exhibiting superior performance will be selected as the baseline.
+## Recommendations
 
-### Deep learning models
+For the future works, we would suggest the following areas:
 
-The primary concern with XGBoost and LightGBM models is their inability to handle hit data of variable lengths. To effectively incorporate hit positions as features, we need to employ a more sophisticated approach using deep learning.
+1.  In addition to the three regular regression models, we have also started a quantile regression based on the MLP architecture. Due to time constraints, more research and analysis could be continued to explore the possibility of quantile regression to facilitate the differentiation of pions and muons in different track momentum ranges.
 
-The first step towards deep learning is to convert the position data corresponding to in-time hits as an input and use that as a feature instead. The reason is that the in-time hits are sparse, compared with the number of the detectors (typically no more than $50$ hits in $2 \times 976$ detectors), leaving a large portion of the array with no information. Consequently, a traditional CNN method would be disadvantageous due to the sparse input data.
+2.  Since the ultimate goal of the NA62 project is to distinguish pions and muons [@Gil_2017], the resolution of fitted ring radius for the two particles in each track momentum range would be important. We need to consider both accuracy and precision of the predictions in order to separate two particles effectively in the future studies.
 
-To address this issue, we have identified two potential model architectures:
-
-1.  PointNet [@qi2017pointnet]
-2.  Graph Convolutional Neural Networks ("Graph CNN") [@zhougraph]
-
-PointNet is designed to directly consume point cloud data without converting positional data to grids or voxels; this can resolve the sparsity problem associated with the traditional CNN approach. Furthermore, PointNet uses a symmetric max pooling function, making it robust to changes in the order of the coordinates comprising the point cloud data.
-
-Dynamic Graph CNN is an architecture capable of handling dynamic data to capture temporal and spatial dependencies. As a result, Dynamic Graph CNN is better suited for capturing local information within the point cloud data. Additionally, it has a shorter training time requirement, improving computational efficiency and reducing time consumption.
-
-### Regression methods
-
-There are three different regression methods that we will attempt in our neural networks:
-
-1.  Simple regression
-2.  Quantile regression
-3.  Mixture density networks
-
-### Implementation
-
-The baseline model will be implemented Python package `xgboost` or `lightgbm` respectively. The deep learning models will be built with PyTorch [@NEURIPS2019_9015] and PyTorch Geometric [@fey].
-
-# Timeline
-
-The total time allocated for our capstone project is nine weeks. We propose the following high-level project timeline (for a detailed day-to-day schedule, refer to Appendix C):
-
-**Week 1 & 2 (May 1 to May 12)**
-
--   MDS hackathon
--   Gain an understanding of the problems in the NA62 experiment
--   Conduct exploratory data analysis (EDA) to identify patterns and potential biases in raw data
--   Carry out preliminary machine learning (ML) experiments
--   Clarify and define the TRIUMF team's needs and expectations
--   Prepare and complete proposal presentation and report for the MDS mentor and the TRIUMF team
-
-**Week 3 & 4 (May 15 to May 26)**
-
--   Finalize preliminary ML experiments
--   Select appropriate models and input features
--   Implement model training on the full dataset provided
--   Conduct hyperparameter tuning
-
-**Week 5 (May 28 to June 2)**
-
--   Test models against test data and evaluate their performance
--   Compare results with the current state-of-the-art algorithm and previous MDS capstone modeling efforts
--   Prepare and submit a draft model product
-
-**Week 6 (June 5 to June 9)**
-
--   Gather feedback from the TRIUMF team and MDS mentor
--   Further iterate and improve models
--   Modularize code and prepare any necessary documentation
-
-**Week 7 (June 12 to June 16)**
-
--   Finalize project deliverables
--   Prepare the final presentation
--   Present the project to the MDS faculty members and class
-
-**Week 8 (June 19 to June 23)**
-
--   Submit final report and product to MDS mentor for review and feedback
--   Revise final report and product based on mentor's comments
-
-**Week 9 (June 26 to June 28)**
-
--   Submit the final report and product to TRIUMF
--   Present the project to TRIUMF
+3.  We also suggest exploring the use of a [Convolutional Neural Network (CNN)](https://www.ibm.com/topics/convolutional-neural-networks) in future experiments as they have proven reliability in image pattern recognition. If the RICH photodetector is treated as a pixel array there could be the opportunity to obtain a promising result.
 
 # References
 
 ::: {#refs}
 :::
-
-# Appndix A: Background Information
-
-The project dataset comes from the NA62 experiment at CERN, the European Organization for Nuclear Research, which involves a particle physics experiment designed to study rare decays of charged kaons.
-
-The NA62 experiment at CERN is a particle physics experiment designed to study rare decays of charged kaons ($K^{+}$ mesons), which are subatomic particles composed of one up quark and one strange antiquark. The primary goal of the NA62 experiment is to probe the Standard Model of particle physics. This current theoretical framework describes the fundamental particles and their interactions, by measuring the ultra-rare decay of a charged kaon into a charged pion and a neutrino-antineutrino pair:
-
-$$
-K^{+} \rightarrow \pi^{+} \nu \bar{\nu}
-$$
-
-By observing and measuring this rare decay, physicists hope to prove the accuracy and completeness of the Standard Model. If the observed decay rate differs significantly from the predicted value, it could indicate the existence of new, undiscovered particles or interactions, providing clues to new physics beyond the Standard Model.
-
-The data we are working with is collected from this procedure [@Gil_2017]:
-
-1.  A kaon-rich beam is sent into the beam and detector setup in "bursts" every four to five seconds (shown in Figure 2).
-2.  During each burst, multiple particle decays occur, with each decay assigned a unique "event" ID.
-3.  As the decay product accelerates through a chamber filled with neon gas in the RICH detector (shown in Figure 1), it generates a cone of light.
-4.  The light cone is reflected by a mirror mosaic onto a photomultiplier tube (PMT) array, ideally forming a "ring" pattern.
-5.  Each PMT in the array records whether it was struck by light and the arrival time for each light hit.
-6.  The hodoscope counters (CHOD) detector (shown in Figure 2), registers the time particle decay occurs.
-
-# Appendix B: Data Structure
-
-There are `Events`, `Hits`, and `Hitmapping` datasets within the HDF5 file.
-
-The `Events` dataset contains the recorded decays. It contains the following attributes:
-
--   ID (composite of Run ID, Burst ID, Event ID, and Track ID)
--   Track momentum
--   CHOD time
--   Track position
--   Features from TRIUMF's maximum likelihood fit:
-    -   Ring radius
-    -   Ring centre (x, y)
-    -   Ring likelihood
--   Decay label, labeled by calorimeter (pion, muon, positron)
-
-The `Hits` dataset corresponds to each of excited sensor. It contains the following attributes:
-
--   Assigned flag, output from the current NA62 algorithm
--   Hit position (calculated by the composite IDs)
--   Hit time
-
-The `Hitsmapping` dataset maintains a one-to-many relationship between the `Events` and `Hits`. An event has a variable number of hits, and each hit must belong to one and only one event.
-
-In addition to the dataset, we also have a file that converts the sensor ID into its relative ($x$, $y$) coordinates, so that it could be used in training.
-
-The total number of decays ("events") for each class is as follows:
-
--   2,160,219 muon decays
--   215,955 pion decays
--   28,515 positron decays
-
-# Appendix C: Meeting Schedule
-
-To ensure effective communication throughout the project, we propose the following meeting schedule:
-
--   Meetings with TRIUMF team Every Tuesday, 11:00 am at TRIUMF onsite boardroom
--   Meetings with MDS mentor Every Tuesday, 1:00 pm at UBC ICCS 204
--   Group meetings Stand-up meeting on Mondays, Wednesdays, and Thursdays at 12:00 pm via Slack huddle Weekly in-person meetings for every Friday, 3:00 pm at UBC after weekly seminars

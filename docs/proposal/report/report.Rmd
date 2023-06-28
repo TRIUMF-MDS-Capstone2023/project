@@ -16,7 +16,7 @@ link-citations: yes
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Executive summary
+# Executive Summary
 
 The "*CaloRICH AI*" project is proposed by TRIUMF, Canada's national particle accelerator center, to improve the Ring-Imaging CHerenkov detector (RICH detector) particle identification performance. Our work this year is an extension of the "*RICH AI*" project [@RICHAI], attempted by an MDS capstone team of similar goals last year.
 
@@ -26,7 +26,7 @@ For more background information, please refer to Appendix A.
 
 # Introduction
 
-## RICH detector
+## RICH Detector
 
 ```{r rich_detector, fig.align = 'center', out.width = "70%", fig.cap = "RICH detector (Gil et al. 2017)", echo=FALSE}
 knitr::include_graphics(here::here("docs/proposal/report/images", "rich_detector.jpg"))
@@ -44,11 +44,11 @@ Our data comes from the RICH detector, shown in Figure 1 [@anzivino2020light]. I
 
 The data collected by the RICH detector forms an image of a ring, shown in Figure 3, as the projection of the conical light emitted due to the Cherenkov radiation [@Gil_2017]. Therefore, we can represent the signal as a 2D scatterplot [@Lazzeroni_2019].
 
-## Project deliverable
+## Project Deliverable
 
 The project deliverable is a trained model for the classification of the decay events and the entire code with adequate comments to reproduce the results and, potentially, train on new data. The goal in building the model would be to classify each particle decay, emphasizing pion decay accurately. A knowledge transfer session is also proposed so that it can be further developed by the NA62 project team at TRIUMF if needed.
 
-# Data science techniques
+# Data Science Techniques
 
 ## Dataset
 
@@ -56,13 +56,13 @@ We are working on a small slice of data collected from the 2021A NA62 experiment
 
 The raw data structure can be found in Appendix B.
 
-## Machine learning
+## Machine Learning
 
 ### Task
 
 Our project's objective is to develop a machine-learning model capable of accurately fitting the radius of the ring, enabling the identification of individual particle decay events as either pions or muons. The experiment primarily concentrates on the rate of rare kaon decay into pions, while muon and positron decays are of lesser interest. The challenge of this task stems from the class imbalance in the data, with pions being considerably rarer compared to muons.
 
-### Current approach
+### Current Approach
 
 The state-of-the-art algorithm currently employed by TRIUMF utilizes an analytical approach without incorporating machine learning for particle classification. Specifically, they implement a statistical algorithm based on the maximum likelihood estimation method to fit a ring to the PMT hit data, using the resulting radius for particle decay classification.
 
@@ -88,11 +88,11 @@ $$
 
 We propose using the metrics root mean square error (RMSE) and coefficient of determination ($R^2$) to compare different machine learning models.
 
-### Baseline model
+### Baseline Model
 
 We will use a gradient-boosted tree regressor as our baseline model. In our preliminary experiment, we will test both XGBoost [@Chen_2016] and LightGBM [@ke2017lightgbm], and training them on our raw dataset. The model exhibiting superior performance will be selected as the baseline.
 
-### Deep learning models
+### Deep Learning Models
 
 The primary concern with XGBoost and LightGBM models is their inability to handle hit data of variable lengths. To effectively incorporate hit positions as features, we need to employ a more sophisticated approach using deep learning.
 
@@ -107,7 +107,7 @@ PointNet is designed to directly consume point cloud data without converting pos
 
 Dynamic Graph CNN is an architecture capable of handling dynamic data to capture temporal and spatial dependencies. As a result, Dynamic Graph CNN is better suited for capturing local information within the point cloud data. Additionally, it has a shorter training time requirement, improving computational efficiency and reducing time consumption.
 
-### Regression methods
+### Regression Methods
 
 There are three different regression methods that we will attempt in our neural networks:
 
