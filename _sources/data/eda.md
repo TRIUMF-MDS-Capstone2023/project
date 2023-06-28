@@ -35,7 +35,6 @@ At the stage of performing the EDA, our focus was to examine the behaviour of ou
 SOTA ring radius vs. track momentum from events data
 ```
 
-
 To further investigate the data, we plotted the track positions for both muons and pions. The resulting visualizations are shown in [Fig. 5](eda_muon_track_position) and [Fig. 6](eda_pion_track_position). 
 
 In [Fig. 5](eda_muon_track_position), it is evident that pions display a wider distribution of y-coordinates, ranging approximately from -100 to 100. On the other hand, muons exhibit a narrower y-coordinate distribution, spanning from around -50 to 50. This disparity suggests that pions tend to have a greater variation in their vertical track positions compared to muons.
@@ -54,4 +53,39 @@ By visualizing and comparing the track positions of muons and pions, we gain mor
 :name: eda_pion_track_position
 
 2D Histogram showing track position distribution of pions
+```
+
+### EDA on the Hits Data 
+
+There are 99,397,075 hits in the hits data. Among these hits, there are 41,003,172 in-time hits when using a cut-off of 0.5 ns for the `chod_delta` variable. To conduct the EDA, we filtered out the out-of-time hits and performed analysis on the in-time hits data only. 
+
+To analyze the distribution of hit positions, we plotted 2D histograms to visualize the hit positions for both muons ([Fig. 7](eda_muon_hit_position_all)) and pions [Fig. 8](eda_pion_hit_position_all). These hit positions represent the positions of photon hits that collectively form the "ring image". For this reason, we expect to observe distinguishable differences in ring radii between muons and pions. However, a distinct disparity in the ring radii between muons and pions is not apparent from [Fig. 7](eda_muon_hit_position_all) and pions [Fig. 8](eda_pion_hit_position_all). 
+
+```{figure} ../../../../figures/eda_hit_position_muon_all.png
+:name: eda_muon_hit_position_all
+
+2D Histogram showing hit position distribution of muons
+```
+
+```{figure} ../../../../figures/eda_hit_position_pion_all.png
+:name: eda_pion_hit_position_all
+
+2D Histogram showing hit position distribution of pions
+```
+
+To investigate the distinction in ring radii between muons and pions more effectively, we focused on a specific track momentum range of 20 to 25 GeV/c. This range was chosen because it exhibits a clear separation in ring radii between the two particle types, as demonstrated in [Fig. 3](eda_theoretical_radius_vs_momentum).
+
+By examining the hit positions within this track momentum range, we plotted [Fig. 9](eda_muon_hit_position_subset) and pions [Fig. 10](eda_pion_hit_position_subset) to visualize the hit distributions for muons and pions, respectively. Notably, in these plots, the hit positions for muons exhibit a larger ring radius compared to pions. This finding agrees with the observed distinction in ring radii illustrated in [Fig. 3](eda_theoretical_radius_vs_momentum) in the specified track momentum region. From this observation, we believe that we need to select the correct momentum region for our model to yield the best separation between muons and pions. 
+
+
+```{figure} ../../../../figures/eda_hit_position_muon_subset.png
+:name: eda_muon_hit_position_subset
+
+2D Histogram showing hit position distribution of muons between 20 and 25 GeV/c
+```
+
+```{figure} ../../../../figures/eda_hit_position_pion_subset.png
+:name: eda_pion_hit_position_subset
+
+2D Histogram showing hit position distribution of pions between 20 and 25 GeV/c
 ```

@@ -215,21 +215,21 @@ const thebe_selector_output = ".output, .cell_output"
 <figure class="align-default" id="xgb-residual-plot">
 <img alt="../../_images/xgb_residual_plot.png" src="../../_images/xgb_residual_plot.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Residual plot residuals vs. calculated ring radius for XGBRegressor</span><a class="headerlink" href="#xgb-residual-plot" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Residual plot residuals vs. calculated ring radius for XGBRegressor</span><a class="headerlink" href="#xgb-residual-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To examine the correlation between the predicted ring radius and the theoretical ring radius, we computed the difference between the theoretical ring radius and its overall maximum for each data point. This is illustrated by the red line in <a class="reference internal" href="#xgb-max-calc-diff"><span class="std std-ref">Fig. 8</span></a>. If a data point lies above the red line, it suggests that the predicted ring radius is smaller than the theoretical ring radius. Conversely, if a data point lies below the red line, it indicates that the predicted ring radius is larger than the theoretical ring radius. Upon examining the more detailed plot on the right side of <a class="reference internal" href="#xgb-max-calc-diff"><span class="std std-ref">Fig. 8</span></a>, it becomes apparent that the data points below the red line are considerably scarce. Additionally, the data points appear to be “pushed” upwards by the presence of the red line. This observation suggests that the predictions are constrained by the upper limit of the theoretical ring radius. As a result, the predictions are unable to exceed the maximum value of the theoretical ring radius.</p>
 <figure class="align-default" id="xgb-max-calc-diff">
 <img alt="../../_images/xgb_max_calc_diff.png" src="../../_images/xgb_max_calc_diff.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Overlaid residual plot showing the difference between the theoretical ring radius and its overall maximum for each data point (shown as red line)</span><a class="headerlink" href="#xgb-max-calc-diff" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Overlaid residual plot showing the difference between the theoretical ring radius and its overall maximum for each data point (shown as red line)</span><a class="headerlink" href="#xgb-max-calc-diff" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The underestimation can be further demonstrated by <a class="reference internal" href="#xgb-radius-vs-momentum"><span class="std std-ref">Fig. 9</span></a>, which illustrates the relationship between the ring radius and track momentum. As previously mentioned, the theoretical ring radius is determined based on the track momentum and mass of the particles, and it is depicted as the green curves in the plot. The predicted radii are represented by the blue and orange scatter points on the plot. By examining the magnified view of the predicted radius specifically for muons in the right plot, it becomes apparent that the model begins to underestimate the radius predictions when the track momentum reaches approximately 57 GeV/c. At this point, the predicted values start to plateau, whereas the theoretical values continue to gradually increase.</p>
 <figure class="align-default" id="xgb-radius-vs-momentum">
 <img alt="../../_images/xgb_radius_vs_momentum.png" src="../../_images/xgb_radius_vs_momentum.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Overlaid plot showing predicted ring radius and theoretical ring radius vs. track momentum for XGBRegressor</span><a class="headerlink" href="#xgb-radius-vs-momentum" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Overlaid plot showing predicted ring radius and theoretical ring radius vs. track momentum for XGBRegressor</span><a class="headerlink" href="#xgb-radius-vs-momentum" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -241,7 +241,7 @@ const thebe_selector_output = ".output, .cell_output"
 <figure class="align-default" id="xgb-shap-plot">
 <img alt="../../_images/xgb_shap_plot.png" src="../../_images/xgb_shap_plot.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 10 </span><span class="caption-text">SHAP summary plot showing the SHAP values and feature values for all the features in XGBRegressor</span><a class="headerlink" href="#xgb-shap-plot" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">SHAP summary plot showing the SHAP values and feature values for all the features in XGBRegressor</span><a class="headerlink" href="#xgb-shap-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
