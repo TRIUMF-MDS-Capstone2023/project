@@ -72,22 +72,28 @@ class CalorichPointNetDataset(Dataset):
             ),
             "ring_radius_cal":(
                 torch.tensor(self.point_net_dataset.select("ring_radius_cal").row(idx)).squeeze().to(device)
+            ),
+            "composite_id":(
+                torch.tensor(self.point_net_dataset.select("composite_event_id").row(idx)).squeeze().to(device)
             )
         }
 
-        end = time.time()
+        return values
 
 
         return values
     
 path = 'data'
-train_file = 'point_net_[train_muons,cut_off_time=0.5,sample_size=50].parquet'
+file_name = 'point_net_[cut_off_time=0.5,sample_size=50].parquet'
 
-train_dataset = CalorichPointNetDataset(os.path.join(path, train_file))
+dataset = CalorichPointNetDataset(os.path.join(path, file_name))
+
+train_dataset, test_dataset = train_test_split(dataset, test_size= 0.2, random_state= 42, shuffle= True)
+
 
 # Create train_loader and validation_loader dataloaders
 
-batch_size = 15000
+batch_size = 1024
 validation_split = 0.2
 shuffle_dataset = True
 random_seed = 42
@@ -291,3 +297,53 @@ train_loss, valid_loss = trainer(model,
 # Save results
 
 torch.save(model.state_dict(), 'saved_models/pointnet_1_states.pth')
+
+# Testing
+
+model = PointNetRegression(50, 1)
+model.load_state_dict(torch.load('saved_models/pointnet_1_states.pth', map_location = device))
+model.eval()
+
+test_loader = DataLoader(test_dataset, batch_size=4000, num_workers = 0, pin_memory = False)
+
+# Get predictions
+
+results = []
+calc_ring_radius = []
+composite_id = []
+
+with torch.no_grad():
+            for i, d in enumerate(test_loader):
+                X = d['hits'].float()
+                y = d['ring_radius_cal'].float().to(device)
+                y = y.unsqueeze(1)
+                comp_id = d['composite_id'].to(device)
+
+                preds = model(X)
+                preds_arr = preds.detach().cpu().numpy()
+
+                results.append(preds_arr)
+                y_arr = y.detach().cpu().numpy()
+                calc_ring_radius.append(y_arr)
+
+                id_arr = comp_id.detach().cpu().numpy()
+                composite_id.append(id_arr)
+
+# Create results dataframe
+
+composite_events_id = []
+for i in np.arange(0, len(composite_id)):
+    for j in composite_id[i]:
+        composite_events_id.append(j)
+
+entire_results = np.vstack(results)
+entire_calc_ring = np.vstack(calc_ring_radius)
+
+residuals = np.subtract(entire_calc_ring, entire_results)
+
+residuals_df = pd.DataFrame(list(zip(entire_results.ravel().tolist(), entire_calc_ring.ravel().tolist(), residuals.ravel().tolist(), composite_events_id)),
+columns = ['Predicted', 'Theoretical', 'Residuals', 'composite_events_id'])
+
+residuals_df = pl.from_pandas(residuals_df)
+
+residuals_df.write_csv('saved_models/pointnet_1_results.csv') #Output predictions and residuals dataframe that can be used for analysis

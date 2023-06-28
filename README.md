@@ -152,6 +152,14 @@ make mlp
 
 To run the notebooks, which takes considerable time, run the corresponding notebooks in the ['models/PointNet`](models/PointNet/) folder.
 
+Alternatively
+
+```bash
+make pointnet
+```
+
+Will run a training and testing script and will output a csv containing the Predictions, Residuals and Ids of the testing split that can be used in the pointnet_1_analysis_csv.ipynb notebook in the notebooks/analyses folder to get a detailed analysis of the results, similar to the one in pointnet_1_analysis_mds.ipynb notebook in the same folder.
+
 ## Additional Notebooks
 
 There are a number of supplementary notebooks in the `notebooks` folder, separated into `experiments` and `analyses`. The files are documented by the corresponding `README.md` in each of the subfolders.
