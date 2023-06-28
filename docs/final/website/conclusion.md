@@ -4,6 +4,14 @@ In this capstone project we have applied machine learning regression methods to 
 
 Although the result of PointNet did not yield an expected performance, we have identified the probable reason, a vanishing gradient, a thus have devised solutions to this problem. Due to the time consuming process of training a new model with the necessary modifications we are keeping these conclusions for the moment and will update if a solution is found and has proven to yield better results than XGBoost.
 
+## Challenges during the execution of the project
+
+One of the main challenges we faced during the project was the amount of available and given data. The sheer volume of data tended to make the data manipulation and preprocessing a difficult task. Often the memory from available computers, and even some Data Science platforms (Kaggle and AWS), ran out during data wrangling and the engineered features compilation. Thus we had to acquire servers with vast amount of available RAM (including a server with 192 GB for some of the most complicated preprocessing tasks). We even ported our initial code to [Polars](https://www.pola.rs/) from Pandas and switched to this library for the rest of the project, this switch allowed us to use lazy evaluation and data manipulations to efficiently use the available RAM, only loading loading the data when necessary.
+
+Another interesting problem was understanding the nature of the data and the NA62 project in order to create the engineered features and
+
+Another challenge was faced when the PointNet DNN did not perform to our expectetions, several experiments were carried out to pinpoint the problem yet time was a constraint as the training process took up to 8 hours (even 24 using the entire dataset available). Some experiments were even run simultaneously in up to 3 different machines.
+
 ## Future works
 
 For the future works, we would suggest the following areas:
