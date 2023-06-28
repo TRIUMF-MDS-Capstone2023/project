@@ -4,7 +4,7 @@ This directory contains the following Jupyter Notebooks, which are the experimen
 
 | File name                         | Description                                                                     |
 |------------------|------------------------------------------------------|
-| `XGBRegressor_fit.ipynb        | The experiment of XGBRegressor fitting on uniformly sampled data in each momentum bin   |
+| `XGBRegressor_fit.ipynb`        | The experiment of XGBRegressor fitting on uniformly sampled data in each momentum bin   |
 | `XGBRegressor_full_data.ipynb` | The experiment of XGBRegressor fitting on full data between momentum 15-45 GeV/c         |
 | `MLP_regression_analysis.ipynb`| The experiment of MLP regression performance analysis             |
 | `eliminate_loading_bottleneck.ipynb` |  The experiment of eliminating loading bottleneck for PointNet|
