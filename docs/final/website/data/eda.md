@@ -35,3 +35,23 @@ At the stage of performing the EDA, our focus was to examine the behaviour of ou
 SOTA ring radius vs. track momentum from events data
 ```
 
+
+To further investigate the data, we plotted the track positions for both muons and pions. The resulting visualizations are shown in [Fig. 5](eda_muon_track_position) and [Fig. 6](eda_pion_track_position). 
+
+In [Fig. 5](eda_muon_track_position), it is evident that pions display a wider distribution of y-coordinates, ranging approximately from -100 to 100. On the other hand, muons exhibit a narrower y-coordinate distribution, spanning from around -50 to 50. This disparity suggests that pions tend to have a greater variation in their vertical track positions compared to muons.
+
+Additionally, [Fig. 5](eda_muon_track_position) and [Fig. 6](eda_pion_track_position) reveal differences in the x-coordinate distributions between muons and pions. Muons demonstrate a relatively narrower x-coordinate distribution compared to pions. This observation indicates that muons tend to be more tightly clustered along the horizontal axis compared to pions.
+
+By visualizing and comparing the track positions of muons and pions, we gain more insights into their distinct spatial characteristics.
+
+```{figure} ../../../../figures/eda_muon_track_position.png
+:name: eda_muon_track_position
+
+2D Histogram showing track position distribution of muons
+```
+
+```{figure} ../../../../figures/eda_pion_track_position.png
+:name: eda_pion_track_position
+
+2D Histogram showing track position distribution of pions
+```
