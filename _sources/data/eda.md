@@ -89,3 +89,6 @@ By examining the hit positions within this track momentum range, we plotted [Fig
 
 2D Histogram showing hit position distribution of pions between 20 and 25 GeV/c
 ```
+### Conclusion 
+
+During the EDA on the data from the 2021A NA62 experiment, we examined the events and hits data to gain insights into the distribution of muon and pion data. The EDA showed distinctions between muons and pions in their track momentum, number of hits per event and track positions. The predicted ring radius from the state-of-the-art method displayed a wider distribution with outliers. It was also found that the hit positions for muons form a larger ring radius compared to pions for a selected momentum range between 20 and 25 GeV/c. From this observation, we believe that the optimal separation between muons and pions in our model should be achieved by selecting the proper momentum region.
