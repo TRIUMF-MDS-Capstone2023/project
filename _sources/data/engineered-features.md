@@ -1,8 +1,8 @@
 # Engineered Features
 
-The raw data only comprises the x and y hit positions for each event, which represent the recorded positions on a grid of PMTs relative to the coordinates of the grid. These positions correspond to the detection of light photons by photomultiplier tube ("PMT") tubes.
+The raw data only comprises of the coordinates of the hit positions for each event, which represent the recorded positions on a grid of PMTs relative to the coordinates of the grid. These positions correspond to the detection of light photons by photomultiplier tube ("PMT") tubes.
 
-To enable better model fitting, we have a number of engineered features that aims to extract more meaningful information from the x and y hit positions. In our analyses,  we use these 18 engineered features based on these positions:
+To enable better model fitting, we have a number of engineered features that aims to extract more meaningful information from the hit positions. In our analyses,  we use these 18 engineered features based on these positions:
 
 1. `total_in_time_hits`: total number of in-time hits in each event
 2. `x_aligned_min`: minimum hit position realigned by subtracting track position x in each event

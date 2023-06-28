@@ -112,12 +112,12 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="Engineered Features  The raw data only comprises the x and y hit positions for each event, which represent the recorded positions on a grid of PMTs relative to " />
+<meta name="description" content="Engineered Features  The raw data only comprises of the coordinates of the hit positions for each event, which represent the recorded positions on a grid of PMT" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Engineered Features"/>
-<meta name="twitter:description" content="Engineered Features  The raw data only comprises the x and y hit positions for each event, which represent the recorded positions on a grid of PMTs relative to ">
+<meta name="twitter:description" content="Engineered Features  The raw data only comprises of the coordinates of the hit positions for each event, which represent the recorded positions on a grid of PMT">
 <meta name="twitter:image" content="">
 
 <!-- Opengraph tags -->
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="Engineered Features  The raw data only comprises the x and y hit positions for each event, which represent the recorded positions on a grid of PMTs relative to " />
+<meta property="og:description" content="Engineered Features  The raw data only comprises of the coordinates of the hit positions for each event, which represent the recorded positions on a grid of PMT" />
 <meta property="og:site_name" content="CaloRICH AI" />
 
 <link rel="icon" href="../_static/favicon.svg" type="image/svg+xml" />
@@ -192,8 +192,8 @@ const thebe_selector_output = ".output, .cell_output"
                         
   <section id="engineered-features">
 <h1>Engineered Features<a class="headerlink" href="#engineered-features" title="Permalink to this headline">#</a></h1>
-<p>The raw data only comprises the x and y hit positions for each event, which represent the recorded positions on a grid of PMTs relative to the coordinates of the grid. These positions correspond to the detection of light photons by photomultiplier tube (“PMT”) tubes.</p>
-<p>To enable better model fitting, we have a number of engineered features that aims to extract more meaningful information from the x and y hit positions. In our analyses,  we use these 18 engineered features based on these positions:</p>
+<p>The raw data only comprises of the coordinates of the hit positions for each event, which represent the recorded positions on a grid of PMTs relative to the coordinates of the grid. These positions correspond to the detection of light photons by photomultiplier tube (“PMT”) tubes.</p>
+<p>To enable better model fitting, we have a number of engineered features that aims to extract more meaningful information from the hit positions. In our analyses,  we use these 18 engineered features based on these positions:</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">total_in_time_hits</span></code>: total number of in-time hits in each event</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">x_aligned_min</span></code>: minimum hit position realigned by subtracting track position x in each event</p></li>

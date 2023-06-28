@@ -112,12 +112,12 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The two datasets we work are from the 2021A experi" />
+<meta name="description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  Terminologies  Our dataset revolves around “events" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raw Data"/>
-<meta name="twitter:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The two datasets we work are from the 2021A experi">
+<meta name="twitter:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  Terminologies  Our dataset revolves around “events">
 <meta name="twitter:image" content="">
 
 <!-- Opengraph tags -->
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The two datasets we work are from the 2021A experi" />
+<meta property="og:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  Terminologies  Our dataset revolves around “events" />
 <meta property="og:site_name" content="CaloRICH AI" />
 
 <link rel="icon" href="../_static/favicon.svg" type="image/svg+xml" />
@@ -157,8 +157,17 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-dataset-run">Main Dataset (<code class="docutils literal notranslate"><span class="pre">run</span></code>)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-dataset-pnn">Supplementary Dataset (<code class="docutils literal notranslate"><span class="pre">pnn</span></code>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminologies">Terminologies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structure">Data Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events"><code class="docutils literal notranslate"><span class="pre">Events</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hits"><code class="docutils literal notranslate"><span class="pre">Hits</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-dataset-run">Main Dataset (<code class="docutils literal notranslate"><span class="pre">run</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-dataset-pnn">Supplementary Dataset (<code class="docutils literal notranslate"><span class="pre">pnn</span></code>)</a></li>
+</ul>
+</li>
 </ul>
                             <p class="logo">
                                 
@@ -199,16 +208,68 @@ const thebe_selector_output = ".output, .cell_output"
   <section id="raw-data">
 <h1>Raw Data<a class="headerlink" href="#raw-data" title="Permalink to this headline">#</a></h1>
 <p>The raw data we are working is prepared and provided by TRIUMF, and was stored in the <a class="reference external" href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000229.shtml">HDF5</a> format.</p>
-<p>The two datasets we work are from the 2021A experiments.</p>
+<section id="terminologies">
+<h2>Terminologies<a class="headerlink" href="#terminologies" title="Permalink to this headline">#</a></h2>
+<p>Our dataset revolves around “events” and “hits”. A “hit” refers to a signal in a detector (specifically, the RICH detector), while an “event” refers to a collection of hits attached to a physical process recorded.</p>
+<p>A “track” refers to the path of a single particle in the experiment, and each “track” is uniquely identified by a set of 4 IDs (<code class="docutils literal notranslate"><span class="pre">run_id</span></code>, <code class="docutils literal notranslate"><span class="pre">burst_id</span></code>, <code class="docutils literal notranslate"><span class="pre">event_id</span></code>, and <code class="docutils literal notranslate"><span class="pre">track_id</span></code>). In our analyses, these are combined as one variable called the <code class="docutils literal notranslate"><span class="pre">composite_event_id</span></code>.</p>
+</section>
+<section id="data-structure">
+<h2>Data Structure<a class="headerlink" href="#data-structure" title="Permalink to this headline">#</a></h2>
+<section id="events">
+<h3><code class="docutils literal notranslate"><span class="pre">Events</span></code><a class="headerlink" href="#events" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Events</span></code> within the H5 file has the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DATATYPE</span> <span class="n">H5T_COMPOUND</span> <span class="p">{</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;run_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;burst_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I64LE</span> <span class="s2">&quot;event_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;track_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_IEEE_F32LE</span> <span class="s2">&quot;track_momentum&quot;</span><span class="p">;</span>
+    <span class="n">H5T_IEEE_F32LE</span> <span class="s2">&quot;chod_time&quot;</span><span class="p">;</span>
+    <span class="n">H5T_ARRAY</span> <span class="p">{</span> <span class="p">[</span> <span class="mi">2</span> <span class="p">]</span> <span class="n">H5T_IEEE_F32LE</span> <span class="p">}</span> <span class="s2">&quot;track_pos&quot;</span><span class="p">;</span>
+    <span class="n">H5T_IEEE_F32LE</span> <span class="s2">&quot;ring_radius&quot;</span><span class="p">;</span>
+    <span class="n">H5T_ARRAY</span> <span class="p">{</span> <span class="p">[</span> <span class="mi">2</span> <span class="p">]</span> <span class="n">H5T_IEEE_F32LE</span> <span class="p">}</span> <span class="s2">&quot;ring_centre_pos&quot;</span><span class="p">;</span>
+    <span class="n">H5T_ARRAY</span> <span class="p">{</span> <span class="p">[</span> <span class="mi">5</span> <span class="p">]</span> <span class="n">H5T_IEEE_F32LE</span> <span class="p">}</span> <span class="s2">&quot;ring_likelihood&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;label&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When combined, <code class="docutils literal notranslate"><span class="pre">run_id</span></code>, <code class="docutils literal notranslate"><span class="pre">burst_id</span></code>, <code class="docutils literal notranslate"><span class="pre">event_id</span></code>, and <code class="docutils literal notranslate"><span class="pre">track_id</span></code> form an unique ID across the experiment.</p>
+<p><code class="docutils literal notranslate"><span class="pre">chod_time</span></code> gives the track time.</p>
+<p><code class="docutils literal notranslate"><span class="pre">track_momentum</span></code> and <code class="docutils literal notranslate"><span class="pre">track_pos</span></code> contains information about the track, provided by the STRAW detector.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ring_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">ring_centre_pos</span></code> and <code class="docutils literal notranslate"><span class="pre">ring_likelihood</span></code> columns are the outputs of the current state-of-the-art model used in the NA62 experiments. In particular, <code class="docutils literal notranslate"><span class="pre">ring_likelihood</span></code> is a set of probabilities given, corresponding to pion, muon, positron, kaon, and background.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">label</span></code> is a label given by the calorimeter, indicating which particle it believed to be. It can show a different result from the <code class="docutils literal notranslate"><span class="pre">ring_likelihood</span></code> outputs.</p>
+</section>
+<section id="hits">
+<h3><code class="docutils literal notranslate"><span class="pre">Hits</span></code><a class="headerlink" href="#hits" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Hits</span></code> has the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DATATYPE</span> <span class="n">H5T_COMPOUND</span> <span class="p">{</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;assigned_flag&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;disk_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;pmt_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;supercell_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;updowndisk_id&quot;</span><span class="p">;</span>
+    <span class="n">H5T_IEEE_F32LE</span> <span class="s2">&quot;hit_time&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When combined, <code class="docutils literal notranslate"><span class="pre">disk_id</span></code>, <code class="docutils literal notranslate"><span class="pre">pmt_id</span></code>, <code class="docutils literal notranslate"><span class="pre">supercell_id</span></code> and <code class="docutils literal notranslate"><span class="pre">updowndisk_id</span></code> give the hit position, using the mapping defined by the <a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/data/rich_pmt_positions.dat"><code class="docutils literal notranslate"><span class="pre">rich_pmt_positions.dat</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">assigned_flag</span></code> is an output of the current state-of-the-art NA62 algorithm.</p>
+<p><code class="docutils literal notranslate"><span class="pre">hit_time</span></code> contains the hit time, which is to be compared with <code class="docutils literal notranslate"><span class="pre">chod_time</span></code>.</p>
+</section>
+</section>
+<section id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">#</a></h2>
+<p>The two datasets we work with are from the 2021A run of the NA62 experiments, and share the exact same data structure.</p>
 <section id="main-dataset-run">
-<h2>Main Dataset (<code class="docutils literal notranslate"><span class="pre">run</span></code>)<a class="headerlink" href="#main-dataset-run" title="Permalink to this headline">#</a></h2>
-<p>The main dataset was extracted from a full <code class="docutils literal notranslate"><span class="pre">RECO</span></code> stream, getting the entirety of the Run 11100.</p>
+<h3>Main Dataset (<code class="docutils literal notranslate"><span class="pre">run</span></code>)<a class="headerlink" href="#main-dataset-run" title="Permalink to this headline">#</a></h3>
+<p>The main dataset was extracted from a full <code class="docutils literal notranslate"><span class="pre">RECO</span></code> stream, originally stored in the ROOT trees, getting the entirety of the Run 11100.</p>
 <p>Counting only the pion and muon events, it contains 2,376,174 events and 99,397,075 hits.</p>
 </section>
 <section id="supplementary-dataset-pnn">
-<h2>Supplementary Dataset (<code class="docutils literal notranslate"><span class="pre">pnn</span></code>)<a class="headerlink" href="#supplementary-dataset-pnn" title="Permalink to this headline">#</a></h2>
+<h3>Supplementary Dataset (<code class="docutils literal notranslate"><span class="pre">pnn</span></code>)<a class="headerlink" href="#supplementary-dataset-pnn" title="Permalink to this headline">#</a></h3>
 <p>The supplementary dataset is much larger, spanning several runs. However, since the events have been filtered, the label distribution is very different.</p>
 <p>For the pion and muon events, there are 42,897,096 events and 1,635,601,517 hits.</p>
+</section>
 </section>
 </section>
 

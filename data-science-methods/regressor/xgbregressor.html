@@ -112,12 +112,12 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="XGBoost Regressor  Why did we choose this model?  For our baseline model, we have attempted training XGBRegressor, RandomForestRegressor, LigtGBM and CatBoostRe" />
+<meta name="description" content="XGBoost Regressor  Why did we choose this model?  For our baseline model, we have attempted to train XGBRegressor, RandomForestRegressor, LightGBM and CatBoostR" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="XGBoost Regressor"/>
-<meta name="twitter:description" content="XGBoost Regressor  Why did we choose this model?  For our baseline model, we have attempted training XGBRegressor, RandomForestRegressor, LigtGBM and CatBoostRe">
+<meta name="twitter:description" content="XGBoost Regressor  Why did we choose this model?  For our baseline model, we have attempted to train XGBRegressor, RandomForestRegressor, LightGBM and CatBoostR">
 <meta name="twitter:image" content="">
 
 <!-- Opengraph tags -->
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="XGBoost Regressor  Why did we choose this model?  For our baseline model, we have attempted training XGBRegressor, RandomForestRegressor, LigtGBM and CatBoostRe" />
+<meta property="og:description" content="XGBoost Regressor  Why did we choose this model?  For our baseline model, we have attempted to train XGBRegressor, RandomForestRegressor, LightGBM and CatBoostR" />
 <meta property="og:site_name" content="CaloRICH AI" />
 
 <link rel="icon" href="../../_static/favicon.svg" type="image/svg+xml" />
@@ -203,7 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>XGBoost Regressor<a class="headerlink" href="#xgboost-regressor" title="Permalink to this headline">#</a></h1>
 <section id="why-did-we-choose-this-model">
 <h2>Why did we choose this model?<a class="headerlink" href="#why-did-we-choose-this-model" title="Permalink to this headline">#</a></h2>
-<p>For our baseline model, we have attempted training XGBRegressor, RandomForestRegressor, LigtGBM and CatBoostRegressor. Out of all the models we have trained, we selected XGBRegressor <span id="id1">[<a class="reference internal" href="../../references.html#id3" title="Tianqi Chen and Carlos Guestrin. XGBoost. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM, aug 2016. URL: https://doi.org/10.1145%2F2939672.2939785, doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> as our baseline model because of its impressive performance and fast execution compared to other baseline models we experimented with. We employed XGBRegressor to train our data set, which exclusively consisted of muons. In addition to the previously mentioned engineered features, we included <code class="docutils literal notranslate"><span class="pre">total_in_time_hits</span></code> as one of the features in our model. The target variable <code class="docutils literal notranslate"><span class="pre">y_train</span></code> used for training the model corresponds to the calculated ring radius (<code class="docutils literal notranslate"><span class="pre">ring_radius_calc</span></code>), which is the theoretical ring radius determined based on the track momentum and mass of the particles.</p>
+<p>For our baseline model, we have attempted to train XGBRegressor, RandomForestRegressor, LightGBM and CatBoostRegressor. Out of all the models we have trained, we selected XGBRegressor <span id="id1">[<a class="reference internal" href="../../references.html#id3" title="Tianqi Chen and Carlos Guestrin. XGBoost. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM, aug 2016. URL: https://doi.org/10.1145%2F2939672.2939785, doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> as our baseline model because of its impressive performance and fast execution compared to other baseline models we experimented with. We employed XGBRegressor to train our data set, which exclusively consisted of muons. In addition to the previously mentioned engineered features, we included <code class="docutils literal notranslate"><span class="pre">total_in_time_hits</span></code> as one of the features in our model. The target variable <code class="docutils literal notranslate"><span class="pre">y_train</span></code> used for training the model corresponds to the calculated ring radius (<code class="docutils literal notranslate"><span class="pre">ring_radius_calc</span></code>), which is the theoretical ring radius determined based on the track momentum and mass of the particles.</p>
 </section>
 <section id="performance">
 <h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">#</a></h2>
