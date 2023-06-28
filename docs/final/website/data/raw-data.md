@@ -10,9 +10,9 @@ A "track" refers to the path of a single particle in the experiment, and each "t
 
 ## Data Structure
 
-### `Events`
+### `Events` array
 
-`Events` within the H5 file has the following structure:
+The `Events` "array" (technically a HDF5 Dataset) has the structure of:
 
 ```
 DATATYPE H5T_COMPOUND {
@@ -40,7 +40,7 @@ When combined, `run_id`, `burst_id`, `event_id`, and `track_id` form an unique I
 
 The `label` is a label given by the calorimeter, indicating which particle it believed to be. It can show a different result from the `ring_likelihood` outputs.
 
-### `Hits`
+### `Hits` array
 
 `Hits` has the following structure:
 
@@ -61,6 +61,15 @@ When combined, `disk_id`, `pmt_id`, `supercell_id` and `updowndisk_id` give the 
 
 `hit_time` contains the hit time, which is to be compared with `chod_time`.
 
+### `Hitmapping` array
+
+The `Hitmapping` array, each element containing an increasing unsigned integer, is exactly one unit longer than the `Hits` array, which is used to map the "event" and corresponding "hits" to that event.
+
+The i-th event is associated with the hits, within the sequence starting from the i-th `Hitmapping` value, and up to (not including) the (i+1)-th `Hitmapping` value. For example, for a `Hitmapping` of values 0, 3, 7, 10, it would mean that:
+- The 0<sup>th</sup> event is associated with the 0<sup>th</sup>, 1<sup>st</sup>, and 2<sup>nd</sup> (3 - 1) hits;
+- The 1<sup>st</sup> event is associated with the 3<sup>rd</sup>, 4<sup>th</sup>, 5<sup>th</sup>, and 6<sup>th</sup> (7 - 1) hits;
+- The 2<sup>nd</sup> event is associated with the 7<sup>th</sup>, 8<sup>th</sup>, and 9<sup>th</sup> (10 - 1) hits.
+
 ## Datasets
 
 The two datasets we work with are from the 2021A run of the NA62 experiments, and share the exact same data structure.
@@ -76,3 +85,7 @@ Counting only the pion and muon events, it contains 2,376,174 events and 99,397,
 The supplementary dataset is much larger, spanning several runs. However, since the events have been filtered, the label distribution is very different.
 
 For the pion and muon events, there are 42,897,096 events and 1,635,601,517 hits.
+
+## "Rings"
+
+A function designed to display a ring, formed by the hits in a particular event, in a Jupyter notebook can be found at [`scripts/display_ring.py`](https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/scripts/display_ring.py).
