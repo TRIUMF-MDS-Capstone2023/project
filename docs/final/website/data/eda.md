@@ -11,3 +11,27 @@ In the events data, there are a total of 2,376,174 events. Among all the events,
 
 Track momentum distribution of muons and pions from events data
 ```
+We also plotted the number of hits per event for muons and pions as displayed in [Fig. 2](eda_number_of_hits_distribution). From the distribution it can be seen that the shape and spread of the distribution for both muons and pions are left skewed, with the mean being approximately 42 hits per event. 
+
+```{figure} ../../../../figures/eda_number_hits.png 
+:name: eda_number_of_hits_distribution
+
+Histogram showing distribution of number of hits per event for muons and pions from events data
+```
+
+To further investigate the behaviour of our data, we have also computed the relationship between the ring radius and the track momentum. Since the theoretical ring radius is calculated from the track momentum and mass of the particle, an ideal relationship between the predicted ring radius and the track momentum should be similar to the plot shown in [Fig. 3](eda_theoretical_radius_vs_momentum). 
+
+```{figure} ../../../../eda_radius_vs_momentum_theoretical.png
+:name: eda_theoretical_radius_vs_momentum
+
+Theoretical ring radius vs. track momentum from events data
+```
+
+At the stage of performing the EDA, our focus was to examine the behaviour of our data without fitting any models. Since the events data includes the ring radius predicted by the state-of-the-art method (SOTA),we plotted the relationship between the ring radius from SOTA vs. the track momentum in [Fig. 4](eda_theoretical_radius_vs_momentum) for investigation and comparison purpose. The plot reveals that the distribution of the predicted ring radius exhibits a wider spread and contains a number of outliers. Consequently, our objective is to develop models that can accurately predict the ring radius with a narrower distribution, thus achieving improved precision and reducing the occurrence of outliers.
+
+```{figure} ../../../../eda_radius_vs_momentum_sota.png
+:name: eda_sota_radius_vs_momentum
+
+SOTA ring radius vs. track momentum from events data
+```
+
