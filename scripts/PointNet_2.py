@@ -4,6 +4,11 @@ import torch.nn.functional as F
 
 class TNet(nn.Module):
     def __init__(self, k = 64):
+        """Initialize
+
+        Args:
+            k (int, optional): Number of features. Defaults to 64.
+        """
         super(TNet, self).__init__()
         self.k = k
 
@@ -31,6 +36,15 @@ class TNet(nn.Module):
         )
 
     def forward(self, x):
+        """ Forward pass of the PointNet Transformation network
+
+        Parameters
+        ----------
+
+        x : tensor
+            Tensor containing the weight values from the previous pass
+        
+        """
         batch_size = x.size(0)
         x = self.conv_network(x)
         x = nn.AdaptiveMaxPool1d(1)(x)
