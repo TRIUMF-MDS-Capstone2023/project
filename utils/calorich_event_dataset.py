@@ -4,6 +4,12 @@ import polars as pl
 
 
 class CalorichEventDataset(Dataset):
+    """
+    Class that creates a dataset object for use in a dataloader function
+
+    Args:
+        Dataset: Filepath to the parquet file that contains the hits data to be used in the DNN
+    """
     def __init__(self, event_with_hit_features_path, hits_path):
         """Constructor"""
         self.event_with_hit_features_columns = [
@@ -42,7 +48,8 @@ class CalorichEventDataset(Dataset):
         return self.event_with_hit_features.shape[0]
 
     def __getitem__(self, idx):
-        """Get a particular item of the dataset"""
+        """Get a particular item of the dataset and output a dictionary containing the hits as a 
+        n*3 tensor array"""
         row = self.event_with_hit_features.row(idx)
 
         composite_event_id = row[0]

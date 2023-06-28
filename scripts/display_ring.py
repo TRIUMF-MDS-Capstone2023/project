@@ -3,6 +3,18 @@ import polars as pl
 
 
 def display_ring(composite_event_id, events, hits, cut_off_time=0.5):
+    """Displays a ring image based on the hit location data for a specific event
+
+    Args:
+        composite_event_id: Special unique identifier integer for the event (included in the parquet data files)
+        events: A polars LazyFrame containing the events data
+        hits: A polars LazyFrame containing the hits data
+        cut_off_time: A float defining the CHOD delta cut-off time. Optional, defaults to 0.5.
+
+    Returns:
+        img: Figure showing the location of the hits, event information (run, burst and track), particle likelihoods,
+        and a circle fitted by the current SOTA with its center.
+    """
     event = (
         events
         .filter(pl.col("composite_event_id") == composite_event_id)
