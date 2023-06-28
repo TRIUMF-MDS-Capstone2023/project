@@ -159,8 +159,9 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminologies">Terminologies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structure">Data Structure</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events"><code class="docutils literal notranslate"><span class="pre">Events</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hits"><code class="docutils literal notranslate"><span class="pre">Hits</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events-array"><code class="docutils literal notranslate"><span class="pre">Events</span></code> array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hits-array"><code class="docutils literal notranslate"><span class="pre">Hits</span></code> array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitmapping-array"><code class="docutils literal notranslate"><span class="pre">Hitmapping</span></code> array</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a><ul class="nav section-nav flex-column">
@@ -168,6 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-dataset-pnn">Supplementary Dataset (<code class="docutils literal notranslate"><span class="pre">pnn</span></code>)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rings">“Rings”</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -215,9 +217,9 @@ const thebe_selector_output = ".output, .cell_output"
 </section>
 <section id="data-structure">
 <h2>Data Structure<a class="headerlink" href="#data-structure" title="Permalink to this headline">#</a></h2>
-<section id="events">
-<h3><code class="docutils literal notranslate"><span class="pre">Events</span></code><a class="headerlink" href="#events" title="Permalink to this headline">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Events</span></code> within the H5 file has the following structure:</p>
+<section id="events-array">
+<h3><code class="docutils literal notranslate"><span class="pre">Events</span></code> array<a class="headerlink" href="#events-array" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Events</span></code> “array” (technically a HDF5 Dataset) has the structure of:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DATATYPE</span> <span class="n">H5T_COMPOUND</span> <span class="p">{</span>
     <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;run_id&quot;</span><span class="p">;</span>
     <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;burst_id&quot;</span><span class="p">;</span>
@@ -239,8 +241,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p><code class="docutils literal notranslate"><span class="pre">ring_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">ring_centre_pos</span></code> and <code class="docutils literal notranslate"><span class="pre">ring_likelihood</span></code> columns are the outputs of the current state-of-the-art model used in the NA62 experiments. In particular, <code class="docutils literal notranslate"><span class="pre">ring_likelihood</span></code> is a set of probabilities given, corresponding to pion, muon, positron, kaon, and background.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">label</span></code> is a label given by the calorimeter, indicating which particle it believed to be. It can show a different result from the <code class="docutils literal notranslate"><span class="pre">ring_likelihood</span></code> outputs.</p>
 </section>
-<section id="hits">
-<h3><code class="docutils literal notranslate"><span class="pre">Hits</span></code><a class="headerlink" href="#hits" title="Permalink to this headline">#</a></h3>
+<section id="hits-array">
+<h3><code class="docutils literal notranslate"><span class="pre">Hits</span></code> array<a class="headerlink" href="#hits-array" title="Permalink to this headline">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Hits</span></code> has the following structure:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DATATYPE</span> <span class="n">H5T_COMPOUND</span> <span class="p">{</span>
     <span class="n">H5T_STD_I32LE</span> <span class="s2">&quot;assigned_flag&quot;</span><span class="p">;</span>
@@ -256,6 +258,16 @@ const thebe_selector_output = ".output, .cell_output"
 <p><code class="docutils literal notranslate"><span class="pre">assigned_flag</span></code> is an output of the current state-of-the-art NA62 algorithm.</p>
 <p><code class="docutils literal notranslate"><span class="pre">hit_time</span></code> contains the hit time, which is to be compared with <code class="docutils literal notranslate"><span class="pre">chod_time</span></code>.</p>
 </section>
+<section id="hitmapping-array">
+<h3><code class="docutils literal notranslate"><span class="pre">Hitmapping</span></code> array<a class="headerlink" href="#hitmapping-array" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Hitmapping</span></code> array, each element containing an increasing unsigned integer, is exactly one unit longer than the <code class="docutils literal notranslate"><span class="pre">Hits</span></code> array, which is used to map the “event” and corresponding “hits” to that event.</p>
+<p>The i-th event is associated with the hits, within the sequence starting from the i-th <code class="docutils literal notranslate"><span class="pre">Hitmapping</span></code> value, and up to (not including) the (i+1)-th <code class="docutils literal notranslate"><span class="pre">Hitmapping</span></code> value. For example, for a <code class="docutils literal notranslate"><span class="pre">Hitmapping</span></code> of values 0, 3, 7, 10, it would mean that:</p>
+<ul class="simple">
+<li><p>The 0<sup>th</sup> event is associated with the 0<sup>th</sup>, 1<sup>st</sup>, and 2<sup>nd</sup> (3 - 1) hits;</p></li>
+<li><p>The 1<sup>st</sup> event is associated with the 3<sup>rd</sup>, 4<sup>th</sup>, 5<sup>th</sup>, and 6<sup>th</sup> (7 - 1) hits;</p></li>
+<li><p>The 2<sup>nd</sup> event is associated with the 7<sup>th</sup>, 8<sup>th</sup>, and 9<sup>th</sup> (10 - 1) hits.</p></li>
+</ul>
+</section>
 </section>
 <section id="datasets">
 <h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">#</a></h2>
@@ -270,6 +282,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The supplementary dataset is much larger, spanning several runs. However, since the events have been filtered, the label distribution is very different.</p>
 <p>For the pion and muon events, there are 42,897,096 events and 1,635,601,517 hits.</p>
 </section>
+</section>
+<section id="rings">
+<h2>“Rings”<a class="headerlink" href="#rings" title="Permalink to this headline">#</a></h2>
+<p>A function designed to display a ring, formed by the hits in a particular event, in a Jupyter notebook can be found at <a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/scripts/display_ring.py"><code class="docutils literal notranslate"><span class="pre">scripts/display_ring.py</span></code></a>.</p>
 </section>
 </section>
 
