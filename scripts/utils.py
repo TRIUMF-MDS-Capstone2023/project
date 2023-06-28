@@ -30,11 +30,11 @@ def compute_composite_event_id(run_id, burst_id, event_id, track_id):
         int: Composite event ID.
     """
     return (
-        # run_id: assumes to be max at 16777216, i.e., 2 ^ 24
+        # run_id: assumes to be max at 16777215, i.e., 2 ^ 24 - 1
         ((run_id & 0xffffff) << (4 + 24 + 11)) |
         # burst_id: [1, 1468], 11-bit
         ((burst_id & 0x7ff) << (4 + 24)) |
-        # event_id, assumes to be max at 16777216, i.e. 2 ^ 24
+        # event_id, assumes to be max at 16777215, i.e. 2 ^ 24 - 1
         ((event_id & 0xffffff) << 4) |
         # track_id: [1, 10], 4-bit
         ((track_id & 0xf))
