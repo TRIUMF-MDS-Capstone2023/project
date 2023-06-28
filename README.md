@@ -85,14 +85,14 @@ The main dataset (or the `run` dataset) we are using is in [HDF5](https://www.lo
 To obtain the necessary files, after placing the aforementioned H5 file in [the `data/` folder](data/), run the following command in the Conda environment:
 
 ``` bash
-make run-all
+make data-run
 ```
 
 It would create all the necessary Parquet files for the analyses involving the `run` dataset.
 
 The main dataset (after cleaning) contains 2,376,174 events and 99,397,075 hits.
 
-(Note that there is also `make run-full`, which also includes some of the obsolete data files derived from the main dataset.)
+(Note that there is also `make data-run-full`, which also includes some of the obsolete data files derived from the main dataset.)
 
 ### Supplementary Dataset
 
@@ -101,12 +101,12 @@ The supplementary dataset (or the `pnn` dataset) is much larger, spanning severa
 To generate the Parquet files associated with the `pnn` dataset, run the following command in the Conda environment:
 
 ``` bash
-make pnn-all
+make data-pnn
 ```
 
 The supplementary dataset (after cleaning) contains 42,897,096 events and 1,635,601,517 hits.
 
-(Note that, similar to the main dataset, there is also `make pnn-full`, which also includes some of the obsolete data files associated with the supplementary dataset.)
+(Note that, similar to the main dataset, there is also `make data-pnn-full`, which also includes some of the obsolete data files associated with the supplementary dataset.)
 
 ### Clean-up
 
