@@ -68,7 +68,25 @@ validloader = DataLoader(val_set, batch_size=BATCH_SIZE, shuffle=True)
 
 # define mlp model
 def linear_block(input_size, output_size):
-    """Linear module with ReLU activation function."""
+    """
+    A linear transformation block.
+
+    Parameters
+    ----------
+    input_size : int
+        the input size of the layer
+    output_size : int
+        the output size of the layer
+
+    Returns
+    -------
+    torch.nn.Sequential
+        a sequential container calling a sequence of modules
+
+    Examples
+    --------
+    >>> linear_block(12, 1)
+    """
     return nn.Sequential(
         nn.Linear(input_size, output_size),
         nn.ReLU()
@@ -98,7 +116,33 @@ model.to(device)
 # define a trainer
 # below code adopted from MDS DSCI 572 Lecture 5 notes
 def trainer(model, criterion, optimizer, trainloader, validloader, epochs=5, patience=5, verbose=True):
-    """Training wrapper for PyTorch network."""
+    """
+    A training wrapper for PyTorch network.
+
+    Parameters
+    ----------
+    model : model class
+        defined model class inheriting from nn.Module
+    criterion : torch.nn.modules.loss
+        a loss function in PyTorch
+    optimizer : optimizer class
+        an optimization algorithm
+    trainloader : torch.utils.data.DataLoader
+        a dataloader for training data   
+    validloader : torch.utils.data.DataLoader
+        a dataloader for validation data          
+    epochs : int, default is 5
+        one full pass through the dataset to look at all observations         
+    patience : int, default is 5
+        a number of consecutive epochs to allow the validation loss to increase before stopping   
+    verbose : bool, default is True
+        whether or not to print additional details when running the function         
+
+    Returns
+    -------
+    float
+        train_loss, valid_loss
+    """
 
     train_loss = []
     valid_loss = []
