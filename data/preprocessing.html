@@ -194,23 +194,6 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h1>
 <p>Time is seriously limited in this project. To save training and loading time, we rely on preprocessed <a class="reference external" href="https://parquet.apache.org/">Parquet files</a>, to do preprocessing.</p>
 <p>The <a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/tree/main/scripts"><code class="docutils literal notranslate"><span class="pre">scripts/</span></code> folder</a> contains all of the respective preprocessing scripts.</p>
-<p>To run the analysis, after placing the H5 files at <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make
-</pre></div>
-</div>
-<p>This would preprocess the H5 files and place the generated files, required to do the analysis, at <code class="docutils literal notranslate"><span class="pre">data/</span></code> folder.</p>
-<p>There are a number of generated files that are defined in the <a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/Makefile">Makefile</a> but are not used in the final report. To generate <em>all</em> of those, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>full
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">full</span></code> is <em>very</em> slow and generates around 400GB of intermediate files!</p>
-</div>
-<p>To remove the generated files, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clean
-</pre></div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">

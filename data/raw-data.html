@@ -112,12 +112,12 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The primary dataset we is from the 2021A experimen" />
+<meta name="description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The two datasets we work are from the 2021A experi" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raw Data"/>
-<meta name="twitter:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The primary dataset we is from the 2021A experimen">
+<meta name="twitter:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The two datasets we work are from the 2021A experi">
 <meta name="twitter:image" content="">
 
 <!-- Opengraph tags -->
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The primary dataset we is from the 2021A experimen" />
+<meta property="og:description" content="Raw Data  The raw data we are working is prepared and provided by TRIUMF, and was stored in the HDF5 format.  The two datasets we work are from the 2021A experi" />
 <meta property="og:site_name" content="CaloRICH AI" />
 
 <link rel="icon" href="../_static/favicon.svg" type="image/svg+xml" />
@@ -150,10 +150,16 @@ const thebe_selector_output = ".output, .cell_output"
                     <div class="inner">
 
                         
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
 
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
-                            
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-dataset-run">Main Dataset (<code class="docutils literal notranslate"><span class="pre">run</span></code>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-dataset-pnn">Supplementary Dataset (<code class="docutils literal notranslate"><span class="pre">pnn</span></code>)</a></li>
+</ul>
                             <p class="logo">
                                 
                             </p>
@@ -192,8 +198,18 @@ const thebe_selector_output = ".output, .cell_output"
                         
   <section id="raw-data">
 <h1>Raw Data<a class="headerlink" href="#raw-data" title="Permalink to this headline">#</a></h1>
-<p>The raw data we are working is prepared and provided by TRIUMF, and was stored in <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">the HDF5 format</a>.</p>
-<p>The primary dataset we is from the 2021A experiments, in particular, the Run 11100.</p>
+<p>The raw data we are working is prepared and provided by TRIUMF, and was stored in the <a class="reference external" href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000229.shtml">HDF5</a> format.</p>
+<p>The two datasets we work are from the 2021A experiments.</p>
+<section id="main-dataset-run">
+<h2>Main Dataset (<code class="docutils literal notranslate"><span class="pre">run</span></code>)<a class="headerlink" href="#main-dataset-run" title="Permalink to this headline">#</a></h2>
+<p>The main dataset was extracted from a full <code class="docutils literal notranslate"><span class="pre">RECO</span></code> stream, getting the entirety of the Run 11100.</p>
+<p>Counting only the pion and muon events, it contains 2,376,174 events and 99,397,075 hits.</p>
+</section>
+<section id="supplementary-dataset-pnn">
+<h2>Supplementary Dataset (<code class="docutils literal notranslate"><span class="pre">pnn</span></code>)<a class="headerlink" href="#supplementary-dataset-pnn" title="Permalink to this headline">#</a></h2>
+<p>The supplementary dataset is much larger, spanning several runs. However, since the events have been filtered, the label distribution is very different.</p>
+<p>For the pion and muon events, there are 42,897,096 events and 1,635,601,517 hits.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

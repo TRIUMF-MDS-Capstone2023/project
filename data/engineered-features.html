@@ -192,7 +192,8 @@ const thebe_selector_output = ".output, .cell_output"
                         
   <section id="engineered-features">
 <h1>Engineered Features<a class="headerlink" href="#engineered-features" title="Permalink to this headline">#</a></h1>
-<p>The raw data only comprises the x and y hit positions for each event, which represent the recorded positions on a grid of PMTs relative to the coordinates of the grid. These positions correspond to the detection of light photons by photomultiplier tube (“PMT”) tubes. To enhance the informative value of the data and enable better model fitting, we aimed to engineer features that extract more meaningful information from the x and y hit positions. Consequently, we created 18 engineered features based on these positions:</p>
+<p>The raw data only comprises the x and y hit positions for each event, which represent the recorded positions on a grid of PMTs relative to the coordinates of the grid. These positions correspond to the detection of light photons by photomultiplier tube (“PMT”) tubes.</p>
+<p>To enable better model fitting, we have a number of engineered features that aims to extract more meaningful information from the x and y hit positions. In our analyses,  we use these 18 engineered features based on these positions:</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">total_in_time_hits</span></code>: total number of in-time hits in each event</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">x_aligned_min</span></code>: minimum hit position realigned by subtracting track position x in each event</p></li>
@@ -212,6 +213,23 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><code class="docutils literal notranslate"><span class="pre">hull_diameter</span></code>: the longest line among all the points</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hull_diff_width_diameter</span></code>: the absolute difference between hull_diameter and hull_width</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hull_width</span></code>: closest distance of the parallel lines that encloses all points</p></li>
+</ol>
+<p>There are also a number of features related to fitted radius that are not used in the final analyses. These can be found here:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_lsq</span></code>: radius fit using a “standard” version of least square circle fit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_lsq_err</span></code>: residual/error from the fitted radius from <code class="docutils literal notranslate"><span class="pre">radius_fit_lsq</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_lsq_hyper</span></code>: radius fit using a “hyperaccuracy” version of least square circle fit <span id="id1">[]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_lsq_hyper_err</span></code>: residual/error from the fitted radius from <code class="docutils literal notranslate"><span class="pre">radius_fit_lsq_hyper</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_riemann_swfla</span></code>: radius fit using Riemann circle fit, SWFL version A <span id="id2">[]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_riemann_swfla_err</span></code>: residual/error from the fitted radius from <code class="docutils literal notranslate"><span class="pre">radius_fit_riemann_swfla</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_svd_pratt</span></code>: radius fit using Pratt’s algebraic circle fit <span id="id3">[]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_svd_pratt_err</span></code>: residual/error from the fitted radius from <code class="docutils literal notranslate"><span class="pre">radius_fit_svd_pratt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_svd_taubin</span></code>: radius fit using Taubin’s algebraic circle fit <span id="id4">[]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_svd_taubin_err</span></code>: residual/error from the fitted radius from <code class="docutils literal notranslate"><span class="pre">radius_fit_svd_taubin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_svd_hyper</span></code>: radius fit using algebraic circle fit with “hyperaccuracy” by <a class="reference external" href="https://people.cas.uab.edu/~mosya/cl/HyperSVD.m">Chernov</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_svd_hyper_err</span></code>: residual/error from the fitted radius from <code class="docutils literal notranslate"><span class="pre">radius_fit_svd_hyper</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_kmh</span></code>: radius fit using a consistent circle fit by Kukush, Markovsky and van Huffel <span id="id5">[]</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_kmh_err</span></code>: residual/error from the fitted radius from <code class="docutils literal notranslate"><span class="pre">radius_fit_kmh</span></code></p></li>
 </ol>
 </section>
 
