@@ -23,6 +23,6 @@ Training time was also a limitation as, even with pre-transformed parquet files,
 Residual plot predicted vs. calculated ring radius for PointNet 
 ```
 
-As shown in [Fig 7](pnt_predicted_vs_theoretical) the performance of PointNet is deficient, not being able to capture the trends in the model. The predicted results have a different behaviour than the ground truth, shown here as a black line. These results, combined with the long training time, motivated us to decide on XGBoost as the best modelling technique for this regression problem.
+As shown in [Fig 13](pnt_predicted_vs_theoretical) the performance of PointNet is deficient, not being able to capture the trends in the model. The predicted results have a different behaviour than the ground truth, shown here as a black line. These results, combined with the long training time, motivated us to decide on XGBoost as the best modelling technique for this regression problem.
 
 
