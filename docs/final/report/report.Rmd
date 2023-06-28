@@ -3,7 +3,7 @@ title: "CaloRICH AI"
 subtitle: "Discrimination of Muon and Pion Decay in NA62"
 author: "Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang"
 date: "June 28, 2023"
-output:
+output: 
   pdf_document:
     number_sections: true
     toc: true
@@ -30,13 +30,9 @@ The project dataset comes from the NA62 experiment at CERN, the European Organiz
 
 Based on the research and advice by the partner, we chose XGBoost as the baseline Machine Learning model, and applied a modified version of PointNet as well as a simple Multi-Layer Perceptron neural network.
 
-## Scope and Challenges
+## Challenges
 
 Our challenge is to improve the capability to determine the specific ring radius of the Cherenkov Radiation cone in the RICH detector, by avoiding the use of the momentum detection and performing a regression analysis instead of a classification based on the "hits" data only.
-
-## Output and Deliverables
-
-The aim of the *CaloRICH AI* project is the creation of a concise, documented and reproducible machine learning pipeline. The pipeline must include the data preprocessing, hyperparameters, models and training procedures required to achieve the results presented on this report in a manner such that the TRIUMF team can verify the findings and potentially incorporate the pipeline into their own ML pipelines.
 
 # Data Science Methods
 
@@ -147,6 +143,30 @@ After evaluating the performance of three models: XGBRegressor, MLP, and PointNe
 When comparing the performance of XGBRegressor and MLP, it is difficult to determine the better performing model solely based on their performance scores. However, taking into account the difference in training time, with XGBRegressor being more than 2 times faster, and considering the additional complexity associated with MLP modeling, it is reasonable to conclude that XGBRegressor is a more efficient and simpler choice in terms of both time consumption and computational power. Overall, we determine XGBRegressor to be the best performing model with our training data.
 
 # Data Product and Results
+
+The data product of the *CaloRICH AI* project is a concise, documented and reproducible machine learning pipeline. The pipeline includes the data preprocessing, model training, model evaluation and analyses required to achieve the results presented in this report in a manner such that the TRIUMF team can verify the findings and potentially incorporate the pipeline into their own ML pipelines.
+
+## Structure of the Data Product
+
+Our pipepline includes three components: the data preprocessing, the model training and the model performance anlayses.
+
+### Data Preprocessing
+
+The data preprocessing pipeline generates parquet files from the original HDF5 file format that prepare the data for training and testing. This pipeline also calculates and adds the **engineered features** we created for the XGBoost and MLP models.
+
+### Model Training and Analyses
+
+We also provide a simple set of commands based on a makefile that trains each of the selected models and performs the analyses of the model's outcome for the following three models:
+
+1.  XGBoost Regressor
+2.  Multilayer Perceptron neural network
+3.  PointNet
+
+Details on how to execute the pipeline and run the makefiles can be found in the README.md of the project's GitHub repository.
+
+### Additional Notebooks
+
+There are a number of supplementary notebooks in the notebooks folder, separated into experiments and analyses. The files are documented by the corresponding README.md in each of the subfolders.
 
 # Conclusions and Recommendations
 
