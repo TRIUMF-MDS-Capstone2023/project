@@ -150,10 +150,21 @@ const thebe_selector_output = ".output, .cell_output"
                     <div class="inner">
 
                         
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
 
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
-                            
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-extract-events-py"><code class="docutils literal notranslate"><span class="pre">data_extract_events.py</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-extract-hits-py"><code class="docutils literal notranslate"><span class="pre">data_extract_hits.py</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-features-py"><code class="docutils literal notranslate"><span class="pre">data_features.py</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sample-py"><code class="docutils literal notranslate"><span class="pre">data_sample.py</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#utils-py"><code class="docutils literal notranslate"><span class="pre">utils.py</span></code></a></li>
+</ul>
+
                             <p class="logo">
                                 
                             </p>
@@ -193,7 +204,43 @@ const thebe_selector_output = ".output, .cell_output"
   <section id="preprocessing">
 <h1>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h1>
 <p>Time is seriously limited in this project. To save training and loading time, we rely on preprocessed <a class="reference external" href="https://parquet.apache.org/">Parquet files</a>, to do preprocessing.</p>
-<p>The <a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/tree/main/scripts"><code class="docutils literal notranslate"><span class="pre">scripts/</span></code> folder</a> contains all of the respective preprocessing scripts.</p>
+<p>The <a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/tree/main/scripts"><code class="docutils literal notranslate"><span class="pre">scripts/</span></code> folder</a> contains all of the respective preprocessing scripts, and the generation was orchestrated by the <a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/Makefile"><code class="docutils literal notranslate"><span class="pre">Makefile</span></code></a>.</p>
+<p>The important files are highlighted as follows:</p>
+</section>
+<section id="data-extract-events-py">
+<h1><a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/scripts/data_extract_events.py"><code class="docutils literal notranslate"><span class="pre">data_extract_events.py</span></code></a><a class="headerlink" href="#data-extract-events-py" title="Permalink to this headline">#</a></h1>
+<p>The script extracts events from the source file. It filters out the events labeled as <code class="docutils literal notranslate"><span class="pre">muon</span></code> and <code class="docutils literal notranslate"><span class="pre">pion</span></code>, and exports as <code class="docutils literal notranslate"><span class="pre">events.parquet</span></code> for each dataset.</p>
+<p>For each event, it also calculates the theoretical mass (<code class="docutils literal notranslate"><span class="pre">mass</span></code>) and the corresponding calculated ring radius (<code class="docutils literal notranslate"><span class="pre">ring_radius_cal</span></code>) using the theoretical mass and the measured momentum.</p>
+</section>
+<section id="data-extract-hits-py">
+<h1><a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/scripts/data_extract_hits.py"><code class="docutils literal notranslate"><span class="pre">data_extract_hits.py</span></code></a><a class="headerlink" href="#data-extract-hits-py" title="Permalink to this headline">#</a></h1>
+<p>The script extracts hits from the source file. It outputs a <code class="docutils literal notranslate"><span class="pre">hits.parquet</span></code> for each dataset.</p>
+<p>Using the raw <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, it performs the following operations:</p>
+<ul class="simple">
+<li><p>“Adjusting” the <code class="docutils literal notranslate"><span class="pre">x_raw</span></code> and <code class="docutils literal notranslate"><span class="pre">y_raw</span></code> to be <code class="docutils literal notranslate"><span class="pre">x_adjusted</span></code> and <code class="docutils literal notranslate"><span class="pre">y_adjusted</span></code>, using the <code class="docutils literal notranslate"><span class="pre">disk_id</span></code> to adjust the position depending whether it is on the Jura side or the Salève side; and</p></li>
+<li><p>“Aligning” the <code class="docutils literal notranslate"><span class="pre">x_adjusted</span></code> and <code class="docutils literal notranslate"><span class="pre">y_adjusted</span></code> to be <code class="docutils literal notranslate"><span class="pre">x_aligned</span></code> and <code class="docutils literal notranslate"><span class="pre">y_aligned</span></code>, by offsetting the expected track position (<code class="docutils literal notranslate"><span class="pre">track_pos_x</span></code> and <code class="docutils literal notranslate"><span class="pre">track_pos_y</span></code>)</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">x_aligned</span></code> and <code class="docutils literal notranslate"><span class="pre">y_aligned</span></code> are also used to calculate a series of <code class="docutils literal notranslate"><span class="pre">hit_distance</span></code>, which can be understood as the distance between the hit and the track position.</p>
+<p><code class="docutils literal notranslate"><span class="pre">chod_delta</span></code> is also calculated as the difference between the <code class="docutils literal notranslate"><span class="pre">hit_time</span></code> and the <code class="docutils literal notranslate"><span class="pre">chod_time</span></code>.</p>
+</section>
+<section id="data-features-py">
+<h1><a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/scripts/data_features.py"><code class="docutils literal notranslate"><span class="pre">data_features.py</span></code></a><a class="headerlink" href="#data-features-py" title="Permalink to this headline">#</a></h1>
+<p>The script engineers features for each events and corresponding hits. For each configurable cut-off time, it outputs a corresponding <code class="docutils literal notranslate"><span class="pre">events_with_hit_features*.parquet</span></code>.</p>
+<p>For each event, the in-time hits are identified (by using the <em>absolute</em> value of <code class="docutils literal notranslate"><span class="pre">chod_delta</span></code> smaller than the cut-off time, defaulted to 0.5ns). The in-time hits then have the following features calculated:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hit_distance_*</span></code>: the parameters correspond to some summary statistics corresponding to the hit distances, e.g., min, max, quantiles, and RMS value;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hull_*</span></code>: the parameters related to the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> formed by the in-time hits, e.g., area, width and diameter; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius_fit_*</span></code>: experimental parameters related to the fitted radius using some published algorithms, provided by the <a class="reference external" href="https://github.com/AlliedToasters/circle-fit"><code class="docutils literal notranslate"><span class="pre">circle-fit</span></code> library</a></p></li>
+</ul>
+</section>
+<section id="data-sample-py">
+<h1><a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/scripts/data_sample.py"><code class="docutils literal notranslate"><span class="pre">data_sample.py</span></code></a><a class="headerlink" href="#data-sample-py" title="Permalink to this headline">#</a></h1>
+<p>The script randomly samples the same number of examples in each bin of track_momentum (bin size = 1 Gev), with the number of examples is equal to the minimum number of examples in all the bins. It outputs the <code class="docutils literal notranslate"><span class="pre">sampled_event_ids*.parquet</span></code> for each of the defined <code class="docutils literal notranslate"><span class="pre">min_momentum</span></code> and <code class="docutils literal notranslate"><span class="pre">max_momentum</span></code> ranges.</p>
+</section>
+<section id="utils-py">
+<h1><a class="reference external" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/scripts/utils.py"><code class="docutils literal notranslate"><span class="pre">utils.py</span></code></a><a class="headerlink" href="#utils-py" title="Permalink to this headline">#</a></h1>
+<p>The script holds some of the utility functions used by the scripts. One of the important functions is <code class="docutils literal notranslate"><span class="pre">compute_composite_event_id</span></code> (and the complement <code class="docutils literal notranslate"><span class="pre">decompose_composite_event_id</span></code>), in which we pack the composite IDs for each event (i.e., <code class="docutils literal notranslate"><span class="pre">run_id</span></code>, <code class="docutils literal notranslate"><span class="pre">burst_id</span></code>, <code class="docutils literal notranslate"><span class="pre">event_id</span></code>, <code class="docutils literal notranslate"><span class="pre">track_id</span></code>) as an unsigned 64-bit integer (<code class="docutils literal notranslate"><span class="pre">UInt64</span></code>).</p>
+<p>In the bit-packing scheme, we assume that the <code class="docutils literal notranslate"><span class="pre">run_id</span></code> and <code class="docutils literal notranslate"><span class="pre">event_id</span></code> are smaller than 16,777,216 (2 ^ 24); where the <code class="docutils literal notranslate"><span class="pre">burst_id</span></code> and <code class="docutils literal notranslate"><span class="pre">track_id</span></code> are stored with 11 bits and 4 bits respectively.</p>
 </section>
 
     <script type="text/x-thebe-config">
