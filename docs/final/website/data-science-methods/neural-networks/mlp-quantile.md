@@ -10,7 +10,7 @@ Based on the MLP architecture in the previous section, we have defined a quantil
 
 ## Results
 
-Since it is a preliminary research as part of our project, so far we have only experimented with three quantiles (q = 0.05, 0.5, 0.95) of predicted ring radius as shown in [Fig. 12](qmlp_pred_plot). To demonstrate the trend, all values are sorted and the x-axis only indicates the index of the observations. The red line on the most right side of the plot is the theoretical ring radius (the target of the regression model). And the predicted ring radius for three quantiles are the scatter points in different colours on the left side. From the plot, the predictions with three quantiles show the same pattern of distributions, and we did not see a significant variation between three quantiles.
+Since it is a preliminary research as part of our project, so far we have only experimented with three quantiles (q = 0.05, 0.5, 0.95) of predicted ring radius as shown in [Fig. 16](qmlp_pred_plot). To demonstrate the trend, all values are sorted and the x-axis only indicates the index of the observations. The red line on the most right side of the plot is the theoretical ring radius (the target of the regression model). And the predicted ring radius for three quantiles are the scatter points in different colours on the left side. From the plot, the predictions with three quantiles show the same pattern of distributions, and we did not see a significant variation between three quantiles.
 
 ```{figure} ../../../../../figures/qmlp_pred_plot.png
 :name: qmlp_pred_plot
