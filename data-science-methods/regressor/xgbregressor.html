@@ -71,7 +71,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/quantecon-book-theme.0127a672561e20f571b5425514463df1.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/quantecon-book-theme.71f4fe54c3b4f7788d9441ebe1e0b865.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -215,21 +215,21 @@ const thebe_selector_output = ".output, .cell_output"
 <figure class="align-default" id="xgb-residual-plot">
 <img alt="../../_images/xgb_residual_plot.png" src="../../_images/xgb_residual_plot.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Residual plot residuals vs. calculated ring radius for XGBRegressor</span><a class="headerlink" href="#xgb-residual-plot" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Residual plot residuals vs. calculated ring radius for XGBRegressor</span><a class="headerlink" href="#xgb-residual-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To examine the correlation between the predicted ring radius and the theoretical ring radius, we computed the difference between the theoretical ring radius and its overall maximum for each data point. This is illustrated by the red line in <a class="reference internal" href="#xgb-max-calc-diff"><span class="std std-ref">Fig. 2</span></a>. If a data point lies above the red line, it suggests that the predicted ring radius is smaller than the theoretical ring radius. Conversely, if a data point lies below the red line, it indicates that the predicted ring radius is larger than the theoretical ring radius. Upon examining the more detailed plot on the right side of <a class="reference internal" href="#xgb-max-calc-diff"><span class="std std-ref">Fig. 2</span></a>, it becomes apparent that the data points below the red line are considerably scarce. Additionally, the data points appear to be “pushed” upwards by the presence of the red line. This observation suggests that the predictions are constrained by the upper limit of the theoretical ring radius. As a result, the predictions are unable to exceed the maximum value of the theoretical ring radius.</p>
 <figure class="align-default" id="xgb-max-calc-diff">
 <img alt="../../_images/xgb_max_calc_diff.png" src="../../_images/xgb_max_calc_diff.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Overlaid residual plot showing the difference between the theoretical ring radius and its overall maximum for each data point (shown as red line)</span><a class="headerlink" href="#xgb-max-calc-diff" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Overlaid residual plot showing the difference between the theoretical ring radius and its overall maximum for each data point (shown as red line)</span><a class="headerlink" href="#xgb-max-calc-diff" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The underestimation can be further demonstrated by <a class="reference internal" href="#xgb-radius-vs-momentum"><span class="std std-ref">Fig. 3</span></a>, which illustrates the relationship between the ring radius and track momentum. As previously mentioned, the theoretical ring radius is determined based on the track momentum and mass of the particles, and it is depicted as the green curves in the plot. The predicted radii are represented by the blue and orange scatter points on the plot. By examining the magnified view of the predicted radius specifically for muons in the right plot, it becomes apparent that the model begins to underestimate the radius predictions when the track momentum reaches approximately 57 GeV/c. At this point, the predicted values start to plateau, whereas the theoretical values continue to gradually increase.</p>
 <figure class="align-default" id="xgb-radius-vs-momentum">
 <img alt="../../_images/xgb_radius_vs_momentum.png" src="../../_images/xgb_radius_vs_momentum.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Overlaid plot showing predicted ring radius and theoretical ring radius vs. track momentum for XGBRegressor</span><a class="headerlink" href="#xgb-radius-vs-momentum" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Overlaid plot showing predicted ring radius and theoretical ring radius vs. track momentum for XGBRegressor</span><a class="headerlink" href="#xgb-radius-vs-momentum" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -241,7 +241,7 @@ const thebe_selector_output = ".output, .cell_output"
 <figure class="align-default" id="xgb-shap-plot">
 <img alt="../../_images/xgb_shap_plot.png" src="../../_images/xgb_shap_plot.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 8 </span><span class="caption-text">SHAP summary plot showing the SHAP values and feature values for all the features in XGBRegressor</span><a class="headerlink" href="#xgb-shap-plot" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">SHAP summary plot showing the SHAP values and feature values for all the features in XGBRegressor</span><a class="headerlink" href="#xgb-shap-plot" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -285,7 +285,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                     <p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png"></a></p>
 
-                    <p>Creative Commons License &ndash; This work is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"></a>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</a>.</p>
+                    <p>Creative Commons License &ndash; This work is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</a> license.</p>
 
                     <p>Powered by <a href="https://jupyterbook.org/" target="_blank" rel="noreferer nofollow">Jupyter Book</a>. Theme forked from <a href="https://github.com/QuantEcon/quantecon-book-theme" target="_blank" rel="noreferer nofollow">quantecon-book-theme</a>.</p>
 
