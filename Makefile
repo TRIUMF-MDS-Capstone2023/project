@@ -291,25 +291,6 @@ PNN_POINTNET_FILES_EXTRA = \
 	$(PNN_POINTNET_FILE_0_5_80) \
 	$(PNN_POINTNET_FILE_0_5_100)
 
-# Notebooks
-
-XGBREGRESSOR_PERFORMANCE_ANALYSIS = \
-	models/XGBRegressor/XGBRegressor_performance_analysis.ipynb
-XGBREGRESSOR_SHAP_ANALYSIS = \
-	models/XGBRegressor/XGBRegressor_shap_analysis.ipynb
-
-MLP_REGRESSION_ANALYSIS = \
-	models/MLP/mlp_regression_analysis.ipynb
-MLP_REGRESSION_MODEL = \
-	models/MLP/mlp_regression_model.ipynb
-MLP_QUANTILE_REGRESSION_MODEL = \
-	models/MLP/mlp_quantile_regression_model.ipynb
-
-POINTNET_1 = \
-	models/PointNet/PointNet_1.ipynb
-POINTNET_2 = \
-	models/PointNet/PointNet_2.ipynb
-
 # Named Targets
 
 .PHONY : clean xgboost mlp
@@ -377,13 +358,16 @@ data-pnn-pointnet : \
 	$(PNN_POINTNET_FILES_EXTRA)
 
 xgboost :
-	$(NBCONVERT) --to notebook --inplace --execute $(XGBREGRESSOR_PERFORMANCE_ANALYSIS)
-	$(NBCONVERT) --to notebook --inplace --execute $(XGBREGRESSOR_SHAP_ANALYSIS)
+	$(PYTHON) scripts/xgb_train.py
+	$(NBCONVERT) --to notebook --inplace --execute models/XGBRegressor/XGBRegressor_performance_analysis.ipynb
+	$(NBCONVERT) --to notebook --inplace --execute models/XGBRegressor/XGBRegressor_shap_analysis.ipynb
 
 mlp :
-	$(NBCONVERT) --to notebook --inplace --execute $(MLP_REGRESSION_MODEL)
-	$(NBCONVERT) --to notebook --inplace --execute $(MLP_REGRESSION_ANALYSIS)
-	$(NBCONVERT) --to notebook --inplace --execute $(MLP_QUANTILE_REGRESSION_MODEL)
+	$(PYTHON) scripts/mlp_train.py
+	$(PYTHON) scripts/qmlp_train.py
+	$(NBCONVERT) --to notebook --inplace --execute models/MLP/mlp_regression_model.ipynb
+	$(NBCONVERT) --to notebook --inplace --execute models/MLP/mlp_regression_analysis.ipynb
+	$(NBCONVERT) --to notebook --inplace --execute models/MLP/mlp_quantile_regression_model.ipynb
 
 clean :
 	$(RM) \

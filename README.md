@@ -18,6 +18,9 @@ The purpose of this repository is to serve as a central hub for accessing genera
     - [Supplementary Dataset](#supplementary-dataset)
     - [Clean-up](#clean-up)
   - [Running the Models](#running-the-models)
+    - [XGBoost Regressor](#xgboost-regressor)
+    - [Multilayer Perceptron neural network](#multilayer-perceptron-neural-network)
+    - [PointNet](#pointnet)
   - [Additional Notebooks](#additional-notebooks)
   - [Copyright and Licensing](#copyright-and-licensing)
 
@@ -127,21 +130,27 @@ The model scripts are stored in the corresponding sub-folders under [the `models
 We have the following models:
 - XGBoost Regressor ([`models/XGBRegressor`](models/XGBRegressor/))
 - Multilayer Perceptron neural network ([`models/MLP`](models/MLP/))
-- PointNet (['models/PointNet](models/PointNet/))
+- PointNet ([`models/PointNet`](models/PointNet/))
 
-An alternative to running the notebooks directly is by using the `make` commands.
+### XGBoost Regressor
 
-To run the XGBoost regressor model notebooks, use the following command in the Conda environment:
+To train the model and run the XGBoost regressor model notebooks afterward, use the following command in the Conda environment:
 
 ```bash
 make xgboost
 ```
 
-To run the MLP model notebooks:
+### Multilayer Perceptron neural network
+
+To train the models (MLP and quantile MLP) and run the corresponding notebooks:
 
 ```bash
 make mlp
 ```
+
+### PointNet
+
+To run the notebooks, which takes considerable time, run the corresponding notebooks in the ['models/PointNet`](models/PointNet/) folder.
 
 ## Additional Notebooks
 

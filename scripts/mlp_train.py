@@ -17,7 +17,7 @@ import torch.optim as optim
 device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
 # Read in parquet files and drop NAs
-event_with_hit_features_path = '../data/events_with_hit_features_[cut_off_time=0.5].parquet'
+event_with_hit_features_path = 'data/events_with_hit_features_[cut_off_time=0.5].parquet'
 df = pd.read_parquet(event_with_hit_features_path).dropna()
 
 # filter df for muons only
@@ -128,15 +128,15 @@ def trainer(model, criterion, optimizer, trainloader, validloader, epochs=5, pat
     optimizer : optimizer class
         an optimization algorithm
     trainloader : torch.utils.data.DataLoader
-        a dataloader for training data   
+        a dataloader for training data
     validloader : torch.utils.data.DataLoader
-        a dataloader for validation data          
+        a dataloader for validation data
     epochs : int, default is 5
-        one full pass through the dataset to look at all observations         
+        one full pass through the dataset to look at all observations
     patience : int, default is 5
-        a number of consecutive epochs to allow the validation loss to increase before stopping   
+        a number of consecutive epochs to allow the validation loss to increase before stopping
     verbose : bool, default is True
-        whether or not to print additional details when running the function         
+        whether or not to print additional details when running the function
 
     Returns
     -------
@@ -206,4 +206,4 @@ train_loss, valid_loss = trainer(model,
                                  verbose=True)
 
 # Save the trained model
-torch.save(model.state_dict(), '../saved_models/mlp_model.pth')
+torch.save(model.state_dict(), 'saved_models/mlp_model.pth')

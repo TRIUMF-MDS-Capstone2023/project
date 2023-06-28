@@ -15,7 +15,7 @@ import pyarrow
 import pickle
 
 # Read in parquet files and drop NAs
-df_selected = pd.read_parquet('../data/events_with_hit_features_[cut_off_time=0.5].parquet').dropna()
+df_selected = pd.read_parquet('data/events_with_hit_features_[cut_off_time=0.5].parquet').dropna()
 
 # Filter for muons only for the training set
 df_muons = df_selected.query('`class`== "muon"')
@@ -39,5 +39,5 @@ xgb_reg = xgb.XGBRegressor()
 xgb_reg.fit(X_train, y_train)
 
 # Save the trained model
-model_path = "../saved_models/xgb_regressor_model.ubj"
+model_path = "saved_models/xgb_regressor_model.ubj"
 xgb_reg.save_model(model_path)
