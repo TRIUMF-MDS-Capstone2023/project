@@ -18,7 +18,7 @@ In addition, before feeding features into the model, the [StandardScaler](https:
 
 After the training completed, we tested the regression performance on the test data. Between the predicted ring radius and the theoretical values, the R2 score was 0.934 and the MAE (Mean Absolute Error) was 1.92. Compared to the result of the XGBRegressor approach (R2 was 0.94), the accuracy of the MLP model was slightly lower.
 
-We have also performed residual analysis for the MLP model. As shown in [Fig. 5](mlp_residual_plot), the similar patterns were observed compared to the residual plot from the XGBRegressor. The result confirms the bias analysis in the previous section.
+We have also performed residual analysis for the MLP model. As shown in [Fig. 11](mlp_residual_plot), the similar patterns were observed compared to the residual plot from the XGBRegressor. The result confirms the bias analysis in the previous section.
 
 ```{figure} ../../../../../figures/mlp_residual_plot.png
 :name: mlp_residual_plot
