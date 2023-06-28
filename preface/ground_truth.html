@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>PointNet &#8212; CaloRICH AI</title>
+    <title>Ground Truth &#8212; CaloRICH AI</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -60,76 +60,74 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/quantecon-book-theme.71f4fe54c3b4f7788d9441ebe1e0b865.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/quantecon-book-theme.71f4fe54c3b4f7788d9441ebe1e0b865.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script src="../../_static/quantecon-book-theme.ef2ef6c3e8da75e1e736fb5fce08cde6.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/quantecon-book-theme.ef2ef6c3e8da75e1e736fb5fce08cde6.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'data-science-methods/neural-networks/pointnet';</script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Best Performing Model" href="../best-performing-model/index.html" />
-    <link rel="prev" title="MLP Quantile Regression" href="mlp-quantile.html" />
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'preface/ground_truth';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Crystal Geng, Daniel Merigo, Kelvin Wong, Peng Zhang" />
 <meta name="keywords" content="calorich, triumf, na62" />
-<meta name="description" content="PointNet  Why did we choose this architecture?  Developed in Stanford, PointNet is a simple yet effective architecture that directly consumes 3-dimensional poin" />
+<meta name="description" content="Ground Truth  For this project we will be using a calculated ring radius as our ground truth. This calculated ring radius is obtained by using the following fun" />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="PointNet"/>
-<meta name="twitter:description" content="PointNet  Why did we choose this architecture?  Developed in Stanford, PointNet is a simple yet effective architecture that directly consumes 3-dimensional poin">
+<meta name="twitter:title" content="Ground Truth"/>
+<meta name="twitter:description" content="Ground Truth  For this project we will be using a calculated ring radius as our ground truth. This calculated ring radius is obtained by using the following fun">
 <meta name="twitter:image" content="">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="PointNet" />
+<meta property="og:title" content="Ground Truth" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="None" />
 <meta property="og:image" content="" />
-<meta property="og:description" content="PointNet  Why did we choose this architecture?  Developed in Stanford, PointNet is a simple yet effective architecture that directly consumes 3-dimensional poin" />
+<meta property="og:description" content="Ground Truth  For this project we will be using a calculated ring radius as our ground truth. This calculated ring radius is obtained by using the following fun" />
 <meta property="og:site_name" content="CaloRICH AI" />
 
-<link rel="icon" href="../../_static/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="../../_static/apple-touch-icon.png" />
+<link rel="icon" href="../_static/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="../_static/apple-touch-icon.png" />
 
 <meta name="theme-color" content="#ffffff" />
 
@@ -143,24 +141,17 @@ const thebe_selector_output = ".output, .cell_output"
 
         <div class="qe-main">
 
-            <div class="qe-page" id=data-science-methods/neural-networks/pointnet>
+            <div class="qe-page" id=preface/ground_truth>
 
                 <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="qe-page__toc-header">
-                            On this page
-                        </div>
 
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
-                            <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-we-choose-this-architecture">Why did we choose this architecture?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-and-limitations">Benefits and Limitations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
-</ul>
+                            
                             <p class="logo">
                                 
                             </p>
@@ -180,9 +171,9 @@ const thebe_selector_output = ".output, .cell_output"
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="../../index.html">CaloRICH AI</a></p>
+                        <p class="qe-page__header-heading"><a href="../index.html">CaloRICH AI</a></p>
 
-                        <p class="qe-page__header-subheading">PointNet</p>
+                        <p class="qe-page__header-subheading">Ground Truth</p>
 
                     </div>
 
@@ -197,34 +188,20 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section id="pointnet">
-<h1>PointNet<a class="headerlink" href="#pointnet" title="Permalink to this headline">#</a></h1>
-<section id="why-did-we-choose-this-architecture">
-<h2>Why did we choose this architecture?<a class="headerlink" href="#why-did-we-choose-this-architecture" title="Permalink to this headline">#</a></h2>
-<p>Developed in Stanford, <a class="reference external" href="https://arxiv.org/abs/1612.00593">PointNet</a> is a simple yet effective architecture that directly consumes 3-dimensional point clouds and can perform diverse operations such as classification, part segmentation and even semantic parsing <span id="id1">[<a class="reference internal" href="../../references.html#id15" title="Charles R Qi, Hao Su, Kaichun Mo, and Leonidas J Guibas. Pointnet: deep learning on point sets for 3d classification and segmentation. In Proceedings of the IEEE conference on computer vision and pattern recognition, 652–660. 2017.">Qi <em>et al.</em>, 2017</a>]</span>. Of these characteristics we concluded that, since the original hit data is already a 2 dimensional point cloud, the ability of the architecture to find patterns in a point cloud regardless of its positioning in space would make a good fit for the project.</p>
-<p>In order to apply this architecture to the regression problem we had to do some modifications, including:</p>
-<ul class="simple">
-<li><p>Adding a third dimension to the hit locations using Gaussian noise in the range (0, 0.5)</p></li>
-<li><p>Substituting the output layer with a linear fully connected layer</p></li>
-<li><p>Changing the output size to 1</p></li>
-</ul>
-<p>We developed 2 distinct architectures, based on the base PointNet architecture, in PyTorch to compare and test simultaneously. We used the MSELoss Loss function and Adam Optimizer. Each architecture also utilized ReLU as the activation function</p>
-</section>
-<section id="benefits-and-limitations">
-<h2>Benefits and Limitations<a class="headerlink" href="#benefits-and-limitations" title="Permalink to this headline">#</a></h2>
-<p>PointNet is an architecture developed to perform classifications, translating the architecture to a regression problem meant discarding the semantic segmentation portion and adding a 3rd dimension at first. This added complexity to the data preparation and in the end could not capture local information or immediately determine the particle for a given event.</p>
-<p>Training time was also a limitation as, even with pre-transformed parquet files, the training time averaged 15 minutes per epoch on a high end GPU (RTX 3080).</p>
-</section>
-<section id="results">
-<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
-<figure class="align-default" id="pnt-predicted-vs-theoretical">
-<img alt="../../_images/pnt_pred_theo.png" src="../../_images/pnt_pred_theo.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Residual plot predicted vs. calculated ring radius for PointNet</span><a class="headerlink" href="#pnt-predicted-vs-theoretical" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>As shown in <a class="reference internal" href="#pnt-predicted-vs-theoretical"><span class="std std-ref">Fig 17</span></a> the performance of PointNet is deficient, not being able to capture the trends in the model. The predicted results have a different behaviour than the ground truth, shown here as a black line. These results, combined with the long training time, motivated us to decide on XGBoost as the best modelling technique for this regression problem.</p>
-</section>
+  <section id="ground-truth">
+<h1>Ground Truth<a class="headerlink" href="#ground-truth" title="Permalink to this headline">#</a></h1>
+<p>For this project we will be using a <strong>calculated ring radius</strong> as our ground truth. This calculated ring radius is obtained by using the following function based on the standard formula to calculate the angle of the <a class="reference external" href="https://indico.cern.ch/event/1156680/contributions/4857473/attachments/2471565/4240363/PID_Lecture_HighRR_Germany_June_2022.pdf">Cherekov Radiation Cone</a>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">calc_ring_radius(m,p):</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Returns</span> <span class="pre">the</span> <span class="pre">expected</span> <span class="pre">ring</span> <span class="pre">radius</span> <span class="pre">[m]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">:</span> <span class="pre">mass</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">particle</span> <span class="pre">in</span> <span class="pre">MeV/c^2</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">:</span> <span class="pre">track</span> <span class="pre">momentum</span> <span class="pre">in</span> <span class="pre">MeV/c</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">F_M</span> <span class="pre">=</span> <span class="pre">17.0</span> <span class="pre">#</span> <span class="pre">Focal</span> <span class="pre">length</span> <span class="pre">[m]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">62.8e-6</span> <span class="pre">#</span> <span class="pre">Neon</span> <span class="pre">refractive</span> <span class="pre">index</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">F_M*N*p*np.sqrt(1</span> <span class="pre">-</span> <span class="pre">(m**2</span> <span class="pre">+</span> <span class="pre">p**2)/(N**2*p**2))/np.sqrt(m**2</span> <span class="pre">+</span> <span class="pre">p**2)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">r</span></code></p>
+<p>Moving forward we will refer to this calculated value as the <strong>‘Theoretical Ring Radius’</strong></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -240,7 +217,7 @@ const thebe_selector_output = ".output, .cell_output"
         },
         kernelOptions: {
             name: "python3",
-            path: "./data-science-methods/neural-networks"
+            path: "./preface"
         },
         predefinedOutput: true
     }
@@ -287,12 +264,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../preface/executive_summary.html">
+  <a class="reference internal" href="executive_summary.html">
    Executive Summary
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../preface/introduction.html">
+  <a class="reference internal" href="introduction.html">
    Introduction
   </a>
  </li>
@@ -304,22 +281,22 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../data/raw-data.html">
+  <a class="reference internal" href="../data/raw-data.html">
    Raw Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../data/eda.html">
+  <a class="reference internal" href="../data/eda.html">
    Exploratory Data Analysis
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../data/preprocessing.html">
+  <a class="reference internal" href="../data/preprocessing.html">
    Preprocessing
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../data/engineered-features.html">
+  <a class="reference internal" href="../data/engineered-features.html">
    Engineered Features
   </a>
  </li>
@@ -329,9 +306,9 @@ const thebe_selector_output = ".output, .cell_output"
   Data Science Methods
  </span>
 </p>
-<ul class="current nav bd-sidenav nav sidenav_l1">
+<ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../regressor/index.html">
+  <a class="reference internal" href="../data-science-methods/regressor/index.html">
    Regressor
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -341,41 +318,41 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../regressor/xgbregressor.html">
+    <a class="reference internal" href="../data-science-methods/regressor/xgbregressor.html">
      XGBoost Regressor
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children active">
-  <a class="reference internal" href="index.html">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data-science-methods/neural-networks/index.html">
    Neural Networks
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label class="toctree-toggle" for="toctree-checkbox-2">
    <i class="fa-solid fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="mlp.html">
+    <a class="reference internal" href="../data-science-methods/neural-networks/mlp.html">
      MLP (Multilayer Perceptron)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="mlp-quantile.html">
+    <a class="reference internal" href="../data-science-methods/neural-networks/mlp-quantile.html">
      MLP Quantile Regression
     </a>
    </li>
-   <li class="toctree-l2 current active active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data-science-methods/neural-networks/pointnet.html">
      PointNet
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../best-performing-model/index.html">
+  <a class="reference internal" href="../data-science-methods/best-performing-model/index.html">
    Best Performing Model
   </a>
  </li>
@@ -387,7 +364,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../conclusion.html">
+  <a class="reference internal" href="../conclusion.html">
    Conclusion
   </a>
  </li>
@@ -399,7 +376,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../references.html">
+  <a class="reference internal" href="../references.html">
    References
   </a>
  </li>
@@ -421,13 +398,13 @@ const thebe_selector_output = ".output, .cell_output"
 
                 <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
-                    <li data-tippy-content="Home"><a href="../../index.html"><i data-feather="home"></i></a></li>
+                    <li data-tippy-content="Home"><a href="../index.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://triumf-mds-capstone2023.github.io/project" title=""><span class="show-for-sr">CaloRICH AI</span></a></li>
                 </ul>
 
                 <ul class="qe-toolbar__links">
                     <li class="btn__search">
-                        <form action="../../search.html" method="get">
+                        <form action="../search.html" method="get">
                             <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
                             <i data-feather="search" id="search-icon"></i>
                         </form>
@@ -437,7 +414,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
-                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/docs/final/website/data-science-methods/neural-networks/pointnet.md" download><i data-feather="github"></i></a></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/TRIUMF-MDS-Capstone2023/project/blob/main/docs/final/website/preface/ground_truth.md" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>

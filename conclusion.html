@@ -157,6 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-during-the-execution-of-the-project">Challenges during the execution of the project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-works">Future works</a></li>
 </ul>
                             <p class="logo">
@@ -199,6 +200,12 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h1>
 <p>In this capstone project we have applied machine learning regression methods to predict the ring radius from variable number of “hits” (excited photodetectors in the RICH detector) for each event of decay. Three models, XGBRegressor, MLP, and PointNet, have been adopted to perform the ring fitting. Both XGBRegressor and MLP were using engineered features generated from hit positions as inputs, while PointNet was directly trained on the raw data of hit coordinates. The result of regression evaluation metrics shown XGBRegressor had the best performance compared to the other two deep learning approaches. Considering the simplicity of model structure and implementation, timing, and future maintenance, we recommend XGBRegressor as the best option to perform the regression task.</p>
 <p>Although the result of PointNet did not yield an expected performance, we have identified the probable reason, a vanishing gradient, a thus have devised solutions to this problem. Due to the time consuming process of training a new model with the necessary modifications we are keeping these conclusions for the moment and will update if a solution is found and has proven to yield better results than XGBoost.</p>
+<section id="challenges-during-the-execution-of-the-project">
+<h2>Challenges during the execution of the project<a class="headerlink" href="#challenges-during-the-execution-of-the-project" title="Permalink to this headline">#</a></h2>
+<p>One of the main challenges we faced during the project was the amount of available and given data. The sheer volume of data tended to make the data manipulation and preprocessing a difficult task. Often the memory from available computers, and even some Data Science platforms (Kaggle and AWS), ran out during data wrangling and the engineered features compilation. Thus we had to acquire servers with vast amount of available RAM (including a server with 192 GB for some of the most complicated preprocessing tasks). We even ported our initial code to <a class="reference external" href="https://www.pola.rs/">Polars</a> from Pandas and switched to this library for the rest of the project, this switch allowed us to use lazy evaluation and data manipulations to efficiently use the available RAM, only loading loading the data when necessary.</p>
+<p>Another interesting problem was understanding the nature of the data and the NA62 project in order to create the engineered features and</p>
+<p>Another challenge was faced when the PointNet DNN did not perform to our expectetions, several experiments were carried out to pinpoint the problem yet time was a constraint as the training process took up to 8 hours (even 24 using the entire dataset available). Some experiments were even run simultaneously in up to 3 different machines.</p>
+</section>
 <section id="future-works">
 <h2>Future works<a class="headerlink" href="#future-works" title="Permalink to this headline">#</a></h2>
 <p>For the future works, we would suggest the following areas:</p>

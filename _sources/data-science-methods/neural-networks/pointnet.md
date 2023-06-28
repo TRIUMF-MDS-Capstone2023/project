@@ -1,8 +1,10 @@
 # PointNet
 
-## Architecture
+## Why did we choose this architecture?
 
-Developed in Stanford, [PointNet](https://arxiv.org/abs/1612.00593) is a simple yet effective architecture that directly consumes 3-dimensional point clouds and can perform diverse operations such as classification, part segmentation and even semantic parsing {cite}`qi2017pointnet`. In order to apply this architecture to the regression problem we had to do some modifications, including:
+Developed in Stanford, [PointNet](https://arxiv.org/abs/1612.00593) is a simple yet effective architecture that directly consumes 3-dimensional point clouds and can perform diverse operations such as classification, part segmentation and even semantic parsing {cite}`qi2017pointnet`. Of these characteristics we concluded that, since the original hit data is already a 2 dimensional point cloud, the ability of the architecture to find patterns in a point cloud regardless of its positioning in space would make a good fit for the project.
+
+In order to apply this architecture to the regression problem we had to do some modifications, including:
 - Adding a third dimension to the hit locations using Gaussian noise in the range (0, 0.5)
 - Substituting the output layer with a linear fully connected layer
 - Changing the output size to 1
